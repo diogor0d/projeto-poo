@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Fatura {
+class Fatura {
     private int num;
     private Cliente cliente;
     private Data data;
