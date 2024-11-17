@@ -1,3 +1,3 @@
-public class ProdutoFarmaciaPrescrito {
+public class ProdutoFarmaciaPrescrito extends Produto {
     private String medico;
 }
