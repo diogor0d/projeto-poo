@@ -1,6 +1,8 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        
+        receberLinha();
     }
 
     private void novoCliente(){}
@@ -12,6 +14,12 @@ public class Main {
     private void apresentarFatura(){}
     private void importarFaturas(){}
     private void exportarFaturas(){}
+
+    public static String receberLinha() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("> ");
+        return scanner.nextLine();
+    }
 
     // estatisticas ? ver depois
 }
