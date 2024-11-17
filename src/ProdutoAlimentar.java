@@ -1,9 +1,9 @@
 public class ProdutoAlimentar extends Produto {
     // Valores de taxas para Continente, Madeira e Acores
-    protected double[] taxas = {23,22,16};
+    protected boolean biologico;
 
-    public ProdutoAlimentar(int codigo, String nome, String descricao, int quantidade, double preco, double[] taxas) {
+    public ProdutoAlimentar(int codigo, String nome, String descricao, int quantidade, double preco, boolean biologico) {
         super(codigo, nome, descricao, quantidade, preco);
-        this.taxas = taxas;
+        this.biologico = biologico;
     }
 }
