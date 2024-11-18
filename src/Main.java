@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
+
     private void novoCliente(){}
     private void editarCliente(){}
     private void listarClientes(){}
@@ -12,10 +13,17 @@ public class Main {
     private void exportarFaturas(){}
     private void apresentarEstatisticas(){}
 
+    private Clientes clientes;
+    //Construtor do main
+    public Main() {
+        this.clientes = new Clientes(); // Inicializa a classe Clientes
+    }
+
+    //nao percebi muito bem o porque mas devemos fazer o new main() correto??
     public static void main(String[] args) {
         Main programa = new Main(); // Cria a instância de Main
-        programa.executar(); // Inicia a execução do programa
-        receberLinha();
+        programa.executar();
+        //receberLinha();
     }
 
 
@@ -29,13 +37,13 @@ public class Main {
             opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
-                    novoCliente();
+                    clientes.novoCliente();
                     break;
                 case 2:
-                    editarCliente();
+                    clientes.editarCliente();
                     break;
                 case 3:
-                    listarClientes();
+                    clientes.listarClientes();
                     break;
                 case 4:
                     criarFatura();
@@ -58,16 +66,21 @@ public class Main {
                 default:
                     System.out.println("Opção inválida. Escreva um número de 0 a 8.");
             }
-            System.out.print("\n");
+            System.out.print("\nDeseja continuar? (S ou N): ");
+            String continuar = scanner.next();
+            if (continuar.equalsIgnoreCase("n")){
+                System.out.println("Programa terminado.");
+                return;
+            }
         }
         scanner.close();
     }
 
 
 
-    public static String receberLinha() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("> ");
-        return scanner.nextLine();
-    }
+    //public static String receberLinha() {
+        //Scanner scanner = new Scanner(System.in);
+        //System.out.print("> ");
+        //return scanner.nextLine();
+    //}
 }
