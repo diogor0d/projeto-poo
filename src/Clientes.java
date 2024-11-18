@@ -1,13 +1,21 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Clientes extends Cliente {
+public class Clientes{
     private ArrayList<Cliente> listaClientes;
 
     // Construtor da classe Clientes
     public Clientes() {
-        super("", 0, "");
         this.listaClientes = new ArrayList<>();
+    }
+
+    public void setListaClientes(ArrayList<Cliente> novaListaClientes) {
+        if (novaListaClientes != null) {
+            this.listaClientes = novaListaClientes;
+            System.out.println("Lista de clientes atualizada com sucesso.");
+        } else {
+            System.out.println("A nova lista de clientes é inválida (null).");
+        }
     }
 
     // Método para ler os dados e adicionar o cliente
@@ -41,9 +49,7 @@ public class Clientes extends Cliente {
         } else {
             System.out.println("Lista de Clientes:");
             for (Cliente cliente : listaClientes) {
-                System.out.println("Nome: " + cliente.getNome()
-                        + ", Contribuinte: " + cliente.getContribuinte()
-                        + ", Localização: " + cliente.getLocalizacao());
+                System.out.println(cliente);
             }
         }
     }

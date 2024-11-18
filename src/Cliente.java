@@ -32,4 +32,8 @@ class Cliente {
     public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
+
+    public String toString() {
+        return "Nome: " + nome + ", Contribuinte: " + contribuinte + ", Localização: " + localizacao;
+    }
 }

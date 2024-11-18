@@ -2,9 +2,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    private void novoCliente(){}
-    private void editarCliente(){}
-    private void listarClientes(){}
     private void criarFatura(){}
     private void editarFatura(){}
     private void listarFaturas(){}
@@ -13,10 +10,15 @@ public class Main {
     private void exportarFaturas(){}
     private void apresentarEstatisticas(){}
 
+    private Leituras leituras;
     private Clientes clientes;
+    private Faturas faturas;
+
     //Construtor do main
     public Main() {
-        this.clientes = new Clientes(); // Inicializa a classe Clientes
+        this.clientes = new Clientes(); // Inicializa a lista de clientes
+        this.faturas = new Faturas();  // Inicializa a lista de faturas
+        this.leituras = new Leituras(clientes, faturas);
     }
 
     //nao percebi muito bem o porque mas devemos fazer o new main() correto??
@@ -28,6 +30,8 @@ public class Main {
 
 
     public void executar() {
+        leituras.lerArquivo();
+
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
 
