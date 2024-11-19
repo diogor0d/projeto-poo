@@ -2,8 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     //as que faltam implementar:
-    private void editarFatura(){}
-    private void apresentarFatura(){}
+    private void vizualizarFatura(){}
     private void importarFaturas(){}
     private void exportarFaturas(){}
     private void apresentarEstatisticas(){}
@@ -53,13 +52,13 @@ public class Main {
                     faturas.novaFatura();
                     break;
                 case 5:
-                    editarFatura();
+                    faturas.editarFatura();
                     break;
                 case 6:
                     faturas.listarFaturas();
                     break;
                 case 7:
-                    apresentarFatura();
+                    vizualizarFatura();
                     break;
                 case 8:
                     apresentarEstatisticas();

@@ -79,7 +79,6 @@ public class Faturas{
             }
         }
         adicionarFatura(numero, cliente, data, produtos);
-        scanner.close();
     }
 
 
@@ -99,6 +98,83 @@ public class Faturas{
             for (Fatura fatura : listaFaturas) {
                 System.out.println(fatura);
             }
+        }
+    }
+
+    public void editarFatura(){
+        Scanner scanner = new Scanner(System.in);
+        if (!listaFaturas.isEmpty()) {
+            System.out.print("Qual é o número da fatura, à qual quer alterar os dados? ");
+            int num = scanner.nextInt();
+            scanner.nextLine();
+            for (Fatura fatura : listaFaturas) {
+                if (fatura.getNum() == num) {
+                    System.out.print("Fatura " + num + " encontrada.");
+                    int opcao = -1;
+                    int opcao_faturas= -1;
+
+                    while (opcao != 0) {
+                        System.out.print("\nQue dados deseja alterar?\n1- Número\n2- Cliente\n3- Data\n4- Produto(s)\n0- Cancelar\nOpção-> ");
+                        opcao = scanner.nextInt();
+                        scanner.nextLine();  // Limpar o buffer do scanner
+                        switch (opcao) {
+                            case 1:
+                                System.out.print("Novo número da fatura: ");
+                                int novoNumero = scanner.nextInt();
+                                scanner.nextLine();  // Limpar o buffer
+                                fatura.setNumero(novoNumero);
+                                System.out.println("Número da fatura alterado com sucesso.");
+                                break;
+                            case 2:
+                                System.out.print("Número de contribuinte do novo cliente: ");
+                                int novoContribuinte = scanner.nextInt();
+                                scanner.nextLine();
+                                Cliente novoCliente = clientes.procurarClientePorContribuinte(novoContribuinte);
+                                if(novoCliente != null){
+                                    fatura.setCliente(novoCliente);
+                                    System.out.println("Cliente alterado com sucesso.");
+                                }else{
+                                    System.out.println("Cliente não encontrado.");
+                                    return;
+                                }
+                            case 3:
+                                System.out.print("Nova data: ");
+                                String dataStr = scanner.nextLine();
+                                String[] partes = dataStr.split("/");
+                                int dia = Integer.parseInt(partes[0]);
+                                int mes = Integer.parseInt(partes[1]);
+                                int ano = Integer.parseInt(partes[2]);
+                                Data novaData = new Data(dia, mes, ano);
+                                fatura.setData(novaData);
+                                System.out.println("Data alterada com sucesso.");
+                                break;
+                            case 4:
+                                while (opcao_faturas != 0) {
+                                    System.out.print("\nDeseja:\n1- Alterar um produto\n2- Adicionar um novo produto\n3- Eliminar um produto\n0- Cancelar\nOpção-> ");
+                                    int nova_opcao = scanner.nextInt();
+                                    scanner.nextLine();
+                                    switch(nova_opcao){
+                                        //adicionar as cenas
+                                }
+                                }
+                            case 0:
+                                System.out.println("Alteração cancelada.");
+                                break;
+                            default:
+                                System.out.println("Opção inválida.");
+                        }
+                        System.out.print("Deseja alterar mais algum dado? (S ou N): ");
+                        String continuar = scanner.nextLine();
+                        if (continuar.equalsIgnoreCase("N")) {
+                            break;
+                        }
+                    }
+                }
+                System.out.println("Cliente não encontrado.");
+            }
+        }
+        else {
+            System.out.println("A lista de clientes está vazia.");
         }
     }
 }

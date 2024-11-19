@@ -20,15 +20,23 @@
         public  ArrayList<Produto> getProdutos() { return produtos; }
 
         public void setNumero(int numero) { this.num = numero; }
-        public void setNomeCliente(Cliente cliente) { this.cliente = cliente; }
+        public void setCliente(Cliente cliente) { this.cliente = cliente; }
         public void setData(Data data) { this.data = data; }
         public void setProdutos(ArrayList<Produto> produtos) { this.produtos = produtos; }
 
 
         public String toString() {
-            String output = "Fatura: " + num + ", Contribuinte: " + cliente.getContribuinte() + ", Data: " + data + ", Produtos: ";
+            String output = "Fatura: " + num + " , CLiente" + cliente.getNome() + ", Contribuinte: " + cliente.getContribuinte() + ", Localização do cliente: " + cliente.getLocalizacao()+ ", Data: " + data + ", Produtos: ";
+            boolean primeira_fatura = true;
             for(Produto produto: produtos){
-                output+= produto.getNome()+ ", ";
+                if(primeira_fatura){
+                    output+= produto.getNome();
+                    primeira_fatura = false;
+                }
+                else{
+                    output+= ", " + produto.getNome();
+                }
+
             }
             return output;
         }
