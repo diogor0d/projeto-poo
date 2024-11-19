@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Main {
     //as que faltam implementar:
-    private void vizualizarFatura(){}
     private void importarFaturas(){}
     private void exportarFaturas(){}
     private void apresentarEstatisticas(){}
@@ -35,7 +34,7 @@ public class Main {
         int opcao = -1;
 
         while (opcao != 0) {
-            System.out.print("MENU:\n1- Novo cliente\n2- Editar cliente\n3- Listar clientes\n4- Criar fatura\n5- Editar fatura\n6- Listar faturas\n7- Apresentar fatura\n"+
+            System.out.print("MENU:\n1- Novo cliente\n2- Editar cliente\n3- Listar clientes\n4- Nova fatura\n5- Editar fatura\n6- Listar faturas\n7- Apresentar fatura\n"+
                             "8- Apresentar estatísticas\n0- Sair\nOpcão-> ");
             opcao = scanner.nextInt();
             switch (opcao) {
@@ -58,7 +57,8 @@ public class Main {
                     faturas.listarFaturas();
                     break;
                 case 7:
-                    vizualizarFatura();
+                    //muito básica
+                    faturas.vizualizarFatura();
                     break;
                 case 8:
                     apresentarEstatisticas();

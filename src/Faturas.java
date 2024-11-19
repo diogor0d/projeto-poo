@@ -170,11 +170,32 @@ public class Faturas{
                         }
                     }
                 }
-                System.out.println("Cliente não encontrado.");
+                System.out.println("Fatura não encontrada.");
             }
         }
         else {
-            System.out.println("A lista de clientes está vazia.");
+            System.out.println("A lista de faturas está vazia.");
+        }
+    }
+
+
+    public void vizualizarFatura() {
+        Scanner scanner = new Scanner(System.in);
+        if (!listaFaturas.isEmpty()) {
+            System.out.print("Qual é o número da fatura que quer vizualizar? ");
+            int num = scanner.nextInt();
+            scanner.nextLine();
+            for (Fatura fatura : listaFaturas) {
+                if (fatura.getNum() == num) {
+                    System.out.print("Fatura " + num + " encontrada.");
+                    System.out.print("Número: " + fatura.getNum());
+                    Cliente cliente = fatura.getCliente();
+                    System.out.print(cliente);
+                    //falta lista de produtos e preços com e sem IVA etc...
+                }
+            }
+        } else {
+            System.out.println("A lista de faturas está vazia");
         }
     }
 }
