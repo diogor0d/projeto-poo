@@ -54,6 +54,16 @@ public class Clientes{
         }
     }
 
+    public Cliente procurarClientePorContribuinte(int contribuinte) {
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getContribuinte() == contribuinte) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+
+
     public void editarCliente(){
         Scanner scanner = new Scanner(System.in);
         if (!listaClientes.isEmpty()) {

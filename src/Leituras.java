@@ -46,55 +46,99 @@ public class Leituras {
                 System.out.println("Arquivo input.txt encontrado.");
 
                 try {
-                    // Separando a leitura em FileReader e BufferedReader
                     FileReader fr = new FileReader(f_txt);
                     BufferedReader br = new BufferedReader(fr);
                     String line;
 
                     while ((line = br.readLine()) != null) {
                         line = line.trim(); // Remove espaços extras no começo e no fim
-                        if (line.isEmpty()) {
-                            continue;
-                        }
+
                         //clientes:
-                        while (line.equalsIgnoreCase("faturas") && !line.isEmpty()) {
-                            String partes[] = line.split(",");
-                            if (partes.length == 3) {
-                                String nome = partes[0].trim();
-                                int contribuinte = Integer.parseInt(partes[1].trim());
-                                String localizacao = partes[2].trim();
+                        if (line.equalsIgnoreCase("clientes")) {
+                            while (!(line.equalsIgnoreCase("faturas")) && !line.isEmpty()) {
+                                if (line.isEmpty()) continue;
+                                line = line.trim();
 
-                                // Adiciona o cliente
-                                clientes.adicionarCliente(nome, contribuinte, localizacao);
+                                String partes[] = line.split(",");
+                                if (partes.length == 3) {
+                                    try {
+                                        String nome = partes[0].trim();
+                                        int contribuinte = Integer.parseInt(partes[1].trim());
+                                        String localizacao = partes[2].trim();
+
+                                        // Adiciona o cliente
+                                        clientes.adicionarCliente(nome, contribuinte, localizacao);
+                                        System.out.println("Faturas carregadas com sucesso.");
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Erro ao processar cliente: " + line);
+                                    }
+                                }
+                            }
+                            if (line.equalsIgnoreCase("faturas")) {
+                                while (!(line.equalsIgnoreCase("produtos")) && !line.isEmpty()) {
+                                    if (line.isEmpty()) continue;
+                                    line = line.trim();
+
+                                    String partes[] = line.split(",");
+                                    if (partes.length >= 3) {
+                                        int numero = Integer.parseInt(partes[0].trim());
+                                        int contibuinte = Integer.parseInt(partes[1].trim());
+                                        Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
+
+                                        if (cliente == null) {
+                                            break;
+                                        }
+
+                                        String[] dataPartes = partes[2].trim().split("/");
+                                        int dia = Integer.parseInt(dataPartes[0]);
+                                        int mes = Integer.parseInt(dataPartes[1]);
+                                        int ano = Integer.parseInt(dataPartes[2]);
+                                        Data data = new Data(dia, mes, ano);
+
+                                        Arraylist<Produto> produtos = new ArrayList<>();
+                                        for (int i = 3; i < partes.length; i++) {
+                                            produtos.add(new Produto(partes[i].trim()));
+                                        }
+                                        faturas.adicionarFatura(numero, cliente, data, produtos);
+                                    }
+                                }
+
+                                faturas.setListaFaturas(listaFaturas);
                                 System.out.println("Faturas carregadas com sucesso.");
                             }
-                        }
-                        while (line.equalsIgnoreCase("produtos") && !line.isEmpty()) {
-                            String partes[] = line.split(",");
-                            if (partes.length >= 3) {
-                                int numero = Integer.parseInt(partes[0].trim());
-                                String clienteNome = partes[1].trim();
-                                String[] dataPartes = partes[2].trim().split("/");
-                                int dia = Integer.parseInt(dataPartes[0]);
-                                int mes = Integer.parseInt(dataPartes[1]);
-                                int ano = Integer.parseInt(dataPartes[2]);
-                                Data data = new Data(dia, mes, ano);
+                            if (line.equalsIgnoreCase("produtos")) {
+                                while ((line = br.readLine()) != null) {
+                                    line = line.trim();
+                                    if (line.equalsIgnoreCase("fim")) break;
 
-                                //Fatura fatura = new Fatura(numero, clienteNome, data,);
 
-                                //faturas.adicionarFatura(fatura);
-                                //faturas.setListaFaturas(listaFaturas);
-                                System.out.println("Faturas carregadas com sucesso.");
+                                    String[] atributos = line.split(",");
+                                    if (atributos.length == 5) {
+                                        try {
+                                            int codigo = Integer.parseInt(atributos[0].trim());
+                                            String nome = atributos[1].trim();
+                                            String descricao = atributos[2].trim();
+                                            int quantidade = Integer.parseInt(atributos[3].trim());
+                                            double preco = Double.parseDouble(atributos[4].trim());
+
+                                            Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
+                                            produtos.add(produto);
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("Erro ao processar produto: " + line);
+                                        }
+                                    }
+                                }
+
                             }
+
+                            //codigo para ler os produtos
                         }
-                        //codigo para ler os produtos
+
+                    } catch(IOException e){
+                        System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
+                    } catch(Exception e){
+                        System.out.println("Erro inesperado: " + e.getMessage());
                     }
-
-
-                } catch (IOException e) {
-                    System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
-                } catch (Exception e) {
-                    System.out.println("Erro inesperado: " + e.getMessage());
                 }
             }
         }
