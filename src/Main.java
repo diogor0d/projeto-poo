@@ -1,10 +1,8 @@
 import java.util.Scanner;
 
 public class Main {
-
-    private void criarFatura(){}
+    //as que faltam implementar:
     private void editarFatura(){}
-    private void listarFaturas(){}
     private void apresentarFatura(){}
     private void importarFaturas(){}
     private void exportarFaturas(){}
@@ -25,6 +23,8 @@ public class Main {
     public static void main(String[] args) {
         Main programa = new Main(); // Cria a instância de Main
         programa.executar();
+
+        //nao usei isto para nada, so nao apaguei porque podias querer ficar com ela, nao sei porque
         //receberLinha();
     }
 
@@ -50,13 +50,13 @@ public class Main {
                     clientes.listarClientes();
                     break;
                 case 4:
-                    criarFatura();
+                    faturas.novaFatura();
                     break;
                 case 5:
                     editarFatura();
                     break;
                 case 6:
-                    listarFaturas();
+                    faturas.listarFaturas();
                     break;
                 case 7:
                     apresentarFatura();
@@ -81,7 +81,7 @@ public class Main {
     }
 
 
-
+    //nao usei isto para nada, so nao apaguei porque podias querer ficar com ela, nao sei porque
     //public static String receberLinha() {
         //Scanner scanner = new Scanner(System.in);
         //System.out.print("> ");

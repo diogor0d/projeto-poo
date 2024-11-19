@@ -1,12 +1,14 @@
 clientes
  manel, contribuinte, acores
 
-faturas
- numero, cliente, data, <produtos>
-
 produtos
  TAXA_INTERMEDIA, vinho branco, 3091, "Rabolhito", 2x, 5.00, cat:vinho
  TAXA_REDUZIDA, pao, 1023, "baguete", 15x, 0.23, certs:ISO23023
  TAXA_NOMAL, carvao, 9231, "african coal - 10kg", 1x, 10.00
  COM_PRESCRICAO, paracetamol, 123, "paracetamol 500mg", 20x, 2.00, "albino jose"
  SEM_PRESCRICAO, fraldas, 123, "pacote 20 unidades", 1x, 5.00, cat:bebes
+
+
+faturas
+ numero, cliente, data, <produtos>
+

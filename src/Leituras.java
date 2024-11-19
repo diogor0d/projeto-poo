@@ -53,7 +53,7 @@ public class Leituras {
                     while ((line = br.readLine()) != null) {
                         line = line.trim(); // Remove espaços extras no começo e no fim
 
-                        //clientes:
+                        //leitura dos clientes:
                         if (line.equalsIgnoreCase("clientes")) {
                             while (!(line.equalsIgnoreCase("faturas")) && !line.isEmpty()) {
                                 if (line.isEmpty()) continue;
@@ -74,15 +74,39 @@ public class Leituras {
                                     }
                                 }
                             }
-                            if (line.equalsIgnoreCase("faturas")) {
-                                while (!(line.equalsIgnoreCase("produtos")) && !line.isEmpty()) {
-                                    if (line.isEmpty()) continue;
-                                    line = line.trim();
+                        }
+                        //leitura dos produtos RODASSSSS
+                        if (line.equalsIgnoreCase("produtos")) {
+                            while (!(line.equalsIgnoreCase("faturas")) && !line.isEmpty()) {
+                                if (line.isEmpty()) continue;
+                                line = line.trim();
+                                if (line.startsWith("TAXA_INTERMEDIA")) {
 
-                                    String partes[] = line.split(",");
-                                    if (partes.length >= 3) {
+                                } else if (line.startsWith("TAXA_REDUZIDA")) {
+
+                                } else if (line.startsWith("TAXA_NOMAL")) {
+
+                                } else if (line.startsWith("COM_PRESCRICAO")) {
+
+                                } else if (line.startsWith("SEM_PRESCRICAO")) {
+
+                                }
+                            }
+                        }
+
+                        //RODAS aqui ve se adicionas os produtos so com o nome no ficheiro de texto e depois vais ver à
+                        //lista de produtos para ir buscar o produto ou se les logo tudo..
+                        //desde que no final adiciones a lista de produtos dessa fatura td okay
+                        if (line.equalsIgnoreCase("faturas")) {
+                            while (!(line.equalsIgnoreCase("produtos")) && !line.isEmpty()) {
+                                if (line.isEmpty()) continue;
+                                line = line.trim();
+
+                                String partes[] = line.split(",");
+                                if (partes.length >= 3) {
+                                    try {
                                         int numero = Integer.parseInt(partes[0].trim());
-                                        int contibuinte = Integer.parseInt(partes[1].trim());
+                                        int contribuinte = Integer.parseInt(partes[1].trim());
                                         Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
 
                                         if (cliente == null) {
@@ -95,51 +119,50 @@ public class Leituras {
                                         int ano = Integer.parseInt(dataPartes[2]);
                                         Data data = new Data(dia, mes, ano);
 
-                                        Arraylist<Produto> produtos = new ArrayList<>();
+                                        ArrayList<Produto> produtos = new ArrayList<>();
                                         for (int i = 3; i < partes.length; i++) {
-                                            produtos.add(new Produto(partes[i].trim()));
+                                            //produtos.add(new Produto(partes[i].trim()));
                                         }
                                         faturas.adicionarFatura(numero, cliente, data, produtos);
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Erro ao processar fatura: " + line);
                                     }
                                 }
-
-                                faturas.setListaFaturas(listaFaturas);
-                                System.out.println("Faturas carregadas com sucesso.");
                             }
-                            if (line.equalsIgnoreCase("produtos")) {
-                                while ((line = br.readLine()) != null) {
-                                    line = line.trim();
-                                    if (line.equalsIgnoreCase("fim")) break;
-
-
-                                    String[] atributos = line.split(",");
-                                    if (atributos.length == 5) {
-                                        try {
-                                            int codigo = Integer.parseInt(atributos[0].trim());
-                                            String nome = atributos[1].trim();
-                                            String descricao = atributos[2].trim();
-                                            int quantidade = Integer.parseInt(atributos[3].trim());
-                                            double preco = Double.parseDouble(atributos[4].trim());
-
-                                            Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
-                                            produtos.add(produto);
-                                        } catch (NumberFormatException e) {
-                                            System.out.println("Erro ao processar produto: " + line);
-                                        }
-                                    }
-                                }
-
-                            }
-
-                            //codigo para ler os produtos
                         }
+                        System.out.println("Faturas carregadas com sucesso.");
 
-                    } catch(IOException e){
-                        System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
-                    } catch(Exception e){
-                        System.out.println("Erro inesperado: " + e.getMessage());
+                        if (line.equalsIgnoreCase("produtos")) {
+                            while ((line = br.readLine()) != null) {
+                                line = line.trim();
+                                if (line.equalsIgnoreCase("fim")) break;
+
+
+                                String[] atributos = line.split(",");
+                                if (atributos.length == 5) {
+                                    try {
+                                        int codigo = Integer.parseInt(atributos[0].trim());
+                                        String nome = atributos[1].trim();
+                                        String descricao = atributos[2].trim();
+                                        int quantidade = Integer.parseInt(atributos[3].trim());
+                                        double preco = Double.parseDouble(atributos[4].trim());
+
+                                        Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
+                                        //produtos.add(produto);
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Erro ao processar produto: " + line);
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                } catch(IOException e){
+                    System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
+                } catch(Exception e){
+                    System.out.println("Erro inesperado: " + e.getMessage());
                 }
+
             }
         }
     }

@@ -6,8 +6,7 @@ public class Faturas{
     private Clientes clientes;
 
     // Construtor da classe Faturas
-    public Faturas(Clientes clientes) {
-        this.clientes = clientes;
+    public Faturas() {
         this.listaFaturas = new ArrayList<>();
     }
 
@@ -49,12 +48,14 @@ public class Faturas{
         int ano = Integer.parseInt(partes[2]);
         Data data = new Data(dia, mes, ano);
 
-        System.out.print("Digite os produtos a adicionar (separados por ','): ");
-        String[] produtosArray = scanner.nextLine().split(",");
+        System.out.print("Digite os produtos a adicionar (codigo, nome, descricao, quantidade, preco): ");
         System.out.println("Digite 'fim' para encerrar.");
+        System.out.println("Cada produto deve estar em uma linha.");
+
         ArrayList<Produto> produtos = new ArrayList<>();
 
         while (true) {
+            System.out.print("Produto: ");
             String linha = scanner.nextLine();
             if (linha.equalsIgnoreCase("fim")) break;
 
@@ -69,7 +70,6 @@ public class Faturas{
 
                     Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
                     produtos.add(produto);
-                    scanner.close();
                 } catch (NumberFormatException e) {
                     System.out.println("Erro ao processar produto: " + linha);
                 }
@@ -78,6 +78,7 @@ public class Faturas{
             }
         }
         adicionarFatura(numero, cliente, data, produtos);
+        scanner.close();
     }
 
 
@@ -93,6 +94,7 @@ public class Faturas{
         if (listaFaturas.isEmpty()) {
             System.out.println("Nenhuma fatura cadastrada.");
         } else {
+            System.out.println("Lista de Faturas:");
             for (Fatura fatura : listaFaturas) {
                 System.out.println(fatura);
             }
