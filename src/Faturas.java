@@ -6,8 +6,9 @@ public class Faturas{
     private Clientes clientes;
 
     // Construtor da classe Faturas
-    public Faturas() {
+    public Faturas(Clientes clientes) {
         this.listaFaturas = new ArrayList<>();
+        this.clientes = clientes;
     }
 
     public void setListaFaturas(ArrayList<Fatura> novaListaFaturas) {

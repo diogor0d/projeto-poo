@@ -15,7 +15,7 @@ public class Main {
     //Construtor do main
     public Main() {
         this.clientes = new Clientes(); // Inicializa a lista de clientes
-        this.faturas = new Faturas();  // Inicializa a lista de faturas
+        this.faturas = new Faturas(clientes);  // Inicializa a lista de faturas
         this.leituras = new Leituras(clientes, faturas);
     }
 
