@@ -61,7 +61,7 @@ public class Clientes{
             try {
                 System.out.print("Digite o nome do cliente: ");
                 nome = scanner.nextLine();
-                if (isTextoValido(nome) && !nome.isEmpty()) {
+                if (isTextoValido(nome) && !(nome.equalsIgnoreCase(""))) {
                     Cliente cliente_com_nome = procurarClientePorNome(nome);
                     if(cliente_com_nome != null){
                         System.out.println("Já existe um cliente com este nome!");
@@ -100,7 +100,7 @@ public class Clientes{
             try {
                 System.out.print("Digite a localização do cliente: ");
                 localizacao = scanner.nextLine();
-                if (isTextoValido(localizacao) && localizacao.isEmpty()) {
+                if (isTextoValido(localizacao) && !(localizacao.equalsIgnoreCase(""))) {
                     break;
                 } else {
                     System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
