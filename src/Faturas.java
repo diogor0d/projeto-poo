@@ -1,3 +1,7 @@
+//falta adicionar proteçoes
+//vizualizarFatura e editarFatura estão incompletos
+//duvida devemos meter a linha 10 a private?
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,6 +15,7 @@ public class Faturas{
         this.clientes = clientes;
     }
 
+    // Metodo para tornar uma lista de faturas na lista de faturas
     public void setListaFaturas(ArrayList<Fatura> novaListaFaturas) {
         if (novaListaFaturas != null) {
             this.listaFaturas = novaListaFaturas;
@@ -20,8 +25,7 @@ public class Faturas{
         }
     }
 
-
-    // Método para ler os dados e adicionara fatura
+    // Metodo para ler os dados e criar a fatura
     public void novaFatura() {
         Scanner scanner = new Scanner(System.in);
 
@@ -82,14 +86,14 @@ public class Faturas{
     }
 
 
-    // Método para adicionar uma nova fatura à lista
+    // Metodo para adicionar uma nova fatura à lista
     public void adicionarFatura(int numero, Cliente cliente, Data data, ArrayList<Produto> produtos) {
         Fatura novaFatura= new Fatura(numero, cliente, data, produtos);
         listaFaturas.add(novaFatura);
         System.out.println("Nova fatura, " +numero+", adicionada com sucesso!");
     }
 
-
+    // Metodo para listar as faturas
     public void listarFaturas() {
         if (listaFaturas.isEmpty()) {
             System.out.println("Nenhuma fatura cadastrada.");
@@ -101,6 +105,7 @@ public class Faturas{
         }
     }
 
+    // Metodo para editar o(s) dado(s) duma fatura
     public void editarFatura(){
         Scanner scanner = new Scanner(System.in);
         if (!listaFaturas.isEmpty()) {
@@ -111,8 +116,6 @@ public class Faturas{
                 if (fatura.getNum() == num) {
                     System.out.print("Fatura " + num + " encontrada.");
                     int opcao = -1;
-                    int opcao_faturas= -1;
-
                     while (opcao != 0) {
                         System.out.print("\nQue dados deseja alterar?\n1- Número\n2- Cliente\n3- Data\n4- Produto(s)\n0- Cancelar\nOpção-> ");
                         opcao = scanner.nextInt();
@@ -149,6 +152,7 @@ public class Faturas{
                                 System.out.println("Data alterada com sucesso.");
                                 break;
                             case 4:
+                                int opcao_faturas= -1;
                                 while (opcao_faturas != 0) {
                                     System.out.print("\nDeseja:\n1- Alterar um produto\n2- Adicionar um novo produto\n3- Eliminar um produto\n0- Cancelar\nOpção-> ");
                                     int nova_opcao = scanner.nextInt();

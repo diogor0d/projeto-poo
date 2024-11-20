@@ -1,3 +1,5 @@
+//dúvida: linha 52 e 155; 104
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,6 +11,7 @@ public class Clientes{
         this.listaClientes = new ArrayList<>();
     }
 
+    // Metodo para tornar uma lista de clientes na lista de clientes
     public void setListaClientes(ArrayList<Cliente> novaListaClientes) {
         if (novaListaClientes != null) {
             this.listaClientes = novaListaClientes;
@@ -18,34 +21,68 @@ public class Clientes{
         }
     }
 
-    // Método para ler os dados e adicionar o cliente
+    // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
+    public boolean isTextoValido(String texto) {
+        for (int i = 0; i < texto.length(); i++) {
+            char c = texto.charAt(i);
+            if (!(Character.isLetter(c) || c == ' ')) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Metodo para ler os dados e criar o cliente
     public void novoCliente() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Digite o nome do cliente: ");
-        String nome = scanner.nextLine();
-
-        System.out.print("Digite o número de contribuinte: ");
-        int contribuinte = scanner.nextInt();
-        scanner.nextLine(); // Consumir o "\n" pendente
-
-        System.out.print("Digite a localização do cliente: ");
-        String localizacao = scanner.nextLine();
-
+        String nome;
+        while(true){
+            System.out.print("Digite o nome do cliente: ");
+            nome = scanner.nextLine();
+            if (isTextoValido(nome)) {
+                break;
+            } else{
+                System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
+            }
+        }
+        int contribuinte;
+        while(true){
+            System.out.print("Digite o número de contribuinte: ");
+            //duvida: o input pode ter 123 dasd dsad; e ele fica só com o 123, mas deveríamos mandar repetir
+            if (scanner.hasNextInt()){
+                contribuinte = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            }else{
+                System.out.println("Entrada inválida. Digite um número inteiro.");
+                scanner.next();
+            }
+        }
+        String localizacao;
+        while(true){
+            System.out.print("Digite a localização do cliente: ");
+            localizacao = scanner.nextLine();
+            if(isTextoValido(localizacao)){
+                break;
+            } else{
+                System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
+            }
+        }
         adicionarCliente(nome, contribuinte, localizacao);
     }
 
-    // Método para adicionar um novo cliente à lista
+    // Metodo para adicionar um novo cliente à lista
     public void adicionarCliente(String nome, int contribuinte, String localizacao) {
         Cliente novoCliente = new Cliente(nome, contribuinte, localizacao);
         listaClientes.add(novoCliente);
         System.out.println("Novo cliente, " +nome+", adicionado com sucesso!");
     }
 
-    // Método para listar os clientes
+    // Metodo para listar os clientes
     public void listarClientes() {
         if (listaClientes.isEmpty()) {
-            System.out.println("Nenhum cliente cadastrado.");
+            System.out.println("A lista de clientes está vazia!");
         } else {
             System.out.println("Lista de Clientes:");
             for (Cliente cliente : listaClientes) {
@@ -54,6 +91,7 @@ public class Clientes{
         }
     }
 
+    // Metodo para procurar um cliente na lista a partir do seu numero de contribuinte
     public Cliente procurarClientePorContribuinte(int contribuinte) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getContribuinte() == contribuinte) {
@@ -63,59 +101,95 @@ public class Clientes{
         return null;
     }
 
-
-    public void editarCliente(){
+    //duvida: deveriamos usar o contribuinte em vez de nome??
+    // Metodo para editar o(s) dado(s) dum cliente
+    public void editarCliente() {
         Scanner scanner = new Scanner(System.in);
-        if (!listaClientes.isEmpty()) {
-            System.out.print("Qual é o nome do cliente, ao qual quer alterar os dados? ");
+        if (listaClientes.isEmpty()) {
+            System.out.println("A lista de clientes está vazia.");
+        }
+        Cliente cliente = null;
+        while (cliente == null) {
+            System.out.print("Digite o nome do cliente ao qual quer alterar os dados: ");
             String nome = scanner.nextLine();
-            for (Cliente cliente : listaClientes) {
-                if (cliente.getNome().equalsIgnoreCase(nome)) {
-                    System.out.print("Cliente " + nome + " encontrado.");
-                    int opcao = -1;
-
-                    while (opcao != 0) {
-                        System.out.print("\nQue dados deseja alterar?\n1- Nome\n2- Contribuinte\n3- Localização\n0- Cancelar\nOpção-> ");
-                        opcao = scanner.nextInt();
-                        scanner.nextLine();  // Limpar o buffer do scanner
-                        switch (opcao) {
-                            case 1:
-                                System.out.print("Novo nome: ");
-                                String novoNome = scanner.nextLine();
-                                cliente.setNome(novoNome);  // Atualiza o nome
-                                System.out.println("Nome alterado com sucesso.");
-                                break;
-                            case 2:
-                                System.out.print("Novo número de contribuinte: ");
-                                int novoContribuinte = scanner.nextInt();
-                                scanner.nextLine();  // Limpar o buffer
-                                cliente.setContribuinte(novoContribuinte);  // Atualiza o contribuinte
-                                System.out.println("Contribuinte alterado com sucesso.");
-                                break;
-                            case 3:
-                                System.out.print("Nova localização: ");
-                                String novaLocalizacao = scanner.nextLine();
-                                cliente.setLocalizacao(novaLocalizacao);  // Atualiza a localização
-                                System.out.println("Localização alterada com sucesso.");
-                                break;
-                            case 0:
-                                System.out.println("Alteração cancelada.");
-                                break;
-                            default:
-                                System.out.println("Opção inválida.");
-                        }
-                        System.out.print("Deseja alterar mais algum dado? (S ou N): ");
-                        String continuar = scanner.nextLine();
-                        if (continuar.equalsIgnoreCase("N")) {
-                            break;
-                        }
+            if (isTextoValido(nome)) {
+                for (Cliente clientes : listaClientes) {
+                    if (clientes.getNome().equalsIgnoreCase(nome)) {
+                        cliente = clientes;
+                        System.out.println("Cliente " + nome + " encontrado.");
+                        break;
                     }
                 }
-                System.out.println("Cliente não encontrado.");
+                if (cliente == null) {
+                    System.out.println("Cliente não encontrado! Tente novamente.");
+                }
+            } else {
+                System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
             }
         }
-        else {
-                System.out.println("A lista de clientes está vazia.");
+        int opcao = -1;
+
+        while (opcao != 0) {
+            System.out.print("Que dados deseja alterar?\n1- Nome\n2- Contribuinte\n3- Localização\n0- Cancelar\nOpção-> ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcao) {
+                case 1:
+                    String novoNome;
+                    while(true){
+                        System.out.print("Novo nome: ");
+                        novoNome = scanner.nextLine();
+                        if(isTextoValido(novoNome)) {
+                            cliente.setNome(novoNome);
+                            System.out.println("Nome alterado com sucesso.");
+                            break;
+                        } else{
+                            System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
+                        }
+                    }
+                    break;
+                case 2:
+                    int novoContribuinte;
+                    while(true) {
+                        System.out.print("Novo número de contribuinte: ");
+                        //duvida: o input pode ter 123 dasd dsad; e ele fica só com o 123, mas deveríamos mandar repetir
+                        if (scanner.hasNextInt()) {
+                            novoContribuinte = scanner.nextInt();
+                            scanner.nextLine();
+                            cliente.setContribuinte(novoContribuinte);
+                            System.out.println("Contribuinte alterado com sucesso.");
+                            break;
+                        } else {
+                            System.out.println("Entrada inválida. Digite um número inteiro.");
+                            scanner.next();
+                        }
+                    }
+                    break;
+                case 3:
+                    String novaLocalizacao;
+                    while(true){
+                        System.out.print("Nova localização: ");
+                        novaLocalizacao = scanner.nextLine();
+                        if(isTextoValido(novaLocalizacao)){
+                            cliente.setLocalizacao(novaLocalizacao);
+                            System.out.println("Localização alterada com sucesso.");
+                            break;
+                        }else{
+                            System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
+                        }
+                    }
+                    break;
+                case 0:
+                    System.out.println("Alteração cancelada.");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente");
             }
+            System.out.print("Deseja alterar mais algum dado? (S ou N): ");
+            String continuar = scanner.nextLine();
+            if (continuar.equalsIgnoreCase("N")) {
+                break;
+            }
+        }
     }
 }

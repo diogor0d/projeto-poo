@@ -1,4 +1,4 @@
-//feita toda com o chat, para ja so serve para testar as restantes funcionalidades
+//feita toda com o chat, para ja so serve para testar as restantes funcionalidades, podes apagar tudo e fazer de novo!! nao mexi mesmo nisto...
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,7 +1,7 @@
-class Data {
-    private int dia;
-    private int mes;
-    private int ano;
+public class Data {
+    private final int dia;
+    private final int mes;
+    private final int ano;
 
     public Data(int dia, int mes, int ano) {
         this.dia = dia;

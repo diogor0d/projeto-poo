@@ -1,3 +1,5 @@
+// duvida: colocamos as linhas 7 e 8 como final??
+
 import java.io.*;
 import java.util.*;
 
@@ -55,7 +57,7 @@ public class Leituras {
 
                         //leitura dos clientes:
                         if (line.equalsIgnoreCase("clientes")) {
-                            while (!(line.equalsIgnoreCase("faturas")) && !line.isEmpty()) {
+                            while (!(line.equalsIgnoreCase("faturas"))) {
                                 if (line.isEmpty()) continue;
                                 line = line.trim();
 
@@ -77,7 +79,7 @@ public class Leituras {
                         }
                         //leitura dos produtos RODASSSSS
                         if (line.equalsIgnoreCase("produtos")) {
-                            while (!(line.equalsIgnoreCase("faturas")) && !line.isEmpty()) {
+                            while (!(line.equalsIgnoreCase("faturas"))) {
                                 if (line.isEmpty()) continue;
                                 line = line.trim();
                                 if (line.startsWith("TAXA_INTERMEDIA")) {
@@ -98,11 +100,11 @@ public class Leituras {
                         //lista de produtos para ir buscar o produto ou se les logo tudo..
                         //desde que no final adiciones a lista de produtos dessa fatura td okay
                         if (line.equalsIgnoreCase("faturas")) {
-                            while (!(line.equalsIgnoreCase("produtos")) && !line.isEmpty()) {
+                            while (!(line.equalsIgnoreCase("produtos"))) {
                                 if (line.isEmpty()) continue;
                                 line = line.trim();
 
-                                String partes[] = line.split(",");
+                                String[] partes = line.split(",");
                                 if (partes.length >= 3) {
                                     try {
                                         int numero = Integer.parseInt(partes[0].trim());

@@ -1,3 +1,6 @@
+// duvida: colocamos as linhas 12 a 14 como final??
+// ve se queres apagar as linhas 27 e 28, e de 85 a 90 que eu nao usei esse metodo
+
 import java.util.Scanner;
 
 public class Main {
