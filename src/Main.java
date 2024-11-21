@@ -55,7 +55,7 @@ public class Main {
                         "8- Apresentar estatísticas\n0- Sair\nOpcão-> ");
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 8) {
-                    System.out.println("Opção inválida! Digite um número entre 0 e 8.");
+                    System.out.println("Opção inválida! Escreva um número de 0 a 8.");
                     continue; // Volta para a entrada de opção
                 }
 
@@ -106,7 +106,7 @@ public class Main {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida! Por favor, digite um número válido.");
+                System.out.println("Entrada inválida! Digite um número válido.");
             } catch (Exception e) {
                 System.out.println("Erro inesperado: " + e.getMessage());
             }

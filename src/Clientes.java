@@ -23,11 +23,16 @@ public class Clientes{
 
     // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
     public boolean isTextoValido(String texto) {
-        for (int i = 0; i < texto.length(); i++) {
-            char c = texto.charAt(i);
-            if (!(Character.isLetter(c) || c == ' ')) {
-                return false;
+        if(!texto.isEmpty()){
+            texto = String.join(" ", texto.split("\\s+"));
+            for (int i = 0; i < texto.length(); i++) {
+                char c = texto.charAt(i);
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    return false;
+                }
             }
+        } else{
+            return false;
         }
         return true;
     }
@@ -61,9 +66,10 @@ public class Clientes{
             try {
                 System.out.print("Digite o nome do cliente: ");
                 nome = scanner.nextLine();
-                if (isTextoValido(nome) && !(nome.equalsIgnoreCase(""))) {
-                    Cliente cliente_com_nome = procurarClientePorNome(nome);
-                    if(cliente_com_nome != null){
+                nome = nome.trim();
+                if (isTextoValido(nome)) {
+                    Cliente clienteComEsteNome = procurarClientePorNome(nome);
+                    if(clienteComEsteNome != null){
                         System.out.println("Já existe um cliente com este nome!");
                     }
                     else{
@@ -100,7 +106,8 @@ public class Clientes{
             try {
                 System.out.print("Digite a localização do cliente: ");
                 localizacao = scanner.nextLine();
-                if (isTextoValido(localizacao) && !(localizacao.equalsIgnoreCase(""))) {
+                localizacao = localizacao.trim();
+                if (isTextoValido(localizacao)) {
                     break;
                 } else {
                     System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
@@ -145,6 +152,7 @@ public class Clientes{
                 try {
                     System.out.print("Digite o nome do cliente ao qual quer alterar os dados: ");
                     String nome = scanner.nextLine();
+                    nome = nome.trim();
                     if (isTextoValido(nome)) {
                         cliente = procurarClientePorNome(nome);
                         if(cliente != null){
@@ -177,9 +185,10 @@ public class Clientes{
                             while (true) {
                                 System.out.print("Novo nome: ");
                                 novoNome = scanner.nextLine();
+                                novoNome = novoNome.trim();
                                 if (isTextoValido(novoNome)) {
-                                    Cliente novoCliente_com_nome = procurarClientePorNome(novoNome);
-                                    if(novoCliente_com_nome == null){
+                                    Cliente novoClienteNome = procurarClientePorNome(novoNome);
+                                    if(novoClienteNome == null){
                                         cliente.setNome(novoNome);
                                         System.out.println("Nome alterado com sucesso.");
                                         break;
@@ -198,8 +207,8 @@ public class Clientes{
                                 System.out.print("Novo número de contribuinte: ");
                                 try {
                                     novoContribuinte = Integer.parseInt(scanner.nextLine());
-                                    Cliente novoCliente_com_contribuinte = procurarClientePorContribuinte(novoContribuinte);
-                                    if(novoCliente_com_contribuinte == null){
+                                    Cliente novoClienteContribuinte = procurarClientePorContribuinte(novoContribuinte);
+                                    if(novoClienteContribuinte == null){
                                         cliente.setContribuinte(novoContribuinte);
                                         System.out.println("Contribuinte alterado com sucesso.");
                                         break;
@@ -217,6 +226,7 @@ public class Clientes{
                             while (true) {
                                 System.out.print("Nova localização: ");
                                 novaLocalizacao = scanner.nextLine();
+                                novaLocalizacao = novaLocalizacao.trim();
                                 if (isTextoValido(novaLocalizacao)) {
                                     cliente.setLocalizacao(novaLocalizacao);
                                     System.out.println("Localização alterada com sucesso.");

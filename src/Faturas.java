@@ -29,30 +29,31 @@ public class Faturas{
 
     // Metodo para verificar se uma Data é válida ou não
     private boolean isDataValida(int dia, int mes, int ano) {
-        // Verifica se o mês está no intervalo correto
-        if(ano>2024) return false;
+        if(ano <200 || ano > 2024) return false;
 
         if (mes < 1 || mes > 12) return false;
 
-        // Dias em cada mês
         int[] diasPorMes = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-        // Verifica anos bissextos
+        // anos bissextos
         if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) {
             diasPorMes[1] = 29;
         }
-
-        // Verifica se o dia está no intervalo correto
-        return dia > 0 && dia <= diasPorMes[mes - 1];
+        return dia >= 0 && dia <= diasPorMes[mes - 1];
     }
 
     // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
     public boolean isTextoValido(String texto) {
-        for (int i = 0; i < texto.length(); i++) {
-            char c = texto.charAt(i);
-            if (!(Character.isLetter(c) || c == ' ')) {
-                return false;
+        if(!texto.isEmpty()){
+            texto = String.join(" ", texto.split("\\s+"));
+            for (int i = 0; i < texto.length(); i++) {
+                char c = texto.charAt(i);
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    return false;
+                }
             }
+        } else{
+            return false;
         }
         return true;
     }
@@ -65,6 +66,7 @@ public class Faturas{
             try {
                 System.out.print("Digite o número da fatura: ");
                 numero = Integer.parseInt(scanner.nextLine());
+                // ir ver se ja existe uma fatura com este número
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Digite um número inteiro.");
@@ -130,6 +132,7 @@ public class Faturas{
         while (true) {
             try {
                 System.out.print("Produto: ");
+                System.out.print("Código: ");
                 String linha = scanner.nextLine();
                 if (linha.equalsIgnoreCase("fim")){
                     break;
@@ -163,7 +166,7 @@ public class Faturas{
         // Criação da fatura
         try {
             adicionarFatura(numero, cliente, data, produtos);
-            System.out.println("Fatura criada com sucesso!");
+            System.out.println("Fatura criada com sucesso.");
         } catch (Exception e) {
             System.out.println("Erro ao criar fatura: " + e.getMessage());
         }
