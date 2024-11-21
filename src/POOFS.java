@@ -1,5 +1,3 @@
-// duvida: colocamos as linhas 12 a 14 como final??
-
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,5 +1,3 @@
-//dúvida: 116; devemos usar try e catch em todos os metodos mesmo todos??
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,6 +33,14 @@ public class Clientes {
             return false;
         }
         return true;
+    }
+
+    public boolean isLocalizacaoValida(String localizacao){
+        ArrayList<String> localizacoes = new ArrayList<>();
+        localizacoes.add("portugal continental");
+        localizacoes.add("açores");
+        localizacoes.add("madeira");
+        return localizacoes.contains(localizacao);
     }
 
     // Metodo para procurar um cliente na lista a partir do seu numero de contribuinte
@@ -87,8 +93,8 @@ public class Clientes {
             try {
                 System.out.print("Digite o número de contribuinte: ");
                 contribuinte = Integer.parseInt(scanner.nextLine());
-                Cliente cliente_com_contribuinte = procurarClientePorContribuinte(contribuinte);
-                if (cliente_com_contribuinte != null) {
+                Cliente clienteComEsteContribuinte = procurarClientePorContribuinte(contribuinte);
+                if (clienteComEsteContribuinte != null) {
                     System.out.println("Já existe um cliente com este número de contribuinte!");
                 } else {
                     break;
@@ -103,11 +109,15 @@ public class Clientes {
         String localizacao;
         while (true) {
             try {
-                System.out.print("Digite a localização do cliente: ");
+                System.out.print("Digite a localização do cliente (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
                 localizacao = scanner.nextLine();
                 localizacao = localizacao.trim();
                 if (isTextoValido(localizacao)) {
-                    break;
+                    if(isLocalizacaoValida(localizacao)){
+                        break;
+                    } else{
+                        System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira'");
+                    }
                 } else {
                     System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
                 }
@@ -142,28 +152,27 @@ public class Clientes {
     //duvida: deveriamos usar o contribuinte em vez de nome??
     public void editarCliente() {
         Scanner scanner = new Scanner(System.in);
+
         if (listaClientes.isEmpty()) {
             System.out.println("A lista de clientes está vazia.");
         } else {
             Cliente cliente;
+            int contribuinte;
             while (true) {
                 try {
-                    System.out.print("Digite o nome do cliente ao qual quer alterar os dados: ");
-                    String nome = scanner.nextLine();
-                    nome = nome.trim();
-                    if (isTextoValido(nome)) {
-                        cliente = procurarClientePorNome(nome);
-                        if (cliente != null) {
-                            System.out.println("Cliente " + nome + " encontrado.");
-                            break;
-                        } else {
-                            System.out.println("Cliente não encontrado! Tente novamente.");
-                        }
+                    System.out.print("Digite o número de contribuintedo cliente ao qual deseja alterar os dados: ");
+                    contribuinte = Integer.parseInt(scanner.nextLine());
+                    cliente = procurarClientePorContribuinte(contribuinte);
+                    if (cliente != null) {
+                        System.out.println("Cliente " + cliente.getNome() + " encontrado!");
+                        break;
                     } else {
-                        System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
+                        System.out.println("Cliente não encontrado! Tente novamente.");
                     }
+                } catch (NumberFormatException e) {
+                    System.out.println("Entrada inválida. Digite um número inteiro.");
                 } catch (Exception e) {
-                    System.out.println("Erro ao processar o nome do cliente: " + e.getMessage());
+                    System.out.println("Erro ao processar o número de contribuinte: " + e.getMessage());
                 }
             }
 
@@ -222,13 +231,17 @@ public class Clientes {
                         case 3:
                             String novaLocalizacao;
                             while (true) {
-                                System.out.print("Nova localização: ");
+                                System.out.print("Nova localização (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
                                 novaLocalizacao = scanner.nextLine();
                                 novaLocalizacao = novaLocalizacao.trim();
                                 if (isTextoValido(novaLocalizacao)) {
-                                    cliente.setLocalizacao(novaLocalizacao);
-                                    System.out.println("Localização alterada com sucesso.");
-                                    break;
+                                    if (isLocalizacaoValida(novaLocalizacao)) {
+                                        cliente.setLocalizacao(novaLocalizacao);
+                                        System.out.println("Localização alterada com sucesso.");
+                                        break;
+                                    } else{
+                                        System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira'");
+                                    }
                                 } else {
                                     System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
                                 }
