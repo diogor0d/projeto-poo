@@ -13,7 +13,7 @@ public class Leituras {
         this.faturas = faturas;
     }
 
-    public void lerArquivo() {
+    public void lerFicheiro() {
         File f_obj = new File("output.obj");
 
         if (f_obj.exists() && f_obj.isFile()) {

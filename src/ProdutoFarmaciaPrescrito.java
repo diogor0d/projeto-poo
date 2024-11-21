@@ -5,7 +5,6 @@ public class ProdutoFarmaciaPrescrito extends Produto {
 
     public ProdutoFarmaciaPrescrito(int codigo, String nome, String descricao, int quantidade, double preco, String medico) {
         super(codigo, nome, descricao, quantidade, preco);
-        this.taxas = taxas;
         this.medico = medico;
     }
 }
