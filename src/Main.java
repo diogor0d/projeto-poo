@@ -39,16 +39,16 @@ public class Main {
     private void exportarFaturas(){}
 
 
-    private Leituras leituras;
-    private Clientes clientes;
-    private Faturas faturas;
+    private final Leituras leituras;
+    private final Clientes clientes;
+    private final Faturas faturas;
 
     public void executar() {
         leituras.lerArquivo();
 
         Scanner scanner = new Scanner(System.in);
         int opcao;
-        
+
         while (true) {
             try {
                 System.out.print("MENU:\n1- Novo cliente\n2- Editar cliente\n3- Listar clientes\n4- Nova fatura\n5- Editar fatura\n6- Listar faturas\n7- Apresentar fatura\n" +

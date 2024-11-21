@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Produtos {
-    private ArrayList<Produto> produtos;
+    private final ArrayList<Produto> produtos;
 
     // Construtor da classe Produtos
     public Produtos() {
