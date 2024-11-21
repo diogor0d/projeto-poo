@@ -13,18 +13,47 @@ public class Produto {
         this.quantidade = quantidade;
         this.preco = preco;
     }
-    // Getter e Setter
-    public int getCodigo() { return codigo; }
-    public String getNome() { return nome; }
-    public String getDescricao() { return descricao; }
-    public int getQuantidade() { return quantidade; }
-    public double getPreco() { return preco; }
 
-    public void setCodigo(int codigo) { this.codigo = codigo; }
-    public void setNome(String nome) { this.nome = nome; }
-    public void setDescricao(String descricao) { this.descricao = descricao; }
-    public void setQuantidade(int quantidade) { this.quantidade = quantidade; }
-    public void setPreco(double preco) { this.preco = preco; }
+    // Getter e Setter
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
 
     // // toString
     public String toString() {

@@ -1,14 +1,15 @@
 // duvida: colocamos as linhas 12 a 14 como final??
-// ve se queres apagar as linhas 27 e 28, e de 85 a 90 que eu nao usei esse metodo
 
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Main {
+public class POOFS {
+    private final Leituras leituras;
+    private final Clientes clientes;
+    private final Faturas faturas;
 
-    //Construtor do main
-    public Main() {
+    public POOFS() {
         this.clientes = new Clientes(); // Inicializa a lista de clientes
         this.faturas = new Faturas(clientes);  // Inicializa a lista de faturas
         this.leituras = new Leituras(clientes, faturas);
@@ -19,32 +20,34 @@ public class Main {
         ArrayList<Produto> produtos = new ArrayList<>(Arrays.asList(
                 new ProdutoAlimentarTI(1234, "vinho de pacote", "750ml vinho de pacote biologico do douro", 2, 250.00, true, CategoriaAlimentar.VINHO),
                 new ProdutoAlimentarTR(12366, "melao", "500g melao do panelas", 1, 5.00, true, new ArrayList<>(Arrays.asList(Certificacao.HACCP))),
-                new ProdutoAlimentarTN(27311, "queijo", "750g queijo de cabra", 4, 10.00, false)
+                new ProdutoAlimentarTN(27311, "queijo", "750g queijo de cabra", 4, 10.00, false),
+                new ProdutoFarmaciaNaoPrescrito(9281, "dorflex", "10 comprimidos dorflex", 2, 250.00, CategoriaFarmacia.BEM_ESTAR),
+                new ProdutoFarmaciaPrescrito(9391, "paracetamol 1000mg", "10 comprimidos paracetamol 1000mg", 2, 250.00, "Dr. Joao")
         ));
 
         Cliente cristinoRondo = new Cliente("Cristino Rondo", 23345123, "Madeira");
-        Data dataFaturaExemplo = new Data(23,1,2065);
+        Cliente joseSocrates = new Cliente("Jose Socrates", 92811231, "Lisboa");
 
-        Fatura debug = new Fatura(8347113, cristinoRondo, dataFaturaExemplo, produtos);
+        Data dataFaturaExemplo = new Data(23, 1, 2065);
 
+        Fatura debugFatura = new Fatura(8347113, cristinoRondo, dataFaturaExemplo, produtos);
 
-        Main programa = new Main(); // Cria a instância de Main
-        programa.executar();
+        POOFS sistema = new POOFS(); // Cria a instância de Main
+        sistema.clientes.setListaClientes(new ArrayList<>(Arrays.asList(cristinoRondo, joseSocrates)));
+        sistema.faturas.setListaFaturas(new ArrayList<>(Arrays.asList(debugFatura)));
+        sistema.iniciar();
 
     }
 
 
+    private void importarFaturas() {
+    }
 
-    private void importarFaturas(){}
-    private void exportarFaturas(){}
+    private void exportarFaturas() {
+    }
 
-
-    private final Leituras leituras;
-    private final Clientes clientes;
-    private final Faturas faturas;
-
-    public void executar() {
-        leituras.lerArquivo();
+    public void iniciar() {
+        leituras.lerFicheiro();
 
         Scanner scanner = new Scanner(System.in);
         int opcao;

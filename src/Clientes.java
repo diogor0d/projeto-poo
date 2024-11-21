@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Clientes{
+public class Clientes {
     private ArrayList<Cliente> listaClientes;
 
     // Construtor da classe Clientes
@@ -50,7 +50,7 @@ public class Clientes{
     // Metodo para procurar um cliente na lista a partir do seu nome
     public Cliente procurarClientePorNome(String nome) {
         for (Cliente cliente : listaClientes) {
-            if (cliente.getNome().equalsIgnoreCase(nome)){
+            if (cliente.getNome().equalsIgnoreCase(nome)) {
                 return cliente;
             }
         }
@@ -71,8 +71,7 @@ public class Clientes{
                     Cliente clienteComEsteNome = procurarClientePorNome(nome);
                     if(clienteComEsteNome != null){
                         System.out.println("Já existe um cliente com este nome!");
-                    }
-                    else{
+                    } else {
                         break;
                     }
                 } else {
@@ -89,9 +88,9 @@ public class Clientes{
                 System.out.print("Digite o número de contribuinte: ");
                 contribuinte = Integer.parseInt(scanner.nextLine());
                 Cliente cliente_com_contribuinte = procurarClientePorContribuinte(contribuinte);
-                if (cliente_com_contribuinte != null){
+                if (cliente_com_contribuinte != null) {
                     System.out.println("Já existe um cliente com este número de contribuinte!");
-                }else{
+                } else {
                     break;
                 }
             } catch (NumberFormatException e) {
@@ -120,12 +119,11 @@ public class Clientes{
     }
 
 
-
     // Metodo para adicionar um novo cliente à lista
     public void adicionarCliente(String nome, int contribuinte, String localizacao) {
         Cliente novoCliente = new Cliente(nome, contribuinte, localizacao);
         listaClientes.add(novoCliente);
-        System.out.println("Novo cliente, " +nome+", adicionado com sucesso!");
+        System.out.println("Novo cliente, " + nome + ", adicionado com sucesso!");
     }
 
     // Metodo para listar os clientes
@@ -155,10 +153,10 @@ public class Clientes{
                     nome = nome.trim();
                     if (isTextoValido(nome)) {
                         cliente = procurarClientePorNome(nome);
-                        if(cliente != null){
+                        if (cliente != null) {
                             System.out.println("Cliente " + nome + " encontrado.");
                             break;
-                        } else{
+                        } else {
                             System.out.println("Cliente não encontrado! Tente novamente.");
                         }
                     } else {
@@ -192,7 +190,7 @@ public class Clientes{
                                         cliente.setNome(novoNome);
                                         System.out.println("Nome alterado com sucesso.");
                                         break;
-                                    } else{
+                                    } else {
                                         System.out.println("Já existe um cliente com este nome!");
                                     }
                                 } else {
@@ -212,7 +210,7 @@ public class Clientes{
                                         cliente.setContribuinte(novoContribuinte);
                                         System.out.println("Contribuinte alterado com sucesso.");
                                         break;
-                                    } else{
+                                    } else {
                                         System.out.println("Já existe um cliente com este número de contribuinte!");
                                     }
                                 } catch (NumberFormatException e) {

@@ -13,7 +13,7 @@ public class Leituras {
         this.faturas = faturas;
     }
 
-    public void lerArquivo() {
+    public void lerFicheiro() {
         File f_obj = new File("output.obj");
 
         if (f_obj.exists() && f_obj.isFile()) {
@@ -159,9 +159,9 @@ public class Leituras {
                         }
                     }
 
-                } catch(IOException e){
+                } catch (IOException e) {
                     System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
-                } catch(Exception e){
+                } catch (Exception e) {
                     System.out.println("Erro inesperado: " + e.getMessage());
                 }
 
