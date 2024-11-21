@@ -2,14 +2,18 @@
 // ve se queres apagar as linhas 27 e 28, e de 85 a 90 que eu nao usei esse metodo
 
 import java.util.Scanner;
-
-public class Main {
-    //as que faltam implementar:
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
+
+    //Construtor do main
+    public Main() {
+        this.clientes = new Clientes(); // Inicializa a lista de clientes
+        this.faturas = new Faturas(clientes);  // Inicializa a lista de faturas
+        this.leituras = new Leituras(clientes, faturas);
+    }
+
     public static void main(String[] args) {
 
         ArrayList<Produto> produtos = new ArrayList<>(Arrays.asList(
@@ -22,6 +26,11 @@ public class Main {
         Data dataFaturaExemplo = new Data(23,1,2065);
 
         Fatura debug = new Fatura(8347113, cristinoRondo, dataFaturaExemplo, produtos);
+
+
+        Main programa = new Main(); // Cria a instância de Main
+        programa.executar();
+
     }
 
 
@@ -34,29 +43,12 @@ public class Main {
     private Clientes clientes;
     private Faturas faturas;
 
-    //Construtor do main
-    public Main() {
-        this.clientes = new Clientes(); // Inicializa a lista de clientes
-        this.faturas = new Faturas(clientes);  // Inicializa a lista de faturas
-        this.leituras = new Leituras(clientes, faturas);
-    }
-
-    //nao percebi muito bem o porque mas devemos fazer o new main() correto??
-    public static void main(String[] args) {
-        Main programa = new Main(); // Cria a instância de Main
-        programa.executar();
-
-        //nao usei isto para nada, so nao apaguei porque podias querer ficar com ela, nao sei porque
-        //receberLinha();
-    }
-
-
     public void executar() {
         leituras.lerArquivo();
 
         Scanner scanner = new Scanner(System.in);
         int opcao;
-
+        
         while (true) {
             try {
                 System.out.print("MENU:\n1- Novo cliente\n2- Editar cliente\n3- Listar clientes\n4- Nova fatura\n5- Editar fatura\n6- Listar faturas\n7- Apresentar fatura\n" +
@@ -122,11 +114,6 @@ public class Main {
 
     }
 
-
-    //nao usei isto para nada, so nao apaguei porque podias querer ficar com ela, nao sei porque
-    //public static String receberLinha() {
-        //Scanner scanner = new Scanner(System.in);
-        //System.out.print("> ");
-        //return scanner.nextLine();
-    //}
+    private void apresentarEstatisticas() {
+    }
 }
