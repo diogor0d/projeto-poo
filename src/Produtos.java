@@ -13,7 +13,7 @@ public class Produtos {
 
 
     // Método para adicionar um novo produto
-    public void adicionarProduto(int codigo, String nome, String descricao, int quantidade, double preco){
+    public void adicionarProduto(int codigo, String nome, String descricao, int quantidade, double preco) {
         Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
         produtos.add(produto);
         System.out.println("Produto \"" + nome + "\" adicionado com sucesso!");
@@ -82,7 +82,6 @@ public class Produtos {
 
             System.out.print("Digite o preço do produto: ");
             double preco = scanner.nextDouble();
-
 
 
             adicionarProduto(codigo, nome, descricao, quantidade, preco);

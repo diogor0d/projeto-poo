@@ -3,7 +3,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Faturas{
+public class Faturas {
     private ArrayList<Fatura> listaFaturas;
     private final Clientes clientes;
 
@@ -15,22 +15,22 @@ public class Faturas{
 
     // Metodo para tornar uma lista de faturas na lista de faturas
     public void setListaFaturas(ArrayList<Fatura> novaListaFaturas) {
-        try{
+        try {
             if (novaListaFaturas != null) {
                 this.listaFaturas = novaListaFaturas;
                 System.out.println("Lista de faturas atualizada com sucesso.");
             } else {
                 System.out.println("A nova lista de faturas é inválida (null).");
             }
-        }catch (Exception e) {
-                System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
 
     // Metodo para verificar se uma Data é válida ou não
     private boolean isDataValida(int dia, int mes, int ano) {
         // Verifica se o mês está no intervalo correto
-        if(ano>2024) return false;
+        if (ano > 2024) return false;
 
         if (mes < 1 || mes > 12) return false;
 
@@ -131,7 +131,7 @@ public class Faturas{
             try {
                 System.out.print("Produto: ");
                 String linha = scanner.nextLine();
-                if (linha.equalsIgnoreCase("fim")){
+                if (linha.equalsIgnoreCase("fim")) {
                     break;
                 }
                 String[] atributos = linha.split(",");
@@ -145,7 +145,7 @@ public class Faturas{
                 quantidade = Integer.parseInt(atributos[3].trim());
                 preco = Double.parseDouble(atributos[4].trim());
 
-                if(nome.isEmpty() || descricao.isEmpty() || !(isTextoValido(nome)) || !(isTextoValido(descricao))){
+                if (nome.isEmpty() || descricao.isEmpty() || !(isTextoValido(nome)) || !(isTextoValido(descricao))) {
                     //nao sei que print dar ahaahha
                     System.out.println("Erro: Linha com formato inválido. Esperado: codigo, nome, descricao, quantidade, preco");
                     continue;
@@ -172,9 +172,9 @@ public class Faturas{
 
     // Metodo para adicionar uma nova fatura à lista
     public void adicionarFatura(int numero, Cliente cliente, Data data, ArrayList<Produto> produtos) {
-        Fatura novaFatura= new Fatura(numero, cliente, data, produtos);
+        Fatura novaFatura = new Fatura(numero, cliente, data, produtos);
         listaFaturas.add(novaFatura);
-        System.out.println("Nova fatura, " +numero+", adicionada com sucesso!");
+        System.out.println("Nova fatura, " + numero + ", adicionada com sucesso!");
     }
 
     // Metodo para listar as faturas
@@ -290,7 +290,6 @@ public class Faturas{
             System.out.println("Ocorreu um erro inesperado: " + e.getMessage());
         }
     }
-
 
 
     public void vizualizarFatura() {
