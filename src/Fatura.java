@@ -17,15 +17,37 @@ public class Fatura {
     }
 
     // Getters e Setters
-    public int getNum() { return num; }
-    public Cliente getCliente() { return cliente; }
-    public Data getData() { return data; }
-    public  ArrayList<Produto> getProdutos() { return produtos; }
+    public int getNum() {
+        return num;
+    }
 
-    public void setNumero(int numero) { this.num = numero; }
-    public void setCliente(Cliente cliente) { this.cliente = cliente; }
-    public void setData(Data data) { this.data = data; }
-    public void setProdutos(ArrayList<Produto> produtos) { this.produtos = produtos; }
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public ArrayList<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setNumero(int numero) {
+        this.num = numero;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public void setProdutos(ArrayList<Produto> produtos) {
+        this.produtos = produtos;
+    }
 
 
     // toString

@@ -159,9 +159,9 @@ public class Leituras {
                         }
                     }
 
-                } catch(IOException e){
+                } catch (IOException e) {
                     System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
-                } catch(Exception e){
+                } catch (Exception e) {
                     System.out.println("Erro inesperado: " + e.getMessage());
                 }
 

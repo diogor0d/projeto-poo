@@ -28,7 +28,7 @@ public class POOFS {
         Cliente cristinoRondo = new Cliente("Cristino Rondo", 23345123, "Madeira");
         Cliente joseSocrates = new Cliente("Jose Socrates", 92811231, "Lisboa");
 
-        Data dataFaturaExemplo = new Data(23,1,2065);
+        Data dataFaturaExemplo = new Data(23, 1, 2065);
 
         Fatura debugFatura = new Fatura(8347113, cristinoRondo, dataFaturaExemplo, produtos);
 
@@ -40,9 +40,11 @@ public class POOFS {
     }
 
 
+    private void importarFaturas() {
+    }
 
-    private void importarFaturas(){}
-    private void exportarFaturas(){}
+    private void exportarFaturas() {
+    }
 
     public void iniciar() {
         leituras.lerFicheiro();
