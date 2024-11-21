@@ -19,14 +19,15 @@ public class Main {
         ArrayList<Produto> produtos = new ArrayList<>(Arrays.asList(
                 new ProdutoAlimentarTI(1234, "vinho de pacote", "750ml vinho de pacote biologico do douro", 2, 250.00, true, CategoriaAlimentar.VINHO),
                 new ProdutoAlimentarTR(12366, "melao", "500g melao do panelas", 1, 5.00, true, new ArrayList<>(Arrays.asList(Certificacao.HACCP))),
-                new ProdutoAlimentarTN(27311, "queijo", "750g queijo de cabra", 4, 10.00, false)
+                new ProdutoAlimentarTN(27311, "queijo", "750g queijo de cabra", 4, 10.00, false),
+                new ProdutoFarmaciaNaoPrescrito(9281, "dorflex", "10 comprimidos dorflex", 2, 250.00, CategoriaFarmacia.ANALGESICO),
+                new ProdutoFarmaciaPrescrito(9391, "dorflex", "10 comprimidos pastilhas", 2, 250.00, true, CategoriaFarmacia.ANALGESICO, "Dr. Joao")
         ));
 
         Cliente cristinoRondo = new Cliente("Cristino Rondo", 23345123, "Madeira");
         Data dataFaturaExemplo = new Data(23,1,2065);
 
         Fatura debug = new Fatura(8347113, cristinoRondo, dataFaturaExemplo, produtos);
-
 
         Main programa = new Main(); // Cria a instância de Main
         programa.executar();
@@ -48,7 +49,7 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         int opcao;
-        
+
         while (true) {
             try {
                 System.out.print("MENU:\n1- Novo cliente\n2- Editar cliente\n3- Listar clientes\n4- Nova fatura\n5- Editar fatura\n6- Listar faturas\n7- Apresentar fatura\n" +
