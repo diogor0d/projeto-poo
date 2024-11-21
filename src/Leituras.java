@@ -43,7 +43,7 @@ public class Leituras {
         }
         // Ler o ficheiro de texto
         else {
-            File f_txt = new File("input.txt");
+            File f_txt = new File("ds");
             if (f_txt.exists() && f_txt.isFile()) {
                 System.out.println("Arquivo input.txt encontrado.");
 

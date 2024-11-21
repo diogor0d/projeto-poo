@@ -1,12 +1,11 @@
 //vizualizarFatura e editarFatura estão incompletos
-//duvida devemos meter a linha 9 a private?
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Faturas{
     private ArrayList<Fatura> listaFaturas;
-    private Clientes clientes;
+    private final Clientes clientes;
 
     // Construtor da classe Faturas
     public Faturas(Clientes clientes) {

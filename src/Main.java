@@ -40,9 +40,9 @@ public class Main {
     private void exportarFaturas(){}
 
 
-    private Leituras leituras;
-    private Clientes clientes;
-    private Faturas faturas;
+    private final Leituras leituras;
+    private final Clientes clientes;
+    private final Faturas faturas;
 
     public void executar() {
         leituras.lerArquivo();
