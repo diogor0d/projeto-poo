@@ -149,7 +149,7 @@ public class Leituras {
                                         int quantidade = Integer.parseInt(atributos[3].trim());
                                         double preco = Double.parseDouble(atributos[4].trim());
 
-                                        Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
+                                        //Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
                                         //produtos.add(produto);
                                     } catch (NumberFormatException e) {
                                         System.out.println("Erro ao processar produto: " + line);
@@ -165,6 +165,25 @@ public class Leituras {
                     System.out.println("Erro inesperado: " + e.getMessage());
                 }
 
+            }
+        }
+
+
+    }
+
+
+    public static int receberInteiro() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print(" >");
+            String input = scanner.nextLine();
+            if (input.equalsIgnoreCase("cancelar")) {
+                return -1;
+            }
+            try {
+                return Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
             }
         }
     }

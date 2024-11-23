@@ -14,8 +14,8 @@ public class Produtos {
 
     // Método para adicionar um novo produto
     public void adicionarProduto(int codigo, String nome, String descricao, int quantidade, double preco) {
-        Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
-        produtos.add(produto);
+        //Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
+        //produtos.add(produto);
         System.out.println("Produto \"" + nome + "\" adicionado com sucesso!");
     }
 

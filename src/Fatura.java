@@ -16,6 +16,15 @@ public class Fatura {
         this.produtos = produtos;
     }
 
+    public double calcularTotal() {
+        double total = 0;
+        for (Produto produto : produtos) {
+            total += produto.getPreco() * produto.getQuantidade() ;
+        }
+
+        return total;
+    }
+
     // Getters e Setters
     public int getNum() {
         return num;

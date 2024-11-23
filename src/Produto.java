@@ -1,4 +1,4 @@
-public class Produto {
+public abstract class Produto {
     protected int codigo;
     protected String nome;
     protected String descricao;
@@ -14,7 +14,14 @@ public class Produto {
         this.preco = preco;
     }
 
+    public abstract double calcularIva (Cliente cliente);
+
+    public double calcularSubtotalProduto(Produto produto) {
+        return produto.getPreco() * produto.getQuantidade();
+    }
+
     // Getter e Setter
+
     public int getCodigo() {
         return codigo;
     }

@@ -154,8 +154,8 @@ public class Faturas {
                     continue;
                 }
 
-                Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
-                produtos.add(produto);
+                //Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
+                //produtos.add(produto);
             } catch (NumberFormatException e) {
                 System.out.println("Erro ao processar produto. Verifique os valores numéricos.");
             } catch (Exception e) {
@@ -303,11 +303,24 @@ public class Faturas {
             scanner.nextLine();
             for (Fatura fatura : listaFaturas) {
                 if (fatura.getNum() == num) {
-                    System.out.print("Fatura " + num + " encontrada.");
-                    System.out.print("Número: " + fatura.getNum());
+                    System.out.println("----------------------------------------------------------------------------------");
+                    System.out.printf("|  Fatura simplificada nº:  %-52d |\n", fatura.getNum());
                     Cliente cliente = fatura.getCliente();
-                    System.out.print(cliente);
-                    //falta lista de produtos e preços com e sem IVA etc...
+                    System.out.printf("|  Cliente:                 %-52s |\n", cliente.getNome());
+                    System.out.printf("|  Nº Contribuinte:         %-52d | \n", cliente.getContribuinte());
+                    System.out.printf("|  Data:                    %-52s |\n", fatura.getData());
+                    System.out.println("----------------------------------------------------------------------------------");
+                    System.out.println("QNT | Produto                                   |  Preço    |  Taxa   | Subtotal  ");
+                    System.out.println("----------------------------------------------------------------------------------");
+                    for (Produto produto : fatura.getProdutos()) {
+                        System.out.printf(" %-3d| %-42s| %-8.2f€ | %-6.2f%% | %-8.2f€\n",
+                                produto.getQuantidade(),
+                                produto.getNome(),
+                                produto.getPreco(),
+                                produto.calcularIva(cliente)*100,
+                                produto.getPreco() * produto.getQuantidade());
+                    }
+                    System.out.println("----------------------------------------------------------------------------------");
                 }
             }
         } else {
