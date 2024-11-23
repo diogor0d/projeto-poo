@@ -81,7 +81,7 @@ public class POOFS {
                         break;
                     case 7:
                         //muito inicial
-                        faturas.apresentarFatura();
+                        faturas.visualizarFatura();
                         break;
                     case 8:
                         apresentarEstatisticas();

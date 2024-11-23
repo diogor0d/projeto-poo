@@ -302,7 +302,7 @@ public class Faturas {
         return null;
     }
 
-    public void apresentarFatura() {
+    public void visualizarFatura() {
         Scanner scanner = new Scanner(System.in);
         if (!listaFaturas.isEmpty()) {
             System.out.print("Qual é o número da fatura que quer vizualizar? ");
@@ -310,34 +310,38 @@ public class Faturas {
             scanner.nextLine();
             for (Fatura fatura : listaFaturas) {
                 if (fatura.getNum() == num) {
-                    System.out.println("--------------------------------------------------------------------------------------------------");
-                    System.out.printf("|  Fatura simplificada nº:  %-68d |\n", fatura.getNum());
-                    Cliente cliente = fatura.getCliente();
-                    System.out.printf("|  Cliente:                 %-68s |\n", cliente.getNome());
-                    System.out.printf("|  Nº Contribuinte:         %-68d | \n", cliente.getContribuinte());
-                    System.out.printf("|  Data:                    %-68s |\n", fatura.getData());
-                    System.out.println("--------------------------------------------------------------------------------------------------");
-                    System.out.println("QNT | Produto                                   |  Preço    |  Taxa   | Subtotal  | Subtotal Taxas");
-                    System.out.println("--------------------------------------------------------------------------------------------------");
-                    for (Produto produto : fatura.getProdutos()) {
-                        double subtotal = produto.getPreco() * produto.getQuantidade();
-                        System.out.printf(" %-3d| %-42s| %-8.2f€ | %-6.2f%% | %-8.2f€ |  %-8.2f€   |\n",
-                                produto.getQuantidade(),
-                                produto.getNome(),
-                                produto.getPreco(),
-                                produto.calcularIva(cliente)*100,
-                                subtotal,
-                                subtotal + (subtotal * produto.calcularIva(cliente))
-                                );
-                    }
-                    System.out.println("--------------------------------------------------------------------------------------------------");
-                    System.out.printf("|  Total: %85.2f€ |\n", fatura.calcularTotal());
-                    System.out.println("--------------------------------------------------------------------------------------------------");
-
+                    apresentarFatura(fatura);
                 }
             }
         } else {
             System.out.println("A lista de faturas está vazia");
         }
+    }
+
+    public void apresentarFatura(Fatura fatura) {
+        System.out.println("--------------------------------------------------------------------------------------------------");
+        System.out.printf("|  Fatura simplificada nº:  %-68d |\n", fatura.getNum());
+        Cliente cliente = fatura.getCliente();
+        System.out.printf("|  Cliente:                 %-68s |\n", cliente.getNome());
+        System.out.printf("|  Nº Contribuinte:         %-68d | \n", cliente.getContribuinte());
+        System.out.printf("|  Data:                    %-68s |\n", fatura.getData());
+        System.out.println("--------------------------------------------------------------------------------------------------");
+        System.out.println("QNT | Produto                                   |  Preço    |  Taxa   | Subtotal  | Subtotal Taxas");
+        System.out.println("--------------------------------------------------------------------------------------------------");
+        for (Produto produto : fatura.getProdutos()) {
+            double subtotal = produto.getPreco() * produto.getQuantidade();
+            System.out.printf(" %-3d| %-42s| %-8.2f€ | %-6.2f%% | %-8.2f€ |  %-8.2f€   |\n",
+                    produto.getQuantidade(),
+                    produto.getNome(),
+                    produto.getPreco(),
+                    produto.calcularIva(cliente)*100,
+                    subtotal,
+                    subtotal + (subtotal * produto.calcularIva(cliente))
+            );
+        }
+        System.out.println("--------------------------------------------------------------------------------------------------");
+        System.out.printf("|  Total: %85.2f€ |\n", fatura.calcularTotal());
+        System.out.println("--------------------------------------------------------------------------------------------------");
+
     }
 }
