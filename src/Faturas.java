@@ -31,7 +31,7 @@ public class Faturas {
 
     // Metodo para verificar se uma Data é válida ou não
     private boolean isDataValida(int dia, int mes, int ano) {
-        if(ano <200 || ano > 2024) return false;
+        if (ano < 200 || ano > 2024) return false;
 
         if (mes < 1 || mes > 12) return false;
 
@@ -46,7 +46,7 @@ public class Faturas {
 
     // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
     public boolean isTextoValido(String texto) {
-        if(!texto.isEmpty()){
+        if (!texto.isEmpty()) {
             texto = String.join(" ", texto.split("\\s+"));
             for (int i = 0; i < texto.length(); i++) {
                 char c = texto.charAt(i);
@@ -54,7 +54,7 @@ public class Faturas {
                     return false;
                 }
             }
-        } else{
+        } else {
             return false;
         }
         return true;
@@ -139,7 +139,7 @@ public class Faturas {
                     System.out.println("Produto não encontrado: " + nome_produto);
                 }
             }
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Erro ao processar cliente: " + line);
         }
 
@@ -275,28 +275,35 @@ public class Faturas {
         }
     }
 
-    public Fatura encontrarFatura(int numero) {
-        for (Fatura fatura : listaFaturas) {
-            if (fatura.getNum() == numero)
-                return fatura;
+    public void visualizarFatura() {
+        System.out.print("Qual é o número da fatura que quer vizualizar? ");
+        int num = lerInteiro();
+        if (num != -1) {
+            Fatura fatura = procurarFatura(num);
+            if (fatura != null) {
+                apresentarFatura(fatura);
+            } else {
+                System.out.println("Fatura não encontrada.");
+            }
+        }
+    }
+
+    public Fatura procurarFatura(int numFatura) {
+        if (!listaFaturas.isEmpty()) {
+            for (Fatura fatura : listaFaturas) {
+                if (fatura.getNum() == numFatura) {
+                    return fatura;
+                }
+            }
         }
         return null;
     }
 
-    public void visualizarFatura() {
+    public int lerInteiro() {
         Scanner scanner = new Scanner(System.in);
-        if (!listaFaturas.isEmpty()) {
-            System.out.print("Qual é o número da fatura que quer vizualizar? ");
-            int num = scanner.nextInt();
-            scanner.nextLine();
-            for (Fatura fatura : listaFaturas) {
-                if (fatura.getNum() == num) {
-                    apresentarFatura(fatura);
-                }
-            }
-        } else {
-            System.out.println("A lista de faturas está vazia");
-        }
+        int num = scanner.nextInt();
+        scanner.nextLine();
+        return num;
     }
 
     public void apresentarFatura(Fatura fatura) {
@@ -315,7 +322,7 @@ public class Faturas {
                     produto.getQuantidade(),
                     produto.getNome(),
                     produto.getPreco(),
-                    produto.calcularIva(cliente)*100,
+                    produto.calcularIva(cliente) * 100,
                     subtotal,
                     subtotal + (subtotal * produto.calcularIva(cliente))
             );
