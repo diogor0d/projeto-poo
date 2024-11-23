@@ -1,14 +1,13 @@
 clientes
- manel, contribuinte, acores
+Cristino Rondo, 23345123, Madeira
+Jose Socrates, 92811231, Lisboa
 
 produtos
- TAXA_INTERMEDIA, vinho branco, 3091, "Rabolhito", 2x, 5.00, cat:vinho
- TAXA_REDUZIDA, pao, 1023, "baguete", 15x, 0.23, certs:ISO23023
- TAXA_NOMAL, carvao, 9231, "african coal - 10kg", 1x, 10.00
- COM_PRESCRICAO, paracetamol, 123, "paracetamol 500mg", 20x, 2.00, "albino jose"
- SEM_PRESCRICAO, fraldas, 123, "pacote 20 unidades", 1x, 5.00, cat:bebes
-
+PA_TI, 1234, vinho de pacote, 750ml vinho de pacote biologico do douro, 2, 250.00, true, VINHO
+PA_TR, 12366, melao, 500g melao do panelas, 1, 5.00, true, HACCP
+PA_TN, 27311, queijo, 750g queijo de cabra, 4, 10.00, false
+PF_NP, 9281, dorflex, 10 comprimidos dorflex, 2, 250.00, BEM_ESTAR
+PF_P, 9391, paracetamol 1000mg, 10 comprimidos paracetamol 1000mg, 2, 250.00, Dr. Joao
 
 faturas
- numero, cliente, data, <produtos>
-
+1, 23345123, 05/02/1995, vinho de pacote, melao, dorflex, paracetamol 1000mg

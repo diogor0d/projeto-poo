@@ -6,33 +6,17 @@ public class POOFS {
     private final Leituras leituras;
     private final Clientes clientes;
     private final Faturas faturas;
+    private final Produtos produtos;
 
     public POOFS() {
         this.clientes = new Clientes(); // Inicializa a lista de clientes
         this.faturas = new Faturas(clientes);  // Inicializa a lista de faturas
-        this.leituras = new Leituras(clientes, faturas);
+        this.produtos = new Produtos();
+        this.leituras = new Leituras(clientes, faturas, produtos);
     }
 
     public static void main(String[] args) {
-
-        ArrayList<Produto> produtos = new ArrayList<>(Arrays.asList(
-                new ProdutoAlimentarTI(1234, "vinho de pacote", "750ml vinho de pacote biologico do douro", 2, 250.00, true, CategoriaAlimentar.VINHO),
-                new ProdutoAlimentarTR(12366, "melao", "500g melao do panelas", 1, 5.00, true, new ArrayList<>(Arrays.asList(Certificacao.HACCP))),
-                new ProdutoAlimentarTN(27311, "queijo", "750g queijo de cabra", 4, 10.00, false),
-                new ProdutoFarmaciaNaoPrescrito(9281, "dorflex", "10 comprimidos dorflex", 2, 250.00, CategoriaFarmacia.BEM_ESTAR),
-                new ProdutoFarmaciaPrescrito(9391, "paracetamol 1000mg", "10 comprimidos paracetamol 1000mg", 2, 250.00, "Dr. Joao")
-        ));
-
-        Cliente cristinoRondo = new Cliente("Cristino Rondo", 23345123, "Madeira");
-        Cliente joseSocrates = new Cliente("Jose Socrates", 92811231, "Lisboa");
-
-        Data dataFaturaExemplo = new Data(23, 1, 2065);
-
-        Fatura debugFatura = new Fatura(8347113, cristinoRondo, dataFaturaExemplo, produtos);
-
         POOFS sistema = new POOFS(); // Cria a instância de Main
-        sistema.clientes.setListaClientes(new ArrayList<>(Arrays.asList(cristinoRondo, joseSocrates)));
-        sistema.faturas.setListaFaturas(new ArrayList<>(Arrays.asList(debugFatura)));
         sistema.iniciar();
 
     }
@@ -45,18 +29,32 @@ public class POOFS {
     }
 
     public void iniciar() {
-        leituras.lerFicheiro();
+        try {
+            leituras.lerFicheiro(); // Tenta ler os ficheiros no início
+        } catch (Exception e) {
+            System.out.println("Erro durante a leitura dos ficheiros: " + e.getMessage());
+        }
 
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
         while (true) {
             try {
-                System.out.print("MENU:\n1- Novo cliente\n2- Editar cliente\n3- Listar clientes\n4- Nova fatura\n5- Editar fatura\n6- Listar faturas\n7- Apresentar fatura\n" +
-                        "8- Apresentar estatísticas\n0- Sair\nOpcão-> ");
+                System.out.print("""
+                        MENU:
+                        1- Novo cliente
+                        2- Editar cliente
+                        3- Listar clientes
+                        4- Nova fatura
+                        5- Editar fatura
+                        6- Listar faturas
+                        7- Apresentar fatura
+                        8- Apresentar estatísticas
+                        0- Sair
+                        Opcão->\s""");
                 opcao = Integer.parseInt(scanner.nextLine());
-                if (opcao < 0 || opcao > 8) {
-                    System.out.println("Opção inválida! Escreva um número de 0 a 8.");
+                if (opcao < 0 || opcao > 9) {
+                    System.out.println("Opção inválida! Escreva um número de 0 a 9."); //so para testar
                     continue; // Volta para a entrada de opção
                 }
 
@@ -84,6 +82,9 @@ public class POOFS {
                         break;
                     case 8:
                         apresentarEstatisticas();
+                        break;
+                    case 9:
+                        produtos.listarProdutos(); //so para testar
                         break;
                     case 0:
                         System.out.println("Programa terminado.");

@@ -4,187 +4,192 @@ import java.io.*;
 import java.util.*;
 
 public class Leituras {
-    private Clientes clientes;
-    private Faturas faturas;
+    private final Clientes clientes;
+    private final Faturas faturas;
+    private final Produtos produtos;
 
     // Construtor que recebe as instâncias de Clientes e Faturas
-    public Leituras(Clientes clientes, Faturas faturas) {
+    public Leituras(Clientes clientes, Faturas faturas, Produtos produtos) {
         this.clientes = clientes;
         this.faturas = faturas;
+        this.produtos = produtos;
     }
+
+
 
     public void lerFicheiro() {
         File f_obj = new File("output.obj");
 
         if (f_obj.exists() && f_obj.isFile()) {
-            try {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f_obj))) {
                 System.out.println("Arquivo output.obj encontrado.");
-                FileInputStream is = new FileInputStream(f_obj);
-                ObjectInputStream ois = new ObjectInputStream(is);
-
-                // Ler lista de clientes do arquivo
-                ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) ois.readObject();
-
-                // Ler a lista de faturas
-                ArrayList<Fatura> listaFaturas = (ArrayList<Fatura>) ois.readObject();
-
-                clientes.setListaClientes(listaClientes);
-                faturas.setListaFaturas(listaFaturas);
-
-                // Fechar o stream
-                ois.close();
+                clientes.setListaClientes((ArrayList<Cliente>) ois.readObject());
+                faturas.setListaFaturas((ArrayList<Fatura>) ois.readObject());
                 System.out.println("Listas carregadas com sucesso.");
-
-            } catch (IOException ex) {
-                System.out.println("Erro ao ler ficheiro: " + ex.getMessage());
-            } catch (ClassNotFoundException ex) {
-                System.out.println("Erro: Classe não encontrada durante a leitura do objeto.");
+            } catch (IOException | ClassNotFoundException ex) {
+                System.out.println("Erro ao carregar dados do arquivo objeto: " + ex.getMessage());
             }
-        }
-        // Ler o ficheiro de texto
-        else {
-            File f_txt = new File("ds");
+        } else {
+            File f_txt = new File("input.txt");
             if (f_txt.exists() && f_txt.isFile()) {
                 System.out.println("Arquivo input.txt encontrado.");
-
-                try {
-                    FileReader fr = new FileReader(f_txt);
-                    BufferedReader br = new BufferedReader(fr);
+                try (BufferedReader br = new BufferedReader(new FileReader(f_txt))) {
                     String line;
-
                     while ((line = br.readLine()) != null) {
-                        line = line.trim(); // Remove espaços extras no começo e no fim
-
-                        //leitura dos clientes:
-                        if (line.equalsIgnoreCase("clientes")) {
-                            while (!(line.equalsIgnoreCase("faturas"))) {
-                                if (line.isEmpty()) continue;
-                                line = line.trim();
-
-                                String partes[] = line.split(",");
-                                if (partes.length == 3) {
-                                    try {
-                                        String nome = partes[0].trim();
-                                        int contribuinte = Integer.parseInt(partes[1].trim());
-                                        String localizacao = partes[2].trim();
-
-                                        // Adiciona o cliente
-                                        clientes.adicionarCliente(nome, contribuinte, localizacao);
-                                        System.out.println("Faturas carregadas com sucesso.");
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("Erro ao processar cliente: " + line);
-                                    }
-                                }
-                            }
-                        }
-                        //leitura dos produtos RODASSSSS
-                        if (line.equalsIgnoreCase("produtos")) {
-                            while (!(line.equalsIgnoreCase("faturas"))) {
-                                if (line.isEmpty()) continue;
-                                line = line.trim();
-                                if (line.startsWith("TAXA_INTERMEDIA")) {
-
-                                } else if (line.startsWith("TAXA_REDUZIDA")) {
-
-                                } else if (line.startsWith("TAXA_NOMAL")) {
-
-                                } else if (line.startsWith("COM_PRESCRICAO")) {
-
-                                } else if (line.startsWith("SEM_PRESCRICAO")) {
-
-                                }
-                            }
-                        }
-
-                        //RODAS aqui ve se adicionas os produtos so com o nome no ficheiro de texto e depois vais ver à
-                        //lista de produtos para ir buscar o produto ou se les logo tudo..
-                        //desde que no final adiciones a lista de produtos dessa fatura td okay
-                        if (line.equalsIgnoreCase("faturas")) {
-                            while (!(line.equalsIgnoreCase("produtos"))) {
-                                if (line.isEmpty()) continue;
-                                line = line.trim();
-
-                                String[] partes = line.split(",");
-                                if (partes.length >= 3) {
-                                    try {
-                                        int numero = Integer.parseInt(partes[0].trim());
-                                        int contribuinte = Integer.parseInt(partes[1].trim());
-                                        Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
-
-                                        if (cliente == null) {
-                                            break;
-                                        }
-
-                                        String[] dataPartes = partes[2].trim().split("/");
-                                        int dia = Integer.parseInt(dataPartes[0]);
-                                        int mes = Integer.parseInt(dataPartes[1]);
-                                        int ano = Integer.parseInt(dataPartes[2]);
-                                        Data data = new Data(dia, mes, ano);
-
-                                        ArrayList<Produto> produtos = new ArrayList<>();
-                                        for (int i = 3; i < partes.length; i++) {
-                                            //produtos.add(new Produto(partes[i].trim()));
-                                        }
-                                        faturas.adicionarFatura(numero, cliente, data, produtos);
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("Erro ao processar fatura: " + line);
-                                    }
-                                }
-                            }
-                        }
-                        System.out.println("Faturas carregadas com sucesso.");
-
-                        if (line.equalsIgnoreCase("produtos")) {
-                            while ((line = br.readLine()) != null) {
-                                line = line.trim();
-                                if (line.equalsIgnoreCase("fim")) break;
-
-
-                                String[] atributos = line.split(",");
-                                if (atributos.length == 5) {
-                                    try {
-                                        int codigo = Integer.parseInt(atributos[0].trim());
-                                        String nome = atributos[1].trim();
-                                        String descricao = atributos[2].trim();
-                                        int quantidade = Integer.parseInt(atributos[3].trim());
-                                        double preco = Double.parseDouble(atributos[4].trim());
-
-                                        //Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
-                                        //produtos.add(produto);
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("Erro ao processar produto: " + line);
-                                    }
-                                }
-                            }
-                        }
+                        line = line.trim();
+                        processarLinha(line, br); // Delegar o processamento a outro método
                     }
-
+                    System.out.println("Processamento do arquivo input.txt concluído.");
                 } catch (IOException e) {
                     System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
-                } catch (Exception e) {
-                    System.out.println("Erro inesperado: " + e.getMessage());
                 }
-
             }
         }
+        System.out.println("Retornando ao menu principal...");
+    }
 
+    private void processarLinha(String line, BufferedReader br) throws IOException {
+        System.out.println("Linha lida: " + line);
+        if (line.equalsIgnoreCase("clientes")) {
+            processarClientes(br);
+        } else if (line.equalsIgnoreCase("produtos")) {
+            processarProdutos(br);
+        } else if (line.equalsIgnoreCase("faturas")) {
+            processarFaturas(br);
+        }
+    }
 
+    private void processarClientes(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
+            if (line.isEmpty()) continue;
+            System.out.println("Linha clientes: "+ line);
+            String[] partes = line.split(",");
+            try {
+                String nome = partes[0].trim();
+                int contribuinte = Integer.parseInt(partes[1].trim());
+                String localizacao = partes[2].trim();
+                clientes.adicionarCliente(nome, contribuinte, localizacao);
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao processar cliente: " + line);
+            }
+        }
     }
 
 
-    public static int receberInteiro() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            System.out.print(" >");
-            String input = scanner.nextLine();
-            if (input.equalsIgnoreCase("cancelar")) {
-                return -1;
+
+    private void processarProdutos(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
+            if (line.isEmpty()) continue;
+            System.out.println("Linha produtos: "+ line);
+            line = line.trim();
+            String[] elementos = line.split(",");
+            for (int i = 0; i < elementos.length; i++) {
+                elementos[i] = elementos[i].trim();
             }
             try {
-                return Integer.parseInt(input);
+
+                int codigo = Integer.parseInt(elementos[1]);
+                String nome = elementos[2];
+                String descricao = elementos[3];
+                int quantidade = Integer.parseInt(elementos[4]);
+                double preco = Double.parseDouble(elementos[5]);
+
+
+                if (line.startsWith("PA_TI")) {
+                    boolean isBiologico = Boolean.parseBoolean(elementos[6]);
+                    CategoriaAlimentar categoria = CategoriaAlimentar.valueOf(elementos[7]);
+
+                    ProdutoAlimentarTI produto = new ProdutoAlimentarTI(codigo, nome, descricao, quantidade, preco, isBiologico, categoria);
+                    produtos.adicionarProduto(produto);
+                    System.out.println("Produto criado: " + produto);
+
+
+                } else if (line.startsWith("PA_TR")) {
+                    boolean isBiologico = Boolean.parseBoolean(elementos[6]);
+
+                    // Criar lista de certificações
+                    ArrayList<Certificacao> listaCertificacoes = new ArrayList<>();
+                    for (int i = 7; i < elementos.length && listaCertificacoes.size() < 4; i++) {
+                        try {
+                            Certificacao certificacao = Certificacao.valueOf(elementos[i].trim());
+                            listaCertificacoes.add(certificacao);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Certificação inválida ignorada: " + elementos[i]);
+                        }
+                    }
+
+                    // Criar o produto
+                    ProdutoAlimentarTR produto = new ProdutoAlimentarTR(codigo, nome, descricao, quantidade, preco, isBiologico, listaCertificacoes);
+                    produtos.adicionarProduto(produto);
+                    System.out.println("Produto criado: " + produto);
+
+
+                } else if(line.startsWith("PA_TN")){
+                    boolean isBiologico = Boolean.parseBoolean(elementos[6]);
+                    ProdutoAlimentarTN produto = new ProdutoAlimentarTN(codigo, nome, descricao, quantidade, preco, isBiologico);
+                    produtos.adicionarProduto(produto);
+
+                } else if(line.startsWith("PF_NP")){
+                    CategoriaFarmacia categoria = CategoriaFarmacia.valueOf(elementos[6]);
+                    ProdutoFarmaciaNaoPrescrito produto = new ProdutoFarmaciaNaoPrescrito(codigo, nome, descricao, quantidade, preco, categoria);
+                    produtos.adicionarProduto(produto);
+
+                } else if(line.startsWith("PF_P")){
+                    String medico = elementos[6];
+                    ProdutoFarmaciaPrescrito produto = new ProdutoFarmaciaPrescrito(codigo, nome, descricao, quantidade, preco, medico);
+                    produtos.adicionarProduto(produto);
+                }
+
             } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a valid integer.");
+                System.out.println("Erro ao processar número no arquivo: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Erro ao processar categoria ou booleano: " + e.getMessage());
+            } catch (Exception e) {
+                System.out.println("Erro inesperado: " + e.getMessage());
+            }
+
+        }
+    }
+
+
+    private void processarFaturas(BufferedReader br) throws IOException {
+        String line;
+        while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
+            if (line.isEmpty()) continue;
+            System.out.println("Linha faturas: " + line);
+            String[] partes = line.split(",");
+            for (int i = 0; i < partes.length; i++) {
+                partes[i] = partes[i].trim();
+            }
+            try {
+                int num = Integer.parseInt(partes[0]);
+                int contribuinte = Integer.parseInt(partes[1]);
+                Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
+
+                String[] dataParts = partes[2].split("/");
+                int dia = Integer.parseInt(dataParts[0]);
+                int mes = Integer.parseInt(dataParts[1]);
+                int ano = Integer.parseInt(dataParts[2]);
+                Data data = new Data(dia, mes, ano);
+
+                ArrayList<Produto> listaProdutos = new ArrayList<>();
+                for (int i = 3; i < partes.length; i++) {
+                    String nome_produto = partes[i];
+                    Produto produto = produtos.encontrarProdutoPeloNome(nome_produto);
+                    if (produto != null) {
+                        listaProdutos.add(produto);
+                    } else {
+                        System.out.println("Produto não encontrado: " + nome_produto);
+                    }
+                }
+                faturas.adicionarFatura(num, cliente, data, listaProdutos);
+            } catch(NumberFormatException e){
+                System.out.println("Erro ao processar cliente: " + line);
             }
         }
     }
 }
+
+

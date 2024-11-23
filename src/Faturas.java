@@ -6,11 +6,13 @@ import java.util.Scanner;
 public class Faturas {
     private ArrayList<Fatura> listaFaturas;
     private final Clientes clientes;
+    private Produtos produtos;
 
     // Construtor da classe Faturas
     public Faturas(Clientes clientes) {
         this.listaFaturas = new ArrayList<>();
         this.clientes = clientes;
+        this.produtos = new Produtos();
     }
 
     // Metodo para tornar uma lista de faturas na lista de faturas
@@ -118,54 +120,32 @@ public class Faturas {
             }
         }
 
-        System.out.print("Digite os produtos a adicionar (codigo, nome, descricao, quantidade, preco): ");
-        System.out.println("Digite 'fim' para encerrar.");
-        System.out.println("Cada produto deve estar em uma linha.");
+        System.out.print("Digite os produtos a adicionar (separados por ','): ");
 
-        ArrayList<Produto> produtos = new ArrayList<>();
-        int codigo;
-        String nome;
-        String descricao;
-        int quantidade;
-        double preco;
-
-        while (true) {
-            try {
-                System.out.print("Produto: ");
-                System.out.print("Código: ");
-                String linha = scanner.nextLine();
-                if (linha.equalsIgnoreCase("fim")) {
-                    break;
+        ArrayList<Produto> listaProdutos = new ArrayList<>();
+        String line = scanner.nextLine();
+        String[] partes = line.split(",");
+        for (int i = 0; i < partes.length; i++) {
+            partes[i] = partes[i].trim();
+        }
+        try {
+            //ao procurar diz que n ha nenhum produto
+            for (int i = 0; i < partes.length; i++) {
+                String nome_produto = partes[i];
+                Produto produto = produtos.encontrarProdutoPeloNome(nome_produto);
+                if (produto != null) {
+                    listaProdutos.add(produto);
+                } else {
+                    System.out.println("Produto não encontrado: " + nome_produto);
                 }
-                String[] atributos = linha.split(",");
-                if (atributos.length != 5) {
-                    System.out.println("Erro: Linha com formato inválido. Esperado: codigo, nome, descricao, quantidade, preco");
-                    continue;
-                }
-                codigo = Integer.parseInt(atributos[0].trim());
-                nome = atributos[1].trim();
-                descricao = atributos[2].trim();
-                quantidade = Integer.parseInt(atributos[3].trim());
-                preco = Double.parseDouble(atributos[4].trim());
-
-                if (nome.isEmpty() || descricao.isEmpty() || !(isTextoValido(nome)) || !(isTextoValido(descricao))) {
-                    //nao sei que print dar ahaahha
-                    System.out.println("Erro: Linha com formato inválido. Esperado: codigo, nome, descricao, quantidade, preco");
-                    continue;
-                }
-
-                //Produto produto = new Produto(codigo, nome, descricao, quantidade, preco);
-                //produtos.add(produto);
-            } catch (NumberFormatException e) {
-                System.out.println("Erro ao processar produto. Verifique os valores numéricos.");
-            } catch (Exception e) {
-                System.out.println("Erro inesperado ao processar produto: " + e.getMessage());
             }
+        }catch(NumberFormatException e){
+            System.out.println("Erro ao processar cliente: " + line);
         }
 
-        // Criação da fatura
+
         try {
-            adicionarFatura(numero, cliente, data, produtos);
+            adicionarFatura(numero, cliente, data, listaProdutos);
             System.out.println("Fatura criada com sucesso.");
         } catch (Exception e) {
             System.out.println("Erro ao criar fatura: " + e.getMessage());
@@ -193,6 +173,7 @@ public class Faturas {
     }
 
     // Metodo para editar o(s) dado(s) duma fatura
+    //falta mudar os produtos!!
     public void editarFatura() {
         Scanner scanner = new Scanner(System.in);
         try {

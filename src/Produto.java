@@ -64,6 +64,6 @@ public abstract class Produto {
 
     // // toString
     public String toString() {
-        return "Produto{" + "codigo=" + codigo + ", nome='" + nome + '\'' + ", descricao='" + descricao + '\'' + ", quantidade=" + quantidade + ", preco=" + preco + '}';
+        return "codigo= " + codigo + ", nome= " + nome + '\'' + ", descricao= " + descricao + '\'' + ", quantidade= " + quantidade + ", preco= " + preco;
     }
 }
