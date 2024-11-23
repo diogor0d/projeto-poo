@@ -80,7 +80,6 @@ public class POOFS {
                         faturas.listarFaturas();
                         break;
                     case 7:
-                        //muito inicial
                         faturas.visualizarFatura();
                         break;
                     case 8:

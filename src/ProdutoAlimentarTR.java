@@ -4,7 +4,7 @@ public class ProdutoAlimentarTR extends ProdutoAlimentar {
 
     private ArrayList<Certificacao> certificacoes;
     protected double[] taxas = {0.06, 0.05, 0.04};
-    protected double descontoBiologico = 0.9;
+    protected double descontoBiologico = 0.1;
     protected double descontoCertificacoes = 0.99;
 
     public ProdutoAlimentarTR(int codigo, String nome, String descricao, int quantidade, double preco, boolean biologico, ArrayList<Certificacao> certificacoes) {
@@ -28,11 +28,11 @@ public class ProdutoAlimentarTR extends ProdutoAlimentar {
                 break;
         }
         if (biologico) {
-            iva *= descontoBiologico;
+            iva -= descontoBiologico;
         }
 
         if (certificacoes.size() == 4) {
-            iva *= descontoCertificacoes;
+            iva -= descontoCertificacoes;
         }
 
         return iva;

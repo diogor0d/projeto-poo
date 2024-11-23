@@ -1,6 +1,6 @@
 public class ProdutoFarmaciaNaoPrescrito extends ProdutoFarmacia {
     protected CategoriaFarmacia categoria;
-    protected double descontoAnimais = 0.99;
+    protected double descontoAnimais = 0.01;
 
     public ProdutoFarmaciaNaoPrescrito(int codigo, String nome, String descricao, int quantidade, double preco, CategoriaFarmacia categoria) {
         super(codigo, nome, descricao, quantidade, preco);
@@ -22,7 +22,7 @@ public class ProdutoFarmaciaNaoPrescrito extends ProdutoFarmacia {
         }
 
         if (categoria == CategoriaFarmacia.ANIMAIS) {
-            iva *= descontoAnimais;
+            iva -= descontoAnimais;
         }
 
         return iva;
