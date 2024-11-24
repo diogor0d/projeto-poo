@@ -342,8 +342,17 @@ public class Faturas {
 
     public int lerInteiro() {
         Scanner scanner = new Scanner(System.in);
-        int num = scanner.nextInt();
-        scanner.nextLine();
+        int num = -1;
+        boolean valid = false;
+        while (!valid) {
+            try {
+                System.out.print("Digite um número inteiro: ");
+                num = Integer.parseInt(scanner.nextLine());
+                valid = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Por favor, digite um número inteiro.");
+            }
+        }
         return num;
     }
 
@@ -354,9 +363,12 @@ public class Faturas {
         System.out.printf("|  Cliente:                 %-68s |\n", cliente.getNome());
         System.out.printf("|  Nº Contribuinte:         %-68d | \n", cliente.getContribuinte());
         System.out.printf("|  Data:                    %-68s |\n", fatura.getData());
+        System.out.printf("|  Região:                  %-68s |\n", fatura.getCliente().getLocalizacao());
         System.out.println("--------------------------------------------------------------------------------------------------");
         System.out.println("QNT | Produto                                   |  Preço    |  Taxa   | Subtotal  | Subtotal Taxas");
         System.out.println("--------------------------------------------------------------------------------------------------");
+
+        double totalIva = 0;
         for (Produto produto : fatura.getProdutos()) {
             double subtotal = produto.getPreco() * produto.getQuantidade();
             System.out.printf(" %-3d| %-42s| %-8.2f€ | %-6.2f%% | %-8.2f€ |  %-8.2f€   |\n",
@@ -367,10 +379,10 @@ public class Faturas {
                     subtotal,
                     subtotal + (subtotal * produto.calcularIva(cliente))
             );
+            totalIva += subtotal + (subtotal * produto.calcularIva(cliente));
         }
         System.out.println("--------------------------------------------------------------------------------------------------");
-        System.out.printf("|  Total: %85.2f€ |\n", fatura.calcularTotal());
+        System.out.printf("                            Total s/IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva);
         System.out.println("--------------------------------------------------------------------------------------------------");
-
     }
 }

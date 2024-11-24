@@ -23,6 +23,10 @@ public class ProdutoFarmaciaPrescrito extends Produto {
                 break;
         }
 
+        if (iva < 0) {
+            iva = 0;
+        }
+
         return iva;
     }
 }

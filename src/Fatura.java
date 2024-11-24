@@ -16,7 +16,7 @@ public class Fatura {
         this.produtos = produtos;
     }
 
-    public double calcularTotal() {
+    public double calcularTotalBruto() {
         double total = 0;
         for (Produto produto : produtos) {
             total += produto.getPreco() * produto.getQuantidade();

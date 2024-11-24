@@ -26,6 +26,11 @@ public class ProdutoAlimentarTN extends ProdutoAlimentar {
         if (biologico) {
             iva -= descontoBiologico;
         }
+
+        if (iva < 0) {
+            iva = 0;
+        }
+
         return iva;
     }
 }

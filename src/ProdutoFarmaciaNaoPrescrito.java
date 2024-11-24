@@ -25,6 +25,10 @@ public class ProdutoFarmaciaNaoPrescrito extends ProdutoFarmacia {
             iva -= descontoAnimais;
         }
 
+        if (iva < 0) {
+            iva = 0;
+        }
+
         return iva;
     }
 }

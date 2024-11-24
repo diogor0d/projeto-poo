@@ -2,7 +2,7 @@ public class ProdutoAlimentarTI extends ProdutoAlimentar {
 
     private CategoriaAlimentar categoria;
     protected double[] taxas = {0.13, 0.12, 0.09};
-    protected double descontoBiologico = 0.9;
+    protected double descontoBiologico = 0.1;
     protected double acrescimoVinho = 0.01;
 
     public ProdutoAlimentarTI(int codigo, String nome, String descricao, int quantidade, double preco, boolean biologico, CategoriaAlimentar categoriaAlimentar) {
@@ -32,6 +32,10 @@ public class ProdutoAlimentarTI extends ProdutoAlimentar {
 
         if (categoria == CategoriaAlimentar.VINHO) {
             iva += acrescimoVinho;
+        }
+
+        if (iva < 0) {
+            iva = 0;
         }
 
         return iva;

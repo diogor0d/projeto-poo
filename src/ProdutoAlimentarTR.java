@@ -35,6 +35,10 @@ public class ProdutoAlimentarTR extends ProdutoAlimentar {
             iva -= descontoCertificacoes;
         }
 
+        if (iva < 0) {
+            iva = 0;
+        }
+
         return iva;
     }
 }

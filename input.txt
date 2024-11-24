@@ -1,9 +1,9 @@
 clientes
 Cristino Rondo, 23345123, Madeira
-Jose Socrates, 92811231, Portugal Continental
+Jose Socrates, 92811231, Continente
 Rabolho Costa, 12345678, Açores
-Fernando Madureira, 87654321, Portugal Continental
-André Ventura, 34567289, Portugal Continental
+Fernando Madureira, 87654321, Continente
+André Ventura, 34567289, Continente
 
 
 produtos
