@@ -25,51 +25,63 @@ public class Fatura {
         return total;
     }
 
-// Getters e Setters
-public int getNum() {
-    return num;
-}
-
-public Cliente getCliente() {
-    return cliente;
-}
-
-public Data getData() {
-    return data;
-}
-
-public ArrayList<Produto> getProdutos() {
-    return produtos;
-}
-
-public void setNumero(int numero) {
-    this.num = numero;
-}
-
-public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
-}
-
-public void setData(Data data) {
-    this.data = data;
-}
-
-public void setProdutos(ArrayList<Produto> produtos) {
-    this.produtos = produtos;
-}
-
-
-// toString
-//duvida só estou a imprimir o nome dos produtos, mas nao os produtos todos para "facilitar" a leitura, o que achas? depois para guardar no ficheiro, atraves do nome do produto,
-// recuperamos o produto inteiro na lista de produtos
-public String toString() {
-    String[] produtosArray = new String[produtos.size()];
-    for (int i = 0; i < produtos.size(); i++) {
-        produtosArray[i] = produtos.get(i).getNome();
+    // Getters e Setters
+    public int getNum() {
+        return num;
     }
-    // Usar String.join para unir os nomes dos produtos com vírgulas
-    String produtosConcatenados = String.join(", ", produtosArray);
 
-    return "Fatura: " + num + " , Cliente: " + cliente.getNome() + ", Contribuinte: " + cliente.getContribuinte() + ", Localização do cliente: " + cliente.getLocalizacao() + ", Data: " + data + ", Produtos: " + produtosConcatenados;
-}
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Data getData() {
+        return data;
+    }
+
+    public ArrayList<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setNumero(int numero) {
+        this.num = numero;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public void setProdutos(ArrayList<Produto> produtos) {
+        this.produtos = produtos;
+    }
+
+
+    // toString
+    //duvida só estou a imprimir o nome dos produtos, mas nao os produtos todos para "facilitar" a leitura, o que achas? depois para guardar no ficheiro, atraves do nome do produto,
+    // recuperamos o produto inteiro na lista de produtos
+    public String toString() {
+        String[] produtosArray = new String[produtos.size()];
+        for (int i = 0; i < produtos.size(); i++) {
+            produtosArray[i] = produtos.get(i).getNome();
+        }
+        // Usar String.join para unir os nomes dos produtos com vírgulas
+        String produtosConcatenados = String.join(", ", produtosArray);
+
+        return "Fatura: " + num + " , Cliente: " + cliente.getNome() + ", Contribuinte: " + cliente.getContribuinte() + ", Localização do cliente: " + cliente.getLocalizacao() + ", Data: " + data + ", Produtos: " + produtosConcatenados;
+    }
+
+    public String toStringParaFicheiro() {
+        String[] produtosArray = new String[produtos.size()];
+        for (int i = 0; i < produtos.size(); i++) {
+            produtosArray[i] = produtos.get(i).getNome();
+        }
+        // Usar String.join para unir os nomes dos produtos com vírgulas
+        String produtosConcatenados = String.join(", ", produtosArray);
+
+        return num + ", " + cliente.getContribuinte() + ", " + data + ", " + produtosConcatenados;
+    }
+
 }

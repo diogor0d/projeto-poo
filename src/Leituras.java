@@ -15,6 +15,29 @@ public class Leituras {
         this.produtos = produtos;
     }
 
+    //ESCREVER
+    public void escreverObjeto(ArrayList<Object> objetos, ArrayList<Produto> produtos, ArrayList<String> clientes) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output.obj"))) {
+            oos.writeObject(objetos);
+            oos.writeObject(produtos);
+            oos.writeObject(clientes);
+            System.out.println("As listas foram escritas no ficheiro 'output.obj' com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever as listas no ficheiro: " + e.getMessage());
+        }
+    }
+    public void exportarFaturas(ArrayList<Fatura> faturas) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
+            for (Fatura fatura : faturas) {
+                writer.write(fatura.toStringParaFicheiro());
+                writer.newLine();
+            }
+            System.out.println("As faturas foram escritas no ficheiro 'output.txt' com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever as faturas no ficheiro: " + e.getMessage());
+        }
+    }
+
 
 
     public void lerFicheiro() {

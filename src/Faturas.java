@@ -15,6 +15,11 @@ public class Faturas {
         this.produtos = produtos; // Passar a mesma instância de Produtos
     }
 
+    public ArrayList<Fatura> getFaturas() {
+        return listaFaturas;
+    }
+
+
     // Metodo para tornar uma lista de faturas na lista de faturas
     public void setListaFaturas(ArrayList<Fatura> novaListaFaturas) {
         try {

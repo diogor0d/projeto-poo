@@ -1,0 +1,4 @@
+1 , 23345123 , 05/02/1995 , vinho de pacote, melao, dorflex, paracetamol 1000mg
+2 , 12345678 , 12/03/2020 , farinha de trigo, mel natural, amoxicilina
+3 , 87654321 , 25/12/2023 , ervilhas congeladas, atum enlatado, creme hidratante
+4 , 34567289 , 01/07/2022 , biscoitos, manteiga, diazepam

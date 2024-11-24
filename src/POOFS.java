@@ -18,19 +18,16 @@ public class POOFS {
     public static void main(String[] args) {
         POOFS sistema = new POOFS(); // Cria a instância de Main
         sistema.iniciar();
-
     }
-
 
     private void importarFaturas() {
     }
 
-    private void exportarFaturas() {
-    }
-
     public void iniciar() {
         try {
-            leituras.lerFicheiro(); // Tenta ler os ficheiros no início
+            leituras.lerFicheiro();
+            //mais tarde usaremos o ficheiro de input para as duas coisas
+            leituras.exportarFaturas(faturas.getFaturas());
         } catch (Exception e) {
             System.out.println("Erro durante a leitura dos ficheiros: " + e.getMessage());
         }
@@ -76,6 +73,7 @@ public class POOFS {
                         break;
                     case 6:
                         faturas.listarFaturas();
+
                         break;
                     case 7:
                         faturas.visualizarFatura();
@@ -88,6 +86,7 @@ public class POOFS {
                         break;
                     case 0:
                         System.out.println("Programa terminado.");
+                        leituras.exportarFaturas(faturas.getFaturas());
                         return;
                     default:
                         System.out.println("Opção inválida. Escreva um número de 0 a 8.");
