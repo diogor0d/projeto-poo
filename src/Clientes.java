@@ -40,7 +40,13 @@ public class Clientes {
         localizacoes.add("portugal continental");
         localizacoes.add("açores");
         localizacoes.add("madeira");
-        return localizacoes.contains(localizacao);
+
+        for (String loc : localizacoes) {
+            if (loc.equalsIgnoreCase(localizacao)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Metodo para procurar um cliente na lista a partir do seu numero de contribuinte
@@ -107,16 +113,24 @@ public class Clientes {
         }
 
         String localizacao;
+        System.out.print("Digite a localização do cliente (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
         while (true) {
             try {
-                System.out.print("Digite a localização do cliente (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
                 localizacao = scanner.nextLine();
                 localizacao = localizacao.trim();
                 if (isTextoValido(localizacao)) {
                     if(isLocalizacaoValida(localizacao)){
+                        //Para  a primeira letra de cada palavra ser maiúscula
+                        if(localizacao.equalsIgnoreCase("madeira")){
+                            localizacao = "Madeira";
+                        } else if(localizacao.equalsIgnoreCase("açores")) {
+                            localizacao = "Açores";
+                        } else if (localizacao.equalsIgnoreCase("portugal continental")){
+                            localizacao = "Portugal Continental";
+                        }
                         break;
                     } else{
-                        System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira'");
+                        System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira': ");
                     }
                 } else {
                     System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
@@ -230,20 +244,30 @@ public class Clientes {
 
                         case 3:
                             String novaLocalizacao;
+                            System.out.print("Digite a localização do cliente (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
                             while (true) {
-                                System.out.print("Nova localização (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
-                                novaLocalizacao = scanner.nextLine();
-                                novaLocalizacao = novaLocalizacao.trim();
-                                if (isTextoValido(novaLocalizacao)) {
-                                    if (isLocalizacaoValida(novaLocalizacao)) {
-                                        cliente.setLocalizacao(novaLocalizacao);
-                                        System.out.println("Localização alterada com sucesso.");
-                                        break;
-                                    } else{
-                                        System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira'");
+                                try {
+                                    novaLocalizacao = scanner.nextLine();
+                                    novaLocalizacao = novaLocalizacao.trim();
+                                    if (isTextoValido(novaLocalizacao)) {
+                                        if(isLocalizacaoValida(novaLocalizacao)){
+                                            //Para  a primeira letra de cada palavra ser maiúscula
+                                            if(novaLocalizacao.equalsIgnoreCase("madeira")){
+                                                novaLocalizacao = "Madeira";
+                                            } else if(novaLocalizacao.equalsIgnoreCase("açores")) {
+                                                novaLocalizacao = "Açores";
+                                            } else if (novaLocalizacao.equalsIgnoreCase("portugal continental")){
+                                                novaLocalizacao = "Portugal Continental";
+                                            }
+                                            break;
+                                        } else{
+                                            System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira': ");
+                                        }
+                                    } else {
+                                        System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
                                     }
-                                } else {
-                                    System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
+                                } catch (Exception e) {
+                                    System.out.println("Erro ao processar a localização: " + e.getMessage());
                                 }
                             }
                             break;

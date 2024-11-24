@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class Faturas {
     private ArrayList<Fatura> listaFaturas;
     private final Clientes clientes;
-    private Produtos produtos;
+    private final Produtos produtos;
 
     // Construtor da classe Faturas
-    public Faturas(Clientes clientes) {
+    public Faturas(Clientes clientes, Produtos produtos) {
         this.listaFaturas = new ArrayList<>();
         this.clientes = clientes;
-        this.produtos = new Produtos();
+        this.produtos = produtos; // Passar a mesma instância de Produtos
     }
 
     // Metodo para tornar uma lista de faturas na lista de faturas
@@ -44,22 +44,6 @@ public class Faturas {
         return dia >= 0 && dia <= diasPorMes[mes - 1];
     }
 
-    // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
-    public boolean isTextoValido(String texto) {
-        if (!texto.isEmpty()) {
-            texto = String.join(" ", texto.split("\\s+"));
-            for (int i = 0; i < texto.length(); i++) {
-                char c = texto.charAt(i);
-                if (!(Character.isLetter(c) || c == ' ')) {
-                    return false;
-                }
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-
     // Metodo para ler os dados e criar a fatura
     public void novaFatura() {
         Scanner scanner = new Scanner(System.in);
@@ -68,8 +52,12 @@ public class Faturas {
             try {
                 System.out.print("Digite o número da fatura: ");
                 numero = Integer.parseInt(scanner.nextLine());
-                // ir ver se ja existe uma fatura com este número
-                break;
+                Fatura faturaEncontrada = procurarFatura(numero);
+                if(faturaEncontrada == null){
+                    break;
+                } else{
+                    System.out.println("Já existe uma fatura com esse número!");
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Digite um número inteiro.");
             }
@@ -129,9 +117,7 @@ public class Faturas {
             partes[i] = partes[i].trim();
         }
         try {
-            //ao procurar diz que n ha nenhum produto
-            for (int i = 0; i < partes.length; i++) {
-                String nome_produto = partes[i];
+            for (String nome_produto : partes) {
                 Produto produto = produtos.encontrarProdutoPeloNome(nome_produto);
                 if (produto != null) {
                     listaProdutos.add(produto);
@@ -178,93 +164,143 @@ public class Faturas {
         Scanner scanner = new Scanner(System.in);
         try {
             if (!listaFaturas.isEmpty()) {
-                boolean faturaEncontrada = false;
-                while (!faturaEncontrada) {
+                Fatura faturaEncontrada = null;
+                while (true) {
                     System.out.print("Qual é o número da fatura, à qual quer alterar os dados? ");
                     int num = Integer.parseInt(scanner.nextLine());
-                    for (Fatura fatura : listaFaturas) {
-                        if (fatura.getNum() == num) {
-                            System.out.print("Fatura " + num + " encontrada.");
-                            faturaEncontrada = true;
-                            int opcao = -1;
-                            while (opcao != 0) {
-                                System.out.print("\nQue dados deseja alterar?\n1- Número\n2- Cliente\n3- Data\n4- Produto(s)\n0- Cancelar\nOpção-> ");
-                                try {
-                                    opcao = Integer.parseInt(scanner.nextLine());
-                                    if (opcao < 0 || opcao > 4) {
-                                        System.out.println("Opção inválida! Por favor, digite um número entre 0 e 4.");
-                                        continue;
-                                    }
-                                } catch (NumberFormatException e) {
-                                    System.out.println("Entrada inválida! Por favor, digite um número válido.");
-                                    continue;
-                                }
-
-                                switch (opcao) {
-                                    case 1:
-                                        try {
-                                            System.out.print("Novo número da fatura: ");
-                                            int novoNumero = Integer.parseInt(scanner.nextLine());
-                                            fatura.setNumero(novoNumero);
-                                            System.out.println("Número da fatura alterado com sucesso.");
-                                        } catch (Exception e) {
-                                            System.out.println("Erro ao alterar o número da fatura: " + e.getMessage());
-                                        }
-                                        break;
-                                    case 2:
-                                        try {
-                                            System.out.print("Número de contribuinte do novo cliente: ");
-                                            int novoContribuinte = Integer.parseInt(scanner.nextLine());
-                                            Cliente novoCliente = clientes.procurarClientePorContribuinte(novoContribuinte);
-                                            if (novoCliente != null) {
-                                                fatura.setCliente(novoCliente);
-                                                System.out.println("Cliente alterado com sucesso.");
-                                            } else {
-                                                System.out.println("Cliente não encontrado.");
-                                            }
-                                        } catch (Exception e) {
-                                            System.out.println("Erro ao alterar cliente: " + e.getMessage());
-                                        }
-                                        break;
-                                    case 3:
-                                        try {
-                                            System.out.print("Nova data (dd/mm/aaaa): ");
-                                            String dataStr = scanner.nextLine();
-                                            String[] partes = dataStr.split("/");
-                                            if (partes.length == 3) {
-                                                int dia = Integer.parseInt(partes[0]);
-                                                int mes = Integer.parseInt(partes[1]);
-                                                int ano = Integer.parseInt(partes[2]);
-                                                Data novaData = new Data(dia, mes, ano);
-                                                fatura.setData(novaData);
-                                                System.out.println("Data alterada com sucesso.");
-                                            } else {
-                                                System.out.println("Formato de data inválido.");
-                                            }
-                                        } catch (Exception e) {
-                                            System.out.println("Erro ao alterar a data: " + e.getMessage());
-                                        }
-                                        break;
-                                    case 4:
-                                        //editar produtos ainda não implementada
-
-                                        break;
-                                    case 0:
-                                        System.out.println("Alteração cancelada.");
-                                        break;
-                                    default:
-                                        System.out.println("Opção inválida.");
-                                }
-                                System.out.print("Deseja alterar mais algum dado? (S ou N): ");
-                                String continuar = scanner.nextLine();
-                                if (continuar.equalsIgnoreCase("N")) {
-                                    break;
-                                }
-                            }
-                        }
+                    faturaEncontrada = procurarFatura(num);
+                    if (faturaEncontrada != null) {
+                        System.out.print("Fatura " + num + " encontrada.");
+                        break;
+                    } else {
+                        System.out.println("Não existe nenhuma fatura com esse número!");
                     }
-                    if (!faturaEncontrada) {
-                        System.out.println("Fatura não encontrada. Tente novamente.");
+                }
+                int opcao = -1;
+                while (opcao != 0) {
+                    System.out.print("\nQue dados deseja alterar?\n1- Número\n2- Cliente\n3- Data\n4- Produto(s)\n0- Cancelar\nOpção-> ");
+                    try {
+                        opcao = Integer.parseInt(scanner.nextLine());
+                        if (opcao < 0 || opcao > 4) {
+                            System.out.println("Opção inválida! Por favor, digite um número entre 0 e 4.");
+                            continue;
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrada inválida! Por favor, digite um número válido.");
+                        continue;
+                    }
+
+                    switch (opcao) {
+                        case 1:
+                            try {
+                                System.out.print("Novo número da fatura: ");
+                                int novoNumero = Integer.parseInt(scanner.nextLine());
+                                faturaEncontrada.setNumero(novoNumero);
+                                System.out.println("Número da fatura alterado com sucesso.");
+                            } catch (Exception e) {
+                                System.out.println("Erro ao alterar o número da fatura: " + e.getMessage());
+                            }
+                            break;
+                        case 2:
+                            try {
+                                System.out.print("Número de contribuinte do novo cliente: ");
+                                int novoContribuinte = Integer.parseInt(scanner.nextLine());
+                                Cliente novoCliente = clientes.procurarClientePorContribuinte(novoContribuinte);
+                                if (novoCliente != null) {
+                                    faturaEncontrada.setCliente(novoCliente);
+                                    System.out.println("Cliente alterado com sucesso.");
+                                } else {
+                                    System.out.println("Cliente não encontrado.");
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Erro ao alterar cliente: " + e.getMessage());
+                            }
+                            break;
+                        case 3:
+                            try {
+                                System.out.print("Nova data (dd/mm/aaaa): ");
+                                String dataStr = scanner.nextLine();
+                                String[] partes = dataStr.split("/");
+                                if (partes.length == 3) {
+                                    int dia = Integer.parseInt(partes[0]);
+                                    int mes = Integer.parseInt(partes[1]);
+                                    int ano = Integer.parseInt(partes[2]);
+                                    Data novaData = new Data(dia, mes, ano);
+                                    faturaEncontrada.setData(novaData);
+                                    System.out.println("Data alterada com sucesso.");
+                                } else {
+                                    System.out.println("Formato de data inválido.");
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Erro ao alterar a data: " + e.getMessage());
+                            }
+                            break;
+                        case 4:
+                            try{
+                                ArrayList<Produto> produtosDaFatura = faturaEncontrada.getProdutos();
+                                if (produtosDaFatura == null || produtosDaFatura.isEmpty()) {
+                                    System.out.println("Não há produtos associados a esta fatura.");
+                                } else {
+                                    produtos.listarProdutos(produtosDaFatura);
+                                }
+                                int opcaoProdutos = -1;
+                                while (opcaoProdutos != 0) {
+                                    System.out.print("\nDeseja:\n1- Adicionar um produto\n2- Remover um produto\n0- Cancelar\nOpção-> ");
+                                    try {
+                                        opcaoProdutos = Integer.parseInt(scanner.nextLine());
+                                        if (opcaoProdutos < 0 || opcaoProdutos > 2) {
+                                            System.out.println("Opção inválida! Por favor, digite um número entre 0 e 2.");
+                                            continue;
+                                        }
+                                        switch (opcaoProdutos){
+                                            case 1:
+                                                System.out.print("Que produto deseja adicionar? ");
+                                                String nomeProdutoAdicionar = scanner.nextLine().trim();
+                                                Produto produtoAdicionar = produtos.encontrarProdutoPeloNome(nomeProdutoAdicionar);
+                                                if (produtoAdicionar != null) {
+                                                    produtosDaFatura.add(produtoAdicionar);
+                                                    System.out.println("Produto adicionado com sucesso.");
+                                                } else {
+                                                    System.out.println("Produto não encontrado.");
+                                                }
+                                                break;
+                                            case 2:
+                                                System.out.print("Que produto deseja remover? ");
+                                                String nomeProdutoRemover = scanner.nextLine().trim();
+                                                Produto produtoRemover = produtos.encontrarProdutoPeloNome(nomeProdutoRemover);
+                                                if (produtoRemover != null) {
+                                                    boolean removido = produtos.removerProduto(produtosDaFatura, produtoRemover);
+                                                    if (removido) {
+                                                        System.out.println("Produto removido com sucesso.");
+                                                    } else {
+                                                        System.out.println("O produto não está associado a esta fatura.");
+                                                    }
+                                                } else {
+                                                    System.out.println("Produto não encontrado.");
+                                                }
+
+                                                break;
+                                        }
+
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Entrada inválida! Por favor, digite um número válido.");
+                                    }
+                                }
+
+                            }catch (Exception e) {
+                                System.out.println("Erro ao alterar a data: " + e.getMessage());
+                            }
+                            break;
+                        case 0:
+                            System.out.println("Alteração cancelada.");
+                            break;
+                        default:
+                            System.out.println("Opção inválida.");
+                    }
+                    System.out.print("Deseja alterar mais algum dado? (S ou N): ");
+                    String continuar = scanner.nextLine();
+                    if (continuar.equalsIgnoreCase("N")) {
+                        break;
                     }
                 }
             } else {

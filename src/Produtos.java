@@ -1,5 +1,3 @@
-//feita com o chat, para testar as restantes funcionalidades, podes apagar a partir donde disse
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,14 +9,18 @@ public class Produtos {
         this.produtos = new ArrayList<>();
     }
 
+    public ArrayList<Produto> getListaProdutos() {
+        return this.produtos;
+    }
+
 
     public void adicionarProduto(Produto produto) {
         produtos.add(produto);
         System.out.println("Produto " + produto + " adicionado!");
     }
 
-    public void listarProdutos() {
-        if (produtos.isEmpty()) {
+    public void listarProdutos(ArrayList<Produto> produtos) {
+        if (produtos == null || produtos.isEmpty()) {
             System.out.println("Nenhum produto cadastrado.");
         } else {
             System.out.println("Lista de produtos:");
@@ -27,6 +29,7 @@ public class Produtos {
             }
         }
     }
+
 
     public Produto encontrarProdutoPeloNome(String nome) {
         if (produtos.isEmpty()) {
@@ -42,5 +45,15 @@ public class Produtos {
             return null;
         }
     }
+
+    public boolean removerProduto(ArrayList<Produto> listaProdutos, Produto produto) {
+        if (listaProdutos.contains(produto)) {
+            listaProdutos.remove(produto);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 }

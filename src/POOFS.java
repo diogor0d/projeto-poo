@@ -10,8 +10,8 @@ public class POOFS {
 
     public POOFS() {
         this.clientes = new Clientes(); // Inicializa a lista de clientes
-        this.faturas = new Faturas(clientes);  // Inicializa a lista de faturas
         this.produtos = new Produtos();
+        this.faturas = new Faturas(clientes, produtos);  // Inicializa a lista de faturas
         this.leituras = new Leituras(clientes, faturas, produtos);
     }
 
@@ -84,7 +84,7 @@ public class POOFS {
                         apresentarEstatisticas();
                         break;
                     case 9:
-                        produtos.listarProdutos(); //so para testar
+                        produtos.listarProdutos(produtos.getListaProdutos()); //so para testar
                         break;
                     case 0:
                         System.out.println("Programa terminado.");
