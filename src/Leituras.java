@@ -39,6 +39,15 @@ public class Leituras {
     }
 
 
+    public void importarFaturas() {
+        try (BufferedReader br = new BufferedReader(new FileReader("output.txt"))) {
+            processarFaturas(br);
+            System.out.println("Faturas importadas com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao importar faturas do arquivo: " + e.getMessage());
+        }
+    }
+
 
     public void lerFicheiro() {
         File f_obj = new File("output.obj");

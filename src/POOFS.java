@@ -47,11 +47,13 @@ public class POOFS {
                         6- Listar faturas
                         7- Apresentar fatura
                         8- Apresentar estatísticas
+                        9- Exportar faturas
+                        10- Importar faturas
                         0- Sair
                         Opcão->\s""");
                 opcao = Integer.parseInt(scanner.nextLine());
-                if (opcao < 0 || opcao > 9) {
-                    System.out.println("Opção inválida! Escreva um número de 0 a 9."); //so para testar
+                if (opcao < 0 || opcao > 10) {
+                    System.out.println("Opção inválida! Escreva um número de 0 a 10."); //so para testar
                     continue; // Volta para a entrada de opção
                 }
 
@@ -82,7 +84,10 @@ public class POOFS {
                         apresentarEstatisticas();
                         break;
                     case 9:
-                        produtos.listarProdutos(produtos.getListaProdutos()); //so para testar
+                        leituras.exportarFaturas(faturas.getFaturas());
+                        break;
+                    case 10:
+                        leituras.importarFaturas();
                         break;
                     case 0:
                         System.out.println("Programa terminado.");
