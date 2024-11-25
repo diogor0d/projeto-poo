@@ -30,6 +30,15 @@ public class Produtos {
         }
     }
 
+    // Metodo para tornar uma lista de clientes na lista de clientes
+    public void setListaProdutos(ArrayList<Produto> novaListaProdutos) {
+        if (novaListaProdutos != null) {
+            this.produtos = novaListaProdutos;
+            System.out.println("Lista de produtos atualizada com sucesso.");
+        } else {
+            System.out.println("A nova lista de proutos é inválida (null).");
+        }
+    }
 
     public Produto encontrarProdutoPeloNome(String nome) {
         if (produtos.isEmpty()) {

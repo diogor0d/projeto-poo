@@ -1,6 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class POOFS {
     private final Leituras leituras;
@@ -9,18 +7,16 @@ public class POOFS {
     private final Produtos produtos;
 
     public POOFS() {
-        this.clientes = new Clientes(); // Inicializa a lista de clientes
+        // Inicializa as listas de clientes, produtos e faturas
+        this.clientes = new Clientes();
         this.produtos = new Produtos();
-        this.faturas = new Faturas(clientes, produtos);  // Inicializa a lista de faturas
+        this.faturas = new Faturas(clientes, produtos);
         this.leituras = new Leituras(clientes, faturas, produtos);
     }
 
     public static void main(String[] args) {
         POOFS sistema = new POOFS(); // Cria a instância de Main
         sistema.iniciar();
-    }
-
-    private void importarFaturas() {
     }
 
     public void iniciar() {
@@ -92,6 +88,7 @@ public class POOFS {
                     case 0:
                         System.out.println("Programa terminado.");
                         leituras.exportarFaturas(faturas.getFaturas());
+                        leituras.escreverObjeto(faturas.getFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         return;
                     default:
                         System.out.println("Opção inválida. Escreva um número de 0 a 8.");
@@ -101,6 +98,8 @@ public class POOFS {
                     String continuar = scanner.nextLine();
                     if (continuar.equalsIgnoreCase("N")) {
                         System.out.println("Programa terminado.");
+                        leituras.exportarFaturas(faturas.getFaturas());
+                        leituras.escreverObjeto(faturas.getFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();
                         return; // Encerra o programa
                     } else if (continuar.equalsIgnoreCase("S")) {
@@ -117,8 +116,5 @@ public class POOFS {
             }
         }
 
-    }
-
-    private void apresentarEstatisticas() {
     }
 }

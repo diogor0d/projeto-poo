@@ -19,6 +19,11 @@ public class Clientes {
         }
     }
 
+    public ArrayList<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
+
     // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
     public boolean isTextoValido(String texto) {
         if(!texto.isEmpty()){

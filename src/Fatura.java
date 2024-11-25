@@ -1,8 +1,9 @@
 //duvida: linha 32; (metodos getdata, getprodutos e setprodutos ainda nao tao a ser utilizados)
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Fatura {
+public class Fatura implements Serializable {
     private int num;
     private Cliente cliente;
     private Data data;

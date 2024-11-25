@@ -15,17 +15,8 @@ public class Leituras {
         this.produtos = produtos;
     }
 
-    //ESCREVER
-    public void escreverObjeto(ArrayList<Object> objetos, ArrayList<Produto> produtos, ArrayList<String> clientes) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output.obj"))) {
-            oos.writeObject(objetos);
-            oos.writeObject(produtos);
-            oos.writeObject(clientes);
-            System.out.println("As listas foram escritas no ficheiro 'output.obj' com sucesso.");
-        } catch (IOException e) {
-            System.out.println("Erro ao escrever as listas no ficheiro: " + e.getMessage());
-        }
-    }
+
+
     public void exportarFaturas(ArrayList<Fatura> faturas) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
             for (Fatura fatura : faturas) {
@@ -48,15 +39,33 @@ public class Leituras {
         }
     }
 
+    //ESCREVER
+    public void escreverObjeto(ArrayList<Fatura> faturas, ArrayList<Produto> produtos, ArrayList<Cliente> clientes) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output3.obj"))) {
+            oos.writeObject(faturas);
+            oos.writeObject(produtos);
+            oos.writeObject(clientes);
+            System.out.println("As listas foram escritas no ficheiro 'output.obj' com sucesso.");
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever as listas no ficheiro: " + e.getMessage());
+        }
+    }
 
     public void lerFicheiro() {
-        File f_obj = new File("output.obj");
+        File f_obj = new File("output3.obj");
 
         if (f_obj.exists() && f_obj.isFile()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f_obj))) {
                 System.out.println("Arquivo output.obj encontrado.");
-                clientes.setListaClientes((ArrayList<Cliente>) ois.readObject());
-                faturas.setListaFaturas((ArrayList<Fatura>) ois.readObject());
+
+                ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
+                ArrayList<Produto> produtosLidos = (ArrayList<Produto>) ois.readObject();
+                ArrayList<Cliente> clientesLidos = (ArrayList<Cliente>) ois.readObject();
+
+                faturas.setListaFaturas(faturasLidas);
+                clientes.setListaClientes(clientesLidos);
+                produtos.setListaProdutos(produtosLidos);
+
                 System.out.println("Listas carregadas com sucesso.");
             } catch (IOException | ClassNotFoundException ex) {
                 System.out.println("Erro ao carregar dados do arquivo objeto: " + ex.getMessage());
@@ -100,6 +109,7 @@ public class Leituras {
             try {
                 String nome = partes[0].trim();
                 int contribuinte = Integer.parseInt(partes[1].trim());
+                clientes.procurarClientePorContribuinte(contribuinte);
                 String localizacao = partes[2].trim();
                 clientes.adicionarCliente(nome, contribuinte, localizacao);
             } catch (NumberFormatException e) {
@@ -197,26 +207,37 @@ public class Leituras {
             }
             try {
                 int num = Integer.parseInt(partes[0]);
-                int contribuinte = Integer.parseInt(partes[1]);
-                Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
-
-                String[] dataParts = partes[2].split("/");
-                int dia = Integer.parseInt(dataParts[0]);
-                int mes = Integer.parseInt(dataParts[1]);
-                int ano = Integer.parseInt(dataParts[2]);
-                Data data = new Data(dia, mes, ano);
-
-                ArrayList<Produto> listaProdutos = new ArrayList<>();
-                for (int i = 3; i < partes.length; i++) {
-                    String nome_produto = partes[i];
-                    Produto produto = produtos.encontrarProdutoPeloNome(nome_produto);
-                    if (produto != null) {
-                        listaProdutos.add(produto);
-                    } else {
-                        System.out.println("Produto não encontrado: " + nome_produto);
-                    }
+                Fatura fatura = faturas.procurarFatura(num);
+                if(fatura != null){
+                    System.out.println("Já existe uma fatura com este número!");
                 }
-                faturas.adicionarFatura(num, cliente, data, listaProdutos);
+                else{
+                    int contribuinte = Integer.parseInt(partes[1]);
+                    Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
+                    if(cliente==null){
+                        System.out.println("Cliente " + contribuinte + " não encontrado!");
+                    } else{
+                        String[] dataParts = partes[2].split("/");
+                        int dia = Integer.parseInt(dataParts[0]);
+                        int mes = Integer.parseInt(dataParts[1]);
+                        int ano = Integer.parseInt(dataParts[2]);
+                        Data data = new Data(dia, mes, ano);
+
+                        ArrayList<Produto> listaProdutos = new ArrayList<>();
+                        for (int i = 3; i < partes.length; i++) {
+                            String nome_produto = partes[i];
+                            Produto produto = produtos.encontrarProdutoPeloNome(nome_produto);
+                            if (produto != null) {
+                                listaProdutos.add(produto);
+                            } else {
+                                System.out.println("Produto não encontrado: " + nome_produto);
+                            }
+                        }
+                        faturas.adicionarFatura(num, cliente, data, listaProdutos);
+
+                    }
+
+                }
             } catch(NumberFormatException e){
                 System.out.println("Erro ao processar cliente: " + line);
             }

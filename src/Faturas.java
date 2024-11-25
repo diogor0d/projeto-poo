@@ -265,8 +265,6 @@ public class Faturas {
                                                 if (produtoAdicionar != null) {
                                                     produtosDaFatura.add(produtoAdicionar);
                                                     System.out.println("Produto adicionado com sucesso.");
-                                                } else {
-                                                    System.out.println("Produto não encontrado.");
                                                 }
                                                 break;
                                             case 2:
@@ -274,14 +272,12 @@ public class Faturas {
                                                 String nomeProdutoRemover = scanner.nextLine().trim();
                                                 Produto produtoRemover = produtos.encontrarProdutoPeloNome(nomeProdutoRemover);
                                                 if (produtoRemover != null) {
-                                                    boolean removido = produtos.removerProduto(produtosDaFatura, produtoRemover);
-                                                    if (removido) {
+                                                    if (produtosDaFatura.contains(produtoRemover)) {
+                                                        produtosDaFatura.remove(produtoRemover);
                                                         System.out.println("Produto removido com sucesso.");
                                                     } else {
                                                         System.out.println("O produto não está associado a esta fatura.");
                                                     }
-                                                } else {
-                                                    System.out.println("Produto não encontrado.");
                                                 }
 
                                                 break;
