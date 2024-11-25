@@ -81,7 +81,7 @@ public class POOFS {
                         faturas.visualizarFatura();
                         break;
                     case 8:
-                        apresentarEstatisticas();
+                        faturas.apresentarEstatisticas();
                         break;
                     case 9:
                         leituras.exportarFaturas(faturas.getFaturas());

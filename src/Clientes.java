@@ -37,7 +37,7 @@ public class Clientes {
 
     public boolean isLocalizacaoValida(String localizacao){
         ArrayList<String> localizacoes = new ArrayList<>();
-        localizacoes.add("portugal continental");
+        localizacoes.add("continente");
         localizacoes.add("açores");
         localizacoes.add("madeira");
 
@@ -113,7 +113,7 @@ public class Clientes {
         }
 
         String localizacao;
-        System.out.print("Digite a localização do cliente (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
+        System.out.print("Digite a localização do cliente (Digite 'Continente', 'Açores' ou 'Madeira'): ");
         while (true) {
             try {
                 localizacao = scanner.nextLine();
@@ -125,12 +125,12 @@ public class Clientes {
                             localizacao = "Madeira";
                         } else if(localizacao.equalsIgnoreCase("açores")) {
                             localizacao = "Açores";
-                        } else if (localizacao.equalsIgnoreCase("portugal continental")){
-                            localizacao = "Portugal Continental";
+                        } else if (localizacao.equalsIgnoreCase("continente")){
+                            localizacao = "Continente";
                         }
                         break;
                     } else{
-                        System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira': ");
+                        System.out.print("Não existe essa localização! Digite 'Continente', 'Açores' ou 'Madeira': ");
                     }
                 } else {
                     System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");

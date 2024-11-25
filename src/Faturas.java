@@ -346,11 +346,11 @@ public class Faturas {
         boolean valid = false;
         while (!valid) {
             try {
-                System.out.print("Digite um número inteiro: ");
+                System.out.print(" > ");
                 num = Integer.parseInt(scanner.nextLine());
                 valid = true;
             } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Por favor, digite um número inteiro.");
+                System.out.println("Entrada inválida. Por favor, digite um número válido.");
             }
         }
         return num;
@@ -385,5 +385,34 @@ public class Faturas {
         System.out.println("--------------------------------------------------------------------------------------------------------------");
         System.out.printf("                                   Total s/IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva);
         System.out.println("--------------------------------------------------------------------------------------------------------------");
+    }
+
+    public void apresentarEstatisticas() {
+        int nFaturas = 0;
+        int nProdutos = 0;
+        double totalBruto = 0;
+        double totalLiquido = 0;
+        double totalIVA = 0;
+
+        for (Fatura fatura : listaFaturas) {
+            nFaturas++;
+
+            for (Produto produto : fatura.getProdutos()) {
+                nProdutos++;
+
+                totalBruto += produto.preco * produto.quantidade;
+                totalLiquido += (produto.preco * produto.quantidade) - ((produto.preco * produto.quantidade) * produto.calcularIva(fatura.getCliente()));
+                totalIVA += (produto.preco * produto.quantidade) * produto.calcularIva(fatura.getCliente());
+
+            }
+        }
+
+        System.out.printf("\nEstatisticas:");
+        System.out.printf("\n%-20s: %d", "Número de Faturas", nFaturas);
+        System.out.printf("\n%-20s: %d", "Número de Produtos", nProdutos);
+        System.out.printf("\n%-20s: %.2f€", "Total Bruto", totalBruto);
+        System.out.printf("\n%-20s: %.2f€", "Total Líquido", totalLiquido);
+        System.out.printf("\n%-20s: %.2f€\n", "Total IVA", totalIVA);
+
     }
 }
