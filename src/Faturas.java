@@ -15,7 +15,7 @@ public class Faturas {
         this.produtos = produtos; // Passar a mesma instância de Produtos
     }
 
-    public ArrayList<Fatura> getFaturas() {
+    public ArrayList<Fatura> getListaFaturas() {
         return listaFaturas;
     }
 
@@ -169,7 +169,7 @@ public class Faturas {
         Scanner scanner = new Scanner(System.in);
         try {
             if (!listaFaturas.isEmpty()) {
-                Fatura faturaEncontrada = null;
+                Fatura faturaEncontrada;
                 while (true) {
                     System.out.print("Qual é o número da fatura, à qual quer alterar os dados? ");
                     int num = Integer.parseInt(scanner.nextLine());
@@ -403,7 +403,7 @@ public class Faturas {
             }
         }
 
-        System.out.printf("\nEstatisticas:");
+        System.out.print("\nEstatisticas:");
         System.out.printf("\n%-20s: %d", "Número de Faturas", nFaturas);
         System.out.printf("\n%-20s: %d", "Número de Produtos", nProdutos);
         System.out.printf("\n%-20s: %.2f€", "Total Bruto", totalBruto);

@@ -8,7 +8,6 @@ public class Leituras {
     private final Faturas faturas;
     private final Produtos produtos;
 
-    // Construtor que recebe as instâncias de Clientes e Faturas
     public Leituras(Clientes clientes, Faturas faturas, Produtos produtos) {
         this.clientes = clientes;
         this.faturas = faturas;
@@ -16,7 +15,7 @@ public class Leituras {
     }
 
 
-
+    //Em vez de receber argumento, exporta as faturas na class Faturas e ta feito
     public void exportarFaturas(ArrayList<Fatura> faturas) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
             for (Fatura fatura : faturas) {
@@ -39,7 +38,7 @@ public class Leituras {
         }
     }
 
-    //ESCREVER
+    //Em vez de receber argumento, exporta as faturas na class POOFS
     public void escreverObjeto(ArrayList<Fatura> faturas, ArrayList<Produto> produtos, ArrayList<Cliente> clientes) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output3.obj"))) {
             oos.writeObject(faturas);
@@ -78,7 +77,7 @@ public class Leituras {
                     String line;
                     while ((line = br.readLine()) != null) {
                         line = line.trim();
-                        processarLinha(line, br); // Delegar o processamento a outro método
+                        processarLinha(line, br); // Delegar o processamento a outro metodo
                     }
                     System.out.println("Processamento do arquivo input.txt concluído.");
                 } catch (IOException e) {

@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Produtos {
     private ArrayList<Produto> produtos;
@@ -13,6 +12,15 @@ public class Produtos {
         return this.produtos;
     }
 
+    // Metodo para tornar uma lista de clientes na lista de clientes
+    public void setListaProdutos(ArrayList<Produto> novaListaProdutos) {
+        if (novaListaProdutos != null) {
+            this.produtos = novaListaProdutos;
+            System.out.println("Lista de produtos atualizada com sucesso.");
+        } else {
+            System.out.println("A nova lista de proutos é inválida (null).");
+        }
+    }
 
     public void adicionarProduto(Produto produto) {
         produtos.add(produto);
@@ -30,20 +38,9 @@ public class Produtos {
         }
     }
 
-    // Metodo para tornar uma lista de clientes na lista de clientes
-    public void setListaProdutos(ArrayList<Produto> novaListaProdutos) {
-        if (novaListaProdutos != null) {
-            this.produtos = novaListaProdutos;
-            System.out.println("Lista de produtos atualizada com sucesso.");
-        } else {
-            System.out.println("A nova lista de proutos é inválida (null).");
-        }
-    }
-
     public Produto encontrarProdutoPeloNome(String nome) {
         if (produtos.isEmpty()) {
             System.out.println("Nenhum produto cadastrado.");
-            return null;
         } else {
             for (Produto produto : produtos) {
                 if (produto.getNome().equalsIgnoreCase(nome)) {
@@ -51,18 +48,7 @@ public class Produtos {
                 }
             }
             System.out.println("Produto não encontrado");
-            return null;
         }
+        return null;
     }
-
-    public boolean removerProduto(ArrayList<Produto> listaProdutos, Produto produto) {
-        if (listaProdutos.contains(produto)) {
-            listaProdutos.remove(produto);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
 }

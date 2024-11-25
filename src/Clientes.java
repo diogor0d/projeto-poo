@@ -9,6 +9,10 @@ public class Clientes {
         this.listaClientes = new ArrayList<>();
     }
 
+    public ArrayList<Cliente> getListaClientes() {
+        return listaClientes;
+    }
+
     // Metodo para tornar uma lista de clientes na lista de clientes
     public void setListaClientes(ArrayList<Cliente> novaListaClientes) {
         if (novaListaClientes != null) {
@@ -18,11 +22,6 @@ public class Clientes {
             System.out.println("A nova lista de clientes é inválida (null).");
         }
     }
-
-    public ArrayList<Cliente> getListaClientes() {
-        return listaClientes;
-    }
-
 
     // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
     public boolean isTextoValido(String texto) {
@@ -85,12 +84,7 @@ public class Clientes {
                 nome = scanner.nextLine();
                 nome = nome.trim();
                 if (isTextoValido(nome)) {
-                    Cliente clienteComEsteNome = procurarClientePorNome(nome);
-                    if(clienteComEsteNome != null){
-                        System.out.println("Já existe um cliente com este nome!");
-                    } else {
-                        break;
-                    }
+                    break;
                 } else {
                     System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
                 }
@@ -213,14 +207,7 @@ public class Clientes {
                                 novoNome = scanner.nextLine();
                                 novoNome = novoNome.trim();
                                 if (isTextoValido(novoNome)) {
-                                    Cliente novoClienteNome = procurarClientePorNome(novoNome);
-                                    if(novoClienteNome == null){
-                                        cliente.setNome(novoNome);
-                                        System.out.println("Nome alterado com sucesso.");
-                                        break;
-                                    } else {
-                                        System.out.println("Já existe um cliente com este nome!");
-                                    }
+                                    break;
                                 } else {
                                     System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
                                 }

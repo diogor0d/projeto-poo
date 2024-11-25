@@ -1,13 +1,14 @@
 import java.util.Scanner;
 
 public class POOFS {
-    private final Leituras leituras;
+    // Declaração das classes que manipulam os clientes, faturas e produtos e da que é responsável pelas leituras e escritas dos arquivos
     private final Clientes clientes;
     private final Faturas faturas;
     private final Produtos produtos;
+    private final Leituras leituras;
 
     public POOFS() {
-        // Inicializa as listas de clientes, produtos e faturas
+        // Inicializa dessas classes, criando uma nova instância para cada uma
         this.clientes = new Clientes();
         this.produtos = new Produtos();
         this.faturas = new Faturas(clientes, produtos);
@@ -15,7 +16,8 @@ public class POOFS {
     }
 
     public static void main(String[] args) {
-        POOFS sistema = new POOFS(); // Cria a instância de Main
+        // Cria a instância de Main, ou seja inicializar o sistema
+        POOFS sistema = new POOFS();
         sistema.iniciar();
     }
 
@@ -23,7 +25,7 @@ public class POOFS {
         try {
             leituras.lerFicheiro();
             //mais tarde usaremos o ficheiro de input para as duas coisas
-            leituras.exportarFaturas(faturas.getFaturas());
+            leituras.exportarFaturas(faturas.getListaFaturas());
         } catch (Exception e) {
             System.out.println("Erro durante a leitura dos ficheiros: " + e.getMessage());
         }
@@ -41,7 +43,7 @@ public class POOFS {
                         4- Nova fatura
                         5- Editar fatura
                         6- Listar faturas
-                        7- Apresentar fatura
+                        7- Visualizar fatura
                         8- Apresentar estatísticas
                         9- Exportar faturas
                         10- Importar faturas
@@ -71,7 +73,6 @@ public class POOFS {
                         break;
                     case 6:
                         faturas.listarFaturas();
-
                         break;
                     case 7:
                         faturas.visualizarFatura();
@@ -80,15 +81,16 @@ public class POOFS {
                         faturas.apresentarEstatisticas();
                         break;
                     case 9:
-                        leituras.exportarFaturas(faturas.getFaturas());
+                        //Em vez de receber argumento, exporta as faturas na class Faturas e ta feito
+                        leituras.exportarFaturas(faturas.getListaFaturas());
                         break;
                     case 10:
                         leituras.importarFaturas();
                         break;
                     case 0:
                         System.out.println("Programa terminado.");
-                        leituras.exportarFaturas(faturas.getFaturas());
-                        leituras.escreverObjeto(faturas.getFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
+                        leituras.exportarFaturas(faturas.getListaFaturas());
+                        leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         return;
                     default:
                         System.out.println("Opção inválida. Escreva um número de 0 a 8.");
@@ -98,8 +100,8 @@ public class POOFS {
                     String continuar = scanner.nextLine();
                     if (continuar.equalsIgnoreCase("N")) {
                         System.out.println("Programa terminado.");
-                        leituras.exportarFaturas(faturas.getFaturas());
-                        leituras.escreverObjeto(faturas.getFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
+                        leituras.exportarFaturas(faturas.getListaFaturas());
+                        leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();
                         return; // Encerra o programa
                     } else if (continuar.equalsIgnoreCase("S")) {
