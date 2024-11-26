@@ -35,20 +35,19 @@ public class POOFS {
 
         while (true) {
             try {
-                System.out.print("""
-                        MENU:
-                        1- Novo cliente
-                        2- Editar cliente
-                        3- Listar clientes
-                        4- Nova fatura
-                        5- Editar fatura
-                        6- Listar faturas
-                        7- Visualizar fatura
-                        8- Apresentar estatísticas
-                        9- Exportar faturas
-                        10- Importar faturas
-                        0- Sair
-                        Selecione a operação >\s""");
+                System.out.println("MENU:");
+                System.out.println("1- Novo cliente");
+                System.out.println("2- Editar cliente");
+                System.out.println("3- Listar clientes");
+                System.out.println("4- Nova fatura");
+                System.out.println("5- Editar fatura");
+                System.out.println("6- Listar faturas");
+                System.out.println("7- Visualizar fatura");
+                System.out.println("8- Apresentar estatísticas");
+                System.out.println("9- Exportar faturas");
+                System.out.println("10- Importar faturas");
+                System.out.println("0- Sair");
+                System.out.print("Selecione a operação > ");
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 10) {
                     System.out.println("Opção inválida! Escreva um número de 0 a 10."); //so para testar
