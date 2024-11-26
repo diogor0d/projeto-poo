@@ -208,7 +208,7 @@ public class Leituras {
                 int num = Integer.parseInt(partes[0]);
                 Fatura fatura = faturas.procurarFatura(num);
                 if(fatura != null){
-                    System.out.println("Já existe uma fatura com este número!");
+                    System.out.println("Já existe uma fatura com o número " + num + "!");
                 }
                 else{
                     int contribuinte = Integer.parseInt(partes[1]);
@@ -221,6 +221,11 @@ public class Leituras {
                         int mes = Integer.parseInt(dataParts[1]);
                         int ano = Integer.parseInt(dataParts[2]);
                         Data data = new Data(dia, mes, ano);
+                        if (data.isDataValida()) {
+                            break;
+                        } else {
+                            System.out.println("Data incorreta. Tente novamente.");
+                        }
 
                         ArrayList<Produto> listaProdutos = new ArrayList<>();
                         for (int i = 3; i < partes.length; i++) {
@@ -232,7 +237,11 @@ public class Leituras {
                                 System.out.println("Produto não encontrado: " + nome_produto);
                             }
                         }
-                        faturas.adicionarFatura(num, cliente, data, listaProdutos);
+                        if(!(listaProdutos.isEmpty())){
+                            faturas.adicionarFatura(num, cliente, data, listaProdutos);
+                        } else{
+                            System.out.println("Lista de produtos vazia, fatura descartada");
+                        }
 
                     }
 

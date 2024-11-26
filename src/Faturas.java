@@ -35,20 +35,7 @@ public class Faturas {
         }
     }
 
-    // Metodo para verificar se uma Data é válida ou não
-    private boolean isDataValida(int dia, int mes, int ano) {
-        if (ano < 200 || ano > 2024) return false;
 
-        if (mes < 1 || mes > 12) return false;
-
-        int[] diasPorMes = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-        // anos bissextos
-        if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) {
-            diasPorMes[1] = 29;
-        }
-        return dia >= 0 && dia <= diasPorMes[mes - 1];
-    }
 
     // Metodo para ler os dados e criar a fatura
     public void novaFatura() {
@@ -118,9 +105,8 @@ public class Faturas {
                 int dia = Integer.parseInt(partes[0].trim());
                 int mes = Integer.parseInt(partes[1].trim());
                 int ano = Integer.parseInt(partes[2].trim());
-
-                if (isDataValida(dia, mes, ano)) {
-                    data = new Data(dia, mes, ano);
+                data = new Data(dia, mes, ano);
+                if (data.isDataValida()) {
                     break;
                 } else {
                     System.out.println("Data incorreta. Tente novamente.");
@@ -404,7 +390,7 @@ public class Faturas {
             totalIva += subtotal + (subtotal * produto.calcularIva(cliente));
         }
         System.out.println("--------------------------------------------------------------------------------------------------------------");
-        System.out.printf("                Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva);
+        System.out.printf("                Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva-fatura.calcularTotalBruto() , totalIva);
         System.out.println("--------------------------------------------------------------------------------------------------------------");
     }
 
