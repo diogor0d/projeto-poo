@@ -1,6 +1,7 @@
 //vizualizarFatura e editarFatura estão incompletos
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Faturas {
@@ -52,21 +53,38 @@ public class Faturas {
     // Metodo para ler os dados e criar a fatura
     public void novaFatura() {
         Scanner scanner = new Scanner(System.in);
+
         int numero;
         while (true) {
-            try {
-                System.out.print("Digite o número da fatura: ");
-                numero = Integer.parseInt(scanner.nextLine());
-                Fatura faturaEncontrada = procurarFatura(numero);
-                if(faturaEncontrada == null){
-                    break;
-                } else{
-                    System.out.println("Já existe uma fatura com esse número!");
+            System.out.print("\nDeseja introduzir um número especifico para a fatura? (S ou N): ");
+            String inserirNumManual = scanner.nextLine();
+            if (inserirNumManual.equalsIgnoreCase("N")) {
+                // Gerar e atribuir um número para a fatura de forma automaticac
+                numero = gerarNumFatura();
+                break;
+            } else if (inserirNumManual.equalsIgnoreCase("S")) {
+                // Permitir ao utilizador atribuir um número para a fatura
+                while (true) {
+                    try {
+                        System.out.print("Digite o número da fatura: ");
+                        numero = Integer.parseInt(scanner.nextLine());
+                        Fatura faturaEncontrada = procurarFatura(numero);
+                        if(faturaEncontrada == null){
+                            break;
+                        } else{
+                            System.out.println("Já existe uma fatura com esse número!");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Entrada inválida. Digite um número inteiro.");
+                    }
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Digite um número inteiro.");
+                break;
+            } else {
+                System.out.println("Entrada inválida. Digite apenas 'S' ou 'N'.");
             }
         }
+
+
         int contribuinte;
         Cliente cliente;
         while (true) {
@@ -381,6 +399,23 @@ public class Faturas {
         System.out.println("--------------------------------------------------------------------------------------------------------------");
         System.out.printf("                                   Total s/IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva);
         System.out.println("--------------------------------------------------------------------------------------------------------------");
+    }
+
+    public int gerarNumFatura() {
+        Random random = new Random();
+        int novoNumero;
+        boolean existe;
+
+        // Gerar numeros aleatorios até não existir colisão com uma fatura existente
+        do {
+            novoNumero = random.nextInt(10000000);
+            existe = false;
+            if (procurarFatura(novoNumero) != null) {
+                existe = true;
+            }
+        } while (existe);
+
+        return novoNumero;
     }
 
     public void apresentarEstatisticas() {
