@@ -63,16 +63,6 @@ public class Clientes {
         return null;
     }
 
-    // Metodo para procurar um cliente na lista a partir do seu nome
-    public Cliente procurarClientePorNome(String nome) {
-        for (Cliente cliente : listaClientes) {
-            if (cliente.getNome().equalsIgnoreCase(nome)) {
-                return cliente;
-            }
-        }
-        return null;
-    }
-
     // Metodo para ler os dados e criar o cliente
     public void novoCliente() {
         Scanner scanner = new Scanner(System.in);
@@ -257,12 +247,13 @@ public class Clientes {
                                                 novaLocalizacao = "Madeira";
                                             } else if(novaLocalizacao.equalsIgnoreCase("açores")) {
                                                 novaLocalizacao = "Açores";
-                                            } else if (novaLocalizacao.equalsIgnoreCase("portugal continental")){
-                                                novaLocalizacao = "Portugal Continental";
+                                            } else if (novaLocalizacao.equalsIgnoreCase("continente")){
+                                                novaLocalizacao = "Continente";
                                             }
+                                            cliente.setLocalizacao(novaLocalizacao);
                                             break;
                                         } else{
-                                            System.out.print("Não existe essa localização! Digite 'Portugal Continental', 'Açores' ou 'Madeira': ");
+                                            System.out.print("Não existe essa localização! Digite 'Continente', 'Açores' ou 'Madeira': ");
                                         }
                                     } else {
                                         System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
