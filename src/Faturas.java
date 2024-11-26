@@ -132,6 +132,7 @@ public class Faturas {
             }
         }
 
+        produtos.listarProdutos(produtos.getListaProdutos());
         System.out.print("Insira os códigos dos produtos a adicionar (separados por ','): ");
 
         ArrayList<Produto> listaProdutos = new ArrayList<>();
@@ -403,7 +404,7 @@ public class Faturas {
             totalIva += subtotal + (subtotal * produto.calcularIva(cliente));
         }
         System.out.println("--------------------------------------------------------------------------------------------------------------");
-        System.out.printf("                                   Total s/IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva);
+        System.out.printf("                Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva);
         System.out.println("--------------------------------------------------------------------------------------------------------------");
     }
 

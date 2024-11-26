@@ -29,9 +29,9 @@ public class Produtos {
 
     public void listarProdutos(ArrayList<Produto> produtos) {
         if (produtos == null || produtos.isEmpty()) {
-            System.out.println("Nenhum produto cadastrado.");
+            System.out.println("Nenhum produto registado.");
         } else {
-            System.out.println("Lista de produtos:");
+            System.out.println("Lista de produtos no sistema:");
             for (Produto produto : produtos) {
                 System.out.println(produto);
             }

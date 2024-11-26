@@ -98,13 +98,13 @@ public class POOFS {
                 while (true) {
                     System.out.print("\nDeseja voltar ao menu? (S ou N): ");
                     String continuar = scanner.nextLine();
-                    if (continuar.equalsIgnoreCase("N")) {
+                    if (continuar.trim().equalsIgnoreCase("N")) {
                         System.out.println("Programa terminado.");
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();
                         return; // Encerra o programa
-                    } else if (continuar.equalsIgnoreCase("S")) {
+                    } else if (continuar.trim().equalsIgnoreCase("S")) {
                         break;
                     } else {
                         System.out.println("Entrada inválida. Digite apenas 'S' ou 'N'.");
