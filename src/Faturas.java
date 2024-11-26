@@ -131,7 +131,7 @@ public class Faturas {
             }
         }
 
-        System.out.print("Digite os produtos a adicionar (separados por ','): ");
+        System.out.print("Insira os códigos dos produtos a adicionar (separados por ','): ");
 
         ArrayList<Produto> listaProdutos = new ArrayList<>();
         String line = scanner.nextLine();
@@ -140,16 +140,22 @@ public class Faturas {
             partes[i] = partes[i].trim();
         }
         try {
-            for (String nome_produto : partes) {
-                Produto produto = produtos.encontrarProdutoPeloNome(nome_produto);
+            for (String codigo : partes) {
+                Produto produto = produtos.procurarProdutoCodigo(Integer.parseInt(codigo));
                 if (produto != null) {
+                    System.out.println("Produto " + produto.getNome() + " adicionado.");
                     listaProdutos.add(produto);
                 } else {
-                    System.out.println("Produto não encontrado: " + nome_produto);
+                    System.out.println("Produto com o código " + codigo + " não encontrado. Verifique o código e tente adiciona-lo novamente.");
                 }
             }
         } catch (NumberFormatException e) {
-            System.out.println("Erro ao processar cliente: " + line);
+            System.out.println("Erro ao processar os produtos: " + line);
+        }
+
+        if (listaProdutos.isEmpty()) {
+            System.out.println("Nenhum produto registado na fatura. Criação de fatura abortada.");
+            return;
         }
 
 
@@ -279,7 +285,7 @@ public class Faturas {
                                             case 1:
                                                 System.out.print("Que produto deseja adicionar? ");
                                                 String nomeProdutoAdicionar = scanner.nextLine().trim();
-                                                Produto produtoAdicionar = produtos.encontrarProdutoPeloNome(nomeProdutoAdicionar);
+                                                Produto produtoAdicionar = produtos.procurarProdutoNome(nomeProdutoAdicionar);
                                                 if (produtoAdicionar != null) {
                                                     produtosDaFatura.add(produtoAdicionar);
                                                     System.out.println("Produto adicionado com sucesso.");
@@ -288,7 +294,7 @@ public class Faturas {
                                             case 2:
                                                 System.out.print("Que produto deseja remover? ");
                                                 String nomeProdutoRemover = scanner.nextLine().trim();
-                                                Produto produtoRemover = produtos.encontrarProdutoPeloNome(nomeProdutoRemover);
+                                                Produto produtoRemover = produtos.procurarProdutoNome(nomeProdutoRemover);
                                                 if (produtoRemover != null) {
                                                     if (produtosDaFatura.contains(produtoRemover)) {
                                                         produtosDaFatura.remove(produtoRemover);

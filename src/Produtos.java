@@ -38,12 +38,26 @@ public class Produtos {
         }
     }
 
-    public Produto encontrarProdutoPeloNome(String nome) {
+    public Produto procurarProdutoNome(String nome) {
         if (produtos.isEmpty()) {
-            System.out.println("Nenhum produto cadastrado.");
+            System.out.println("Não existe nenhum produto registado.");
         } else {
             for (Produto produto : produtos) {
                 if (produto.getNome().equalsIgnoreCase(nome)) {
+                    return produto;
+                }
+            }
+            System.out.println("Produto não encontrado");
+        }
+        return null;
+    }
+
+    public Produto procurarProdutoCodigo(int codigo) {
+        if (produtos.isEmpty()) {
+            System.out.println("Não existe nenhum produto registado.");
+        } else {
+            for (Produto produto : produtos) {
+                if (produto.getCodigo() == codigo) {
                     return produto;
                 }
             }

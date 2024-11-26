@@ -225,7 +225,7 @@ public class Leituras {
                         ArrayList<Produto> listaProdutos = new ArrayList<>();
                         for (int i = 3; i < partes.length; i++) {
                             String nome_produto = partes[i];
-                            Produto produto = produtos.encontrarProdutoPeloNome(nome_produto);
+                            Produto produto = produtos.procurarProdutoNome(nome_produto);
                             if (produto != null) {
                                 listaProdutos.add(produto);
                             } else {
