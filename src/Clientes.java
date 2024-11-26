@@ -98,12 +98,17 @@ public class Clientes {
             try {
                 System.out.print("Digite o número de contribuinte: ");
                 contribuinte = Integer.parseInt(scanner.nextLine());
-                Cliente clienteComEsteContribuinte = procurarClientePorContribuinte(contribuinte);
-                if (clienteComEsteContribuinte != null) {
-                    System.out.println("Já existe um cliente com este número de contribuinte!");
-                } else {
-                    break;
+                if(String.valueOf(contribuinte).length() != 9){
+                    System.out.println("Número de contribuinte inválido. O número deve ter 9 digitos!");
+                } else{
+                    Cliente clienteComEsteContribuinte = procurarClientePorContribuinte(contribuinte);
+                    if (clienteComEsteContribuinte != null) {
+                        System.out.println("Já existe um cliente com este número de contribuinte!");
+                    } else {
+                        break;
+                    }
                 }
+
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Digite um número inteiro.");
             } catch (Exception e) {
@@ -220,13 +225,17 @@ public class Clientes {
                                 System.out.print("Novo número de contribuinte: ");
                                 try {
                                     novoContribuinte = Integer.parseInt(scanner.nextLine());
-                                    Cliente novoClienteContribuinte = procurarClientePorContribuinte(novoContribuinte);
-                                    if(novoClienteContribuinte == null){
-                                        cliente.setContribuinte(novoContribuinte);
-                                        System.out.println("Contribuinte alterado com sucesso.");
-                                        break;
+                                    if(String.valueOf(contribuinte).length() != 9){
+                                        System.out.println("Número de contribuinte inválido. O número deve ter 9 digitos!");
                                     } else {
-                                        System.out.println("Já existe um cliente com este número de contribuinte!");
+                                        Cliente novoClienteContribuinte = procurarClientePorContribuinte(novoContribuinte);
+                                        if (novoClienteContribuinte == null) {
+                                            cliente.setContribuinte(novoContribuinte);
+                                            System.out.println("Contribuinte alterado com sucesso.");
+                                            break;
+                                        } else {
+                                            System.out.println("Já existe um cliente com este número de contribuinte!");
+                                        }
                                     }
                                 } catch (NumberFormatException e) {
                                     System.out.println("Entrada inválida. Digite um número inteiro.");
