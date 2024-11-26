@@ -67,6 +67,6 @@ public abstract class Produto implements Serializable {
 
     // // toString
     public String toString() {
-        return "codigo= " + codigo + ", nome= " + nome + '\'' + ", descricao= " + descricao + '\'' + ", quantidade= " + quantidade + ", preco= " + preco;
+        return "codigo= " + codigo + ", nome= \'" + nome + '\'' + ", descricao= \'" + descricao + '\'' + ", quantidade= " + quantidade + ", preco= " + preco;
     }
 }

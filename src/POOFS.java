@@ -96,7 +96,7 @@ public class POOFS {
                         System.out.println("Opção inválida. Escreva um número de 0 a 8.");
                 }
                 while (true) {
-                    System.out.print("\nDeseja continuar? (S ou N): ");
+                    System.out.print("\nDeseja voltar ao menu? (S ou N): ");
                     String continuar = scanner.nextLine();
                     if (continuar.equalsIgnoreCase("N")) {
                         System.out.println("Programa terminado.");

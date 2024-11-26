@@ -269,11 +269,10 @@ public class Faturas {
                                 ArrayList<Produto> produtosDaFatura = faturaEncontrada.getProdutos();
                                 if (produtosDaFatura == null || produtosDaFatura.isEmpty()) {
                                     System.out.println("Não há produtos associados a esta fatura.");
-                                } else {
-                                    produtos.listarProdutos(produtosDaFatura);
                                 }
                                 int opcaoProdutos = -1;
                                 while (opcaoProdutos != 0) {
+                                    produtos.listarProdutos(produtosDaFatura);
                                     System.out.print("\nDeseja:\n1- Adicionar um produto\n2- Remover um produto\n0- Cancelar\nOpção-> ");
                                     try {
                                         opcaoProdutos = Integer.parseInt(scanner.nextLine());
@@ -283,18 +282,18 @@ public class Faturas {
                                         }
                                         switch (opcaoProdutos){
                                             case 1:
-                                                System.out.print("Que produto deseja adicionar? ");
-                                                String nomeProdutoAdicionar = scanner.nextLine().trim();
-                                                Produto produtoAdicionar = produtos.procurarProdutoNome(nomeProdutoAdicionar);
+                                                System.out.print("Insira o código do produto que deseja adicionar: ");
+                                                String codigoProdutoAdicionar = scanner.nextLine().trim();
+                                                Produto produtoAdicionar = produtos.procurarProdutoCodigo(Integer.parseInt(codigoProdutoAdicionar));
                                                 if (produtoAdicionar != null) {
                                                     produtosDaFatura.add(produtoAdicionar);
                                                     System.out.println("Produto adicionado com sucesso.");
                                                 }
                                                 break;
                                             case 2:
-                                                System.out.print("Que produto deseja remover? ");
-                                                String nomeProdutoRemover = scanner.nextLine().trim();
-                                                Produto produtoRemover = produtos.procurarProdutoNome(nomeProdutoRemover);
+                                                System.out.print("Insira o codigo do produto a remover: ");
+                                                String codigoProdutoRemover = scanner.nextLine().trim();
+                                                Produto produtoRemover = produtos.procurarProdutoCodigo(Integer.parseInt(codigoProdutoRemover));
                                                 if (produtoRemover != null) {
                                                     if (produtosDaFatura.contains(produtoRemover)) {
                                                         produtosDaFatura.remove(produtoRemover);
