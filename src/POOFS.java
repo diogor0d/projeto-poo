@@ -30,7 +30,7 @@ public class POOFS {
             System.out.println("Erro durante a leitura dos ficheiros: " + e.getMessage());
         }
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new   Scanner(System.in);
         int opcao;
 
         while (true) {
