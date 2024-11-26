@@ -61,6 +61,7 @@ public class Faturas {
             if (inserirNumManual.equalsIgnoreCase("N")) {
                 // Gerar e atribuir um número para a fatura de forma automaticac
                 numero = gerarNumFatura();
+                System.out.println("Foi atribuído o seguinte número à sua fatura: " + numero);
                 break;
             } else if (inserirNumManual.equalsIgnoreCase("S")) {
                 // Permitir ao utilizador atribuir um número para a fatura

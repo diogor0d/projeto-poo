@@ -173,7 +173,7 @@ public class Clientes {
             int contribuinte;
             while (true) {
                 try {
-                    System.out.print("Digite o número de contribuintedo cliente ao qual deseja alterar os dados: ");
+                    System.out.print("Digite o número de contribuinte do cliente ao qual deseja alterar os dados: ");
                     contribuinte = Integer.parseInt(scanner.nextLine());
                     cliente = procurarClientePorContribuinte(contribuinte);
                     if (cliente != null) {

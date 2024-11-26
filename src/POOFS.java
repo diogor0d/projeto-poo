@@ -48,7 +48,7 @@ public class POOFS {
                         9- Exportar faturas
                         10- Importar faturas
                         0- Sair
-                        Opcão->\s""");
+                        Selecione a operação >\s""");
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 10) {
                     System.out.println("Opção inválida! Escreva um número de 0 a 10."); //so para testar
