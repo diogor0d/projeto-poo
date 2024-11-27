@@ -1,12 +1,11 @@
-clientes
+CLIENTES
 Cristino Rondo, 23345123, Madeira
 Jose Socrates, 92811231, Continente
 Rabolho Costa, 12345678, Açores
 Fernando Madureira, 87654321, Continente
 André Ventura, 34567289, Continente
 
-
-produtos
+PRODUTOS
 PA_TR, 12366, melao, 500g melao do panelas, 1, 5.00, true, HACCP
 PA_TR, 4567, farinha de trigo, 1kg farinha tipo 55, 10, 1.50, true, HACCP, GMP
 PA_TR, 6789, mel natural, 500g mel artesanal de rosmaninho, 3, 7.00, true, ISO22000
@@ -23,7 +22,7 @@ PF_NP, 3214, creme hidratante, 200ml creme para rosto, 10, 20.00, BELEZA
 PF_NP, 9281, dorflex, 10 comprimidos dorflex, 2, 250.00, BEM_ESTAR
 PF_NP, 4987, ração para gatos, 2kg ração premium para gatos adultos, 4, 25.00, ANIMAIS
 
-faturas
+FATURAS
 1, 23345123, 05/02/1995, 1234, 12366, 9281, 9391
 2, 12345678, 12/03/2020, 4567, 6789, 6547
 3, 87654321, 25/12/2023, 9876, 3458, 3214
