@@ -57,7 +57,7 @@ public class Leituras {
 
         if (ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiroObjetos))) {
-                System.out.println("Arquivo output.obj encontrado.");
+                System.out.println("Ficheiro output.obj encontrado.");
 
                 ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
                 ArrayList<Produto> produtosLidos = (ArrayList<Produto>) ois.readObject();
