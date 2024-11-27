@@ -1,3 +1,4 @@
+import java.text.Normalizer;
 import java.util.Scanner;
 
 public class POOFS {
@@ -27,30 +28,30 @@ public class POOFS {
             //mais tarde usaremos o ficheiro de input para as duas coisas
             leituras.exportarFaturas(faturas.getListaFaturas());
         } catch (Exception e) {
-            System.out.println("Erro durante a leitura dos ficheiros: " + e.getMessage());
+            System.out.printf("%sErro durante a leitura dos ficheiros: %s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
 
-        Scanner scanner = new   Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         int opcao;
 
         while (true) {
             try {
-                System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-                System.out.println(String.format("┃  [Sistema de Faturação]                                        ┃"));
-                System.out.println(String.format("┃  MENU:                     "+"⠈⠛⠻⠶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  1- Novo cliente           "+"⠀⠀⠀⠀⠈⢻⣆⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀    ┃"));
-                System.out.println(String.format("┃  2- Editar cliente         "+"⠀⠀⠀⠀⠀⠀⢻⡏⠉⠉⠉⠉⢹⡏⠉⠉⠉⠉⣿⠉⠉⠉⠉⠉⣹⠇⠀⠀    ┃"));
-                System.out.println(String.format("┃  3- Listar clientes        "+"⠀⠀⠀⠀⠀⠀⠈⣿⣀⣀⣀⣀⣸⣧⣀⣀⣀⣀⣿⣄⣀⣀⣀⣠⡿⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  4- Nova fatura            "+"⠀⠀⠀⠀⠀⠀⠀⠸⣧⠀⠀⠀⢸⡇⠀⠀⠀⠀⣿⠁⠀⠀⠀⣿⠃⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  5- Editar fatura          "+"⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⣤⣤⣼⣧⣤⣤⣤⣤⣿⣤⣤⣤⣼⡏⠀⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  6- Listar faturas         "+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⠀⠀⢸⡇⠀⠀⠀⠀⣿⠀⠀⢠⡿⠀⠀⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  7- Visualizar fatura      "+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣷⠤⠼⠷⠤⠤⠤⠤⠿⠦⠤⠾⠃⠀⠀⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  8- Apresentar estatísticas"+"⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  9- Exportar faturas       "+"⠀⠀⠀⠀⠀⠀⠀⠀⢾⣷⢶⣶⠶⠶⠶⠶⠶⠶⣶⠶⣶⡶⠀⠀⠀⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  10- Importar faturas      "+"⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⣠⡿⠀⠀⠀⠀⠀⠀⢷⣄⣼⠇⠀⠀⠀⠀⠀⠀    ┃"));
-                System.out.println(String.format("┃  0- Sair                                                       ┃"));
-                System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
-                System.out.print("Selecione a operação > ");
+                System.out.printf("%s┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n", Formatacao.YELLOW.getCode());
+                System.out.printf("┃                  %s❯ Sistema de Gestão POOFS                     %s┃\n",Formatacao.BOLD.getCode(),Formatacao.YELLOW.getCode());
+                System.out.printf("┃%s  %sMENU:                     "+Formatacao.GREEN.getCode()+"⠈⠛⠻⠶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    %s┃\n", Formatacao.YELLOW.getCode(), Formatacao.BOLD.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  1%s - Novo cliente           "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠈⢻⣆⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀   %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  2%s - Editar cliente         "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⢻⡏⠉⠉⠉⠉⢹⡏⠉⠉⠉⠉⣿⠉⠉⠉⠉⠉⣹⠇⠀⠀   %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  3%s - Listar clientes        "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠈⣿⣀⣀⣀⣀⣸⣧⣀⣀⣀⣀⣿⣄⣀⣀⣀⣠⡿⠀⠀⠀   %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  4%s - Nova fatura            "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠀⠸⣧⠀⠀⠀⢸⡇⠀⠀⠀⠀⣿⠁⠀⠀⠀⣿⠃⠀⠀    %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  5%s - Editar fatura          "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⣤⣤⣼⣧⣤⣤⣤⣤⣿⣤⣤⣤⣼⡏⠀⠀⠀    %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  6%s - Listar faturas         "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⠀⠀⢸⡇⠀⠀⠀⠀⣿⠀⠀⢠⡿⠀⠀⠀⠀    %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  7%s - Visualizar fatura      "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣷⠤⠼⠷⠤⠤⠤⠤⠿⠦⠤⠾⠃⠀⠀⠀⠀    %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  8%s - Apresentar estatísticas"+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  9%s - Exportar faturas       "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠀⠀⢾⣷⢶⣶⠶⠶⠶⠶⠶⠶⣶⠶⣶⡶⠀⠀⠀⠀⠀    %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  10%s- Importar faturas      "+Formatacao.GREEN.getCode()+"⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⣠⡿⠀⠀⠀⠀⠀⠀⢷⣄⣼⠇⠀⠀⠀⠀⠀     %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┃  0%s - Sair                                                      %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
+                System.out.printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.RESET.getCode());
+                System.out.printf("%s%s❯ Selecione a operação → %s", Formatacao.BOLD.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode());
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 10) {
                     System.out.println("Opção inválida! Escreva um número de 0 a 10."); //so para testar
@@ -90,11 +91,11 @@ public class POOFS {
                         leituras.importarFaturas();
                         break;
                     case 0:
-                        System.out.println("------------------------");
-                        System.out.println("|  Programa terminado  |");
-                        System.out.println("------------------------");
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
+                        System.out.printf("%s┏━━━━━━━━━━━━━━━━━━━━━━┓\n", Formatacao.YELLOW.getCode());
+                        System.out.println("┃  Execução terminada  ┃");
+                        System.out.printf("┗━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.RESET.getCode());
                         return;
                     default:
                         System.out.println("Opção inválida. Escreva um número de 0 a 8.");
@@ -103,12 +104,12 @@ public class POOFS {
                     System.out.print("\nDeseja voltar ao menu? (S ou N): ");
                     String continuar = scanner.nextLine();
                     if (continuar.trim().equalsIgnoreCase("N")) {
-                        System.out.println("------------------------");
-                        System.out.println("|  Programa terminado  |");
-                        System.out.println("------------------------");
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();
+                        System.out.println("------------------------");
+                        System.out.println("|  Programa terminado  |");
+                        System.out.println("------------------------");
                         return; // Encerra o programa
                     } else if (continuar.trim().equalsIgnoreCase("S")) {
                         break;

@@ -17,7 +17,7 @@ public class Clientes {
     public void setListaClientes(ArrayList<Cliente> novaListaClientes) {
         if (novaListaClientes != null) {
             this.listaClientes = novaListaClientes;
-            System.out.println("Lista de clientes atualizada com sucesso.");
+            System.out.println("Lista de Clientes atualizada.");
         } else {
             System.out.println("A nova lista de clientes é inválida (null).");
         }

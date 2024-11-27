@@ -26,9 +26,9 @@ public class Faturas {
         try {
             if (novaListaFaturas != null) {
                 this.listaFaturas = novaListaFaturas;
-                System.out.println("Lista de faturas atualizada com sucesso.");
+                System.out.println("Lista de Faturas atualizada.");
             } else {
-                System.out.println("A nova lista de faturas é inválida (null).");
+                System.out.println("A nova lista de Faturas é inválida (null).");
             }
         } catch (Exception e) {
             System.out.println("Ocorreu um erro inesperado: " + e.getMessage());

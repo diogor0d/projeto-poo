@@ -16,7 +16,7 @@ public class Produtos {
     public void setListaProdutos(ArrayList<Produto> novaListaProdutos) {
         if (novaListaProdutos != null) {
             this.produtos = novaListaProdutos;
-            System.out.println("Lista de produtos atualizada com sucesso.");
+            System.out.println("Lista de Produtos atualizada.");
         } else {
             System.out.println("A nova lista de proutos é inválida (null).");
         }

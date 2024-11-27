@@ -1,6 +1,8 @@
 // duvida: colocamos as linhas 7 e 8 como final??
 
 import java.io.*;
+import java.text.Format;
+import java.text.Normalizer;
 import java.util.*;
 
 public class Leituras {
@@ -22,9 +24,9 @@ public class Leituras {
                 writer.write(fatura.toStringFicheiro());
                 writer.newLine();
             }
-            System.out.println("As faturas foram escritas no ficheiro 'output.txt' com sucesso.");
+            System.out.printf("%s● As faturas foram escritas no ficheiro %s'output.txt'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.println("Erro ao escrever as faturas no ficheiro: " + e.getMessage());
+            System.out.printf("%sErro ao escrever as faturas no ficheiro: %s", Formatacao.RED.getCode(),e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
@@ -42,13 +44,13 @@ public class Leituras {
     public void escreverObjeto(ArrayList<Fatura> faturas, ArrayList<Produto> produtos, ArrayList<Cliente> clientes) {
         File ficheiroObjetos = new File("output.obj");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ficheiroObjetos))) {
-            System.out.println("Arquivo " +ficheiroObjetos +" encontrado.");
+            System.out.printf("%s● Ficheiro %s'" +ficheiroObjetos +"'%s encontrado.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
             oos.writeObject(faturas);
             oos.writeObject(produtos);
             oos.writeObject(clientes);
-            System.out.println("As listas foram escritas no ficheiro 'output.obj' com sucesso.");
+            System.out.printf("%s● As listas foram escritas no ficheiro %s'output.obj'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.println("Erro ao escrever as listas no ficheiro: " + e.getMessage());
+            System.out.println("● Erro ao escrever as listas no ficheiro: " + e.getMessage());
         }
     }
 
@@ -57,7 +59,7 @@ public class Leituras {
 
         if (ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiroObjetos))) {
-                System.out.println("Ficheiro output.obj encontrado.");
+                System.out.printf("%s● Ficheiro %s\'output.obj\'%s encontrado.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(),Formatacao.GREEN.getCode(),Formatacao.RESET.getCode());
 
                 ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
                 ArrayList<Produto> produtosLidos = (ArrayList<Produto>) ois.readObject();
@@ -67,27 +69,27 @@ public class Leituras {
                 clientes.setListaClientes(clientesLidos);
                 produtos.setListaProdutos(produtosLidos);
 
-                System.out.println("Listas carregadas com sucesso.");
+                System.out.printf("%s● Listas carregadas com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
             } catch (IOException | ClassNotFoundException ex) {
-                System.out.println("Erro ao carregar dados do arquivo objeto: " + ex.getMessage());
+                System.out.printf("%sErro ao carregar dados do arquivo objeto: %s %s\n", Formatacao.RED.getCode(),ex.getMessage(), Formatacao.RESET.getCode());
             }
         } else {
-            System.out.println("Ficheiro output.obj não encontrado.");
+            System.out.printf("%sFicheiro %soutput.obj%s não encontrado.%s\n", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             File f_txt = new File("input.txt");
             if (f_txt.exists() && f_txt.isFile()) {
-                System.out.println("Arquivo input.txt encontrado.");
+                System.out.printf("%sFicheiro %sinput.txt%s encontrado.%s\n", Formatacao.GREEN.getCode(),Formatacao.YELLOW.getCode(),Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
                 try (BufferedReader br = new BufferedReader(new FileReader(f_txt))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         line = line.trim();
                         processarLinha(line, br);
                     }
-                    System.out.println("Processamento do arquivo input.txt concluído.");
+                    System.out.printf("%sProcessamento do ficheiro %sinput.txt%s concluído.%s\n", Formatacao.GREEN.getCode(),Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
                 } catch (IOException e) {
-                    System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
+                    System.out.printf("%sErro ao ler o ficheiro de texto: %s%s", Formatacao.RED.getCode() ,e.getMessage(), Formatacao.RESET.getCode());
                 }
             } else {
-                System.out.println("Ficheiro input.txt não encontrado.");
+                System.out.printf("%sFicheiro %sinput.txt%s não encontrado.%s", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             }
         }
     }
