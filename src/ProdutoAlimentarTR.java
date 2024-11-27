@@ -41,4 +41,9 @@ public class ProdutoAlimentarTR extends ProdutoAlimentar {
 
         return iva;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Certificações: " + certificacoes;
+    }
 }

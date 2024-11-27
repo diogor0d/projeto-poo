@@ -24,10 +24,8 @@ PF_NP, 9281, dorflex, 10 comprimidos dorflex, 2, 250.00, BEM_ESTAR
 PF_NP, 4987, ração para gatos, 2kg ração premium para gatos adultos, 4, 25.00, ANIMAIS
 
 faturas
-1, 23345123, 05/02/1995, vinho de pacote, melao, dorflex, paracetamol 1000mg
-2, 12345678, 12/03/2020, farinha de trigo, mel natural, amoxicilina
-3, 87654321, 25/12/2023, ervilhas congeladas, atum enlatado, creme hidratante
-4, 34567289, 01/07/2022, biscoitos, manteiga, diazepam
-10, 123, 01/12/2000, biscoitos, melao
-4, 34567289, 01/07/2022, diazepam
+1, 23345123, 05/02/1995, 1234, 12366, 9281, 9391
+2, 12345678, 12/03/2020, 4567, 6789, 6547
+3, 87654321, 25/12/2023, 9876, 3458, 3214
+4, 34567289, 01/07/2022, 1357, 9753, 8723
 

@@ -52,11 +52,11 @@ public class Leituras {
     }
 
     public void lerFicheiro() {
-        File f_obj = new File("output10.obj");
+        File f_obj = new File("output.obj");
 
         if (f_obj.exists() && f_obj.isFile()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f_obj))) {
-                System.out.println("Arquivo output10.obj encontrado.");
+                System.out.println("Arquivo output.obj encontrado.");
 
                 ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
                 ArrayList<Produto> produtosLidos = (ArrayList<Produto>) ois.readObject();
@@ -78,7 +78,7 @@ public class Leituras {
                     String line;
                     while ((line = br.readLine()) != null) {
                         line = line.trim();
-                        processarLinha(line, br); // Delegar o processamento a outro metodo
+                        processarLinha(line, br);
                     }
                     System.out.println("Processamento do arquivo input.txt concluído.");
                 } catch (IOException e) {
@@ -86,7 +86,6 @@ public class Leituras {
                 }
             }
         }
-        System.out.println("Retornando ao menu principal...");
     }
 
     private void processarLinha(String line, BufferedReader br) throws IOException {
@@ -185,7 +184,7 @@ public class Leituras {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Erro ao processar número no arquivo: " + e.getMessage());
+                System.out.println("Erro ao processar número no ficheiro: " + e.getMessage());
             } catch (IllegalArgumentException e) {
                 System.out.println("Erro ao processar categoria ou booleano: " + e.getMessage());
             } catch (Exception e) {
@@ -202,9 +201,14 @@ public class Leituras {
             if (line.isEmpty()) continue;
             System.out.println("Linha faturas: " + line);
             String[] partes = line.split(",");
+
+            System.out.println(Formatacao.RED + Arrays.toString(partes) + Formatacao.RESET);
+
+
             for (int i = 0; i < partes.length; i++) {
                 partes[i] = partes[i].trim();
             }
+
             try {
                 int num = Integer.parseInt(partes[0]);
                 Fatura fatura = faturas.procurarFatura(num);
@@ -213,7 +217,9 @@ public class Leituras {
                 }
                 else{
                     int contribuinte = Integer.parseInt(partes[1]);
+
                     Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
+
                     if(cliente==null){
                         System.out.println("Cliente " + contribuinte + " não encontrado!");
                     } else{
@@ -222,20 +228,19 @@ public class Leituras {
                         int mes = Integer.parseInt(dataParts[1]);
                         int ano = Integer.parseInt(dataParts[2]);
                         Data data = new Data(dia, mes, ano);
-                        if (data.isDataValida()) {
-                            break;
-                        } else {
+                        if (!data.isDataValida()) {
                             System.out.println("Data incorreta. Tente novamente.");
+                            break;
                         }
 
                         ArrayList<Produto> listaProdutos = new ArrayList<>();
                         for (int i = 3; i < partes.length; i++) {
-                            String nome_produto = partes[i];
-                            Produto produto = produtos.procurarProdutoNome(nome_produto);
+                            String codigoProduto = partes[i];
+                            Produto produto = produtos.procurarProdutoCodigo(Integer.parseInt(codigoProduto));
                             if (produto != null) {
                                 listaProdutos.add(produto);
                             } else {
-                                System.out.println("Produto não encontrado: " + nome_produto);
+                                System.out.println("Produto não encontrado: " + codigoProduto);
                             }
                         }
                         if(!(listaProdutos.isEmpty())){
@@ -247,6 +252,7 @@ public class Leituras {
                     }
 
                 }
+
             } catch(NumberFormatException e){
                 System.out.println("Erro ao processar cliente: " + line);
             }
