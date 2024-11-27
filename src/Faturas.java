@@ -189,7 +189,7 @@ public class Faturas {
                     int num = Integer.parseInt(scanner.nextLine());
                     faturaEncontrada = procurarFatura(num);
                     if (faturaEncontrada != null) {
-                        System.out.print("Fatura " + num + " encontrada.");
+                        System.out.println("Fatura " + num + " encontrada.");
                         break;
                     } else {
                         System.out.println("Não existe nenhuma fatura com esse número!");
@@ -197,7 +197,15 @@ public class Faturas {
                 }
                 int opcao = -1;
                 while (opcao != 0) {
-                    System.out.print("\nQue dados deseja alterar?\n1- Número\n2- Cliente\n3- Data\n4- Produto(s)\n0- Cancelar\nOpção-> ");
+                    System.out.println("--------------------------------");
+                    System.out.printf("| Que dados deseja alterar?   |\n", "");
+                    System.out.printf("|  1- Nome                    |\n", "");
+                    System.out.printf("|  2- Cliente                 |\n", "");
+                    System.out.printf("|  3- Data                    |\n", "");
+                    System.out.printf("|  4 -Produto(s)              |\n", "");
+                    System.out.printf("|  0- Cancelar                |\n", "");
+                    System.out.println("-------------------------------");
+                    System.out.print("Opção-> ");
                     try {
                         opcao = Integer.parseInt(scanner.nextLine());
                         if (opcao < 0 || opcao > 4) {
@@ -263,7 +271,14 @@ public class Faturas {
                                 int opcaoProdutos = -1;
                                 while (opcaoProdutos != 0) {
                                     produtos.listarProdutos(produtosDaFatura);
-                                    System.out.print("\nDeseja:\n1- Adicionar um produto\n2- Remover um produto\n0- Cancelar\nOpção-> ");
+                                    System.out.println("--------------------------------");
+                                    System.out.printf("| Deseja:                      |\n", "");
+                                    System.out.printf("|  1- Adicionar um produto     |\n", "");
+                                    System.out.printf("|  2- Remover um produto       |\n", "");
+                                    System.out.printf("|  0- Cancelar                 |\n", "");
+                                    System.out.println("--------------------------------");
+                                    System.out.print("Opção-> ");
+
                                     try {
                                         opcaoProdutos = Integer.parseInt(scanner.nextLine());
                                         if (opcaoProdutos < 0 || opcaoProdutos > 2) {

@@ -31,22 +31,13 @@ public class Produtos {
         if (produtos == null || produtos.isEmpty()) {
             System.out.println("Nenhum produto registado.");
         } else {
-            System.out.println("Lista de produtos no sistema:");
+            System.out.println("------------------------------------------");
+            System.out.println("| Lista de produtos no sistema:          |");
             for (Produto produto : produtos) {
                 System.out.println(produto);
             }
+            System.out.println("------------------------------------------");
         }
-    }
-
-    public Produto procurarProdutoNome(String nome) {
-        if (!produtos.isEmpty()) {
-            for (Produto produto : produtos) {
-                if (produto.getNome().equalsIgnoreCase(nome)) {
-                    return produto;
-                }
-            }
-        }
-        return null;
     }
 
     public Produto procurarProdutoCodigo(int codigo) {

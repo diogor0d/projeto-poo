@@ -189,7 +189,15 @@ public class Clientes {
             int opcao = -1;
             while (opcao != 0) {
                 try {
-                    System.out.print("Que dados deseja alterar?\n1- Nome\n2- Contribuinte\n3- Localização\n0- Cancelar\nOpção-> ");
+                    System.out.println("--------------------------------");
+                    System.out.printf("| Que dados deseja alterar?   |\n", "");
+                    System.out.printf("|  1- Nome                    |\n", "");
+                    System.out.printf("|  2- Contribuinte            |\n", "");
+                    System.out.printf("|  3- Localização             |\n", "");
+                    System.out.printf("|  0- Cancelar                |\n", "");
+                    System.out.println("-------------------------------");
+
+                    System.out.print("Opção-> ");
                     opcao = Integer.parseInt(scanner.nextLine());
                     if (opcao < 0 || opcao > 3) {
                         System.out.println("Opção inválida! Digite um número entre 0 e 3.");

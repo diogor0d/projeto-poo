@@ -72,13 +72,12 @@ public class Fatura implements Serializable {
         String produtosConcatenados = String.join(", ", produtosArray);
 
         return String.format(
-            "| Fatura: %-5s  Cliente: %-20s  Contribuinte: %-8s  Localização: %-13s |  Data: %-12s  Produtos: %-55s |",
+                "| Fatura: %-5s  Cliente: %-20s  Contribuinte: %-8s  Localização: %-13s |  Data: %-12s  Produtos: %-55s |",
                 num, cliente.getNome(), cliente.getContribuinte(), cliente.getLocalizacao(), data, produtosConcatenados
-            );
-        }
+        );
+    }
 
-
-        public String toStringParaFicheiro() {
+    public String toStringParaFicheiro() {
         String[] produtosArray = new String[produtos.size()];
         for (int i = 0; i < produtos.size(); i++) {
             produtosArray[i] = produtos.get(i).getNome();
