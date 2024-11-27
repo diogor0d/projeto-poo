@@ -19,7 +19,7 @@ public class Leituras {
     public void exportarFaturas(ArrayList<Fatura> faturas) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
             for (Fatura fatura : faturas) {
-                writer.write(fatura.toStringParaFicheiro());
+                writer.write(fatura.toStringFicheiro());
                 writer.newLine();
             }
             System.out.println("As faturas foram escritas no ficheiro 'output.txt' com sucesso.");
@@ -57,7 +57,7 @@ public class Leituras {
 
         if (ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiroObjetos))) {
-                System.out.println("Arquivo output.obj encontrado.");
+                System.out.println("Ficheiro output.obj encontrado.");
 
                 ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
                 ArrayList<Produto> produtosLidos = (ArrayList<Produto>) ois.readObject();
@@ -72,10 +72,11 @@ public class Leituras {
                 System.out.println("Erro ao carregar dados do arquivo objeto: " + ex.getMessage());
             }
         } else {
-            File ficheiroTexto = new File("input.txt");
-            if (ficheiroTexto.exists() &&  ficheiroTexto.isFile()) {
-                System.out.println("Arquivo " + ficheiroTexto + " encontrado.");
-                try (BufferedReader br = new BufferedReader(new FileReader( ficheiroTexto))) {
+            System.out.println("Ficheiro output.obj não encontrado.");
+            File f_txt = new File("input.txt");
+            if (f_txt.exists() && f_txt.isFile()) {
+                System.out.println("Arquivo input.txt encontrado.");
+                try (BufferedReader br = new BufferedReader(new FileReader(f_txt))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         line = line.trim();
@@ -85,6 +86,8 @@ public class Leituras {
                 } catch (IOException e) {
                     System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
                 }
+            } else {
+                System.out.println("Ficheiro input.txt não encontrado.");
             }
         }
     }
