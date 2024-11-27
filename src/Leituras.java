@@ -40,8 +40,9 @@ public class Leituras {
 
     //Em vez de receber argumento, exporta as faturas na class POOFS
     public void escreverObjeto(ArrayList<Fatura> faturas, ArrayList<Produto> produtos, ArrayList<Cliente> clientes) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output10.obj"))) {
-            System.out.println("Arquivo output10.obj encontrado.");
+        File ficheiroObjetos = new File("output.obj");
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ficheiroObjetos))) {
+            System.out.println("Arquivo " +ficheiroObjetos +" encontrado.");
             oos.writeObject(faturas);
             oos.writeObject(produtos);
             oos.writeObject(clientes);
@@ -52,10 +53,10 @@ public class Leituras {
     }
 
     public void lerFicheiro() {
-        File f_obj = new File("output.obj");
+        File ficheiroObjetos = new File("output.obj");
 
-        if (f_obj.exists() && f_obj.isFile()) {
-            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f_obj))) {
+        if (ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiroObjetos))) {
                 System.out.println("Arquivo output.obj encontrado.");
 
                 ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
@@ -71,10 +72,10 @@ public class Leituras {
                 System.out.println("Erro ao carregar dados do arquivo objeto: " + ex.getMessage());
             }
         } else {
-            File f_txt = new File("input.txt");
-            if (f_txt.exists() && f_txt.isFile()) {
-                System.out.println("Arquivo input.txt encontrado.");
-                try (BufferedReader br = new BufferedReader(new FileReader(f_txt))) {
+            File ficheiroTexto = new File("input.txt");
+            if (ficheiroTexto.exists() &&  ficheiroTexto.isFile()) {
+                System.out.println("Arquivo " + ficheiroTexto + " encontrado.");
+                try (BufferedReader br = new BufferedReader(new FileReader( ficheiroTexto))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         line = line.trim();

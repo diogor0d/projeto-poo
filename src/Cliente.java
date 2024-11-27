@@ -12,6 +12,7 @@ public class Cliente implements Serializable {
         this.localizacao = localizacao;
     }
 
+
     // Getters e Setters
     public String getNome() { return nome; }
     public int getContribuinte() { return contribuinte; }
