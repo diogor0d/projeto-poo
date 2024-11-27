@@ -71,10 +71,14 @@ public class Fatura implements Serializable {
         // Usar String.join para unir os nomes dos produtos com vírgulas
         String produtosConcatenados = String.join(", ", produtosArray);
 
-        return "Fatura: " + num + " , Cliente: " + cliente.getNome() + ", Contribuinte: " + cliente.getContribuinte() + ", Localização do cliente: " + cliente.getLocalizacao() + ", Data: " + data + ", Produtos: " + produtosConcatenados;
-    }
+        return String.format(
+            "| Fatura: %-5s  Cliente: %-20s  Contribuinte: %-8s  Localização: %-13s |  Data: %-12s  Produtos: %-55s |",
+                num, cliente.getNome(), cliente.getContribuinte(), cliente.getLocalizacao(), data, produtosConcatenados
+            );
+        }
 
-    public String toStringParaFicheiro() {
+
+        public String toStringParaFicheiro() {
         String[] produtosArray = new String[produtos.size()];
         for (int i = 0; i < produtos.size(); i++) {
             produtosArray[i] = produtos.get(i).getNome();

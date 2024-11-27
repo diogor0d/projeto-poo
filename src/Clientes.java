@@ -149,10 +149,12 @@ public class Clientes {
         if (listaClientes.isEmpty()) {
             System.out.println("A lista de clientes está vazia!");
         } else {
-            System.out.println("Lista de Clientes:");
+            System.out.println("--------------------------------------------------------------------------------------------");
+            System.out.printf("| Lista de Clientes: %-69s |\n", "");
             for (Cliente cliente : listaClientes) {
                 System.out.println(cliente);
             }
+            System.out.println("--------------------------------------------------------------------------------------------");
         }
     }
 

@@ -35,18 +35,20 @@ public class POOFS {
 
         while (true) {
             try {
-                System.out.println("MENU:");
-                System.out.println("1- Novo cliente");
-                System.out.println("2- Editar cliente");
-                System.out.println("3- Listar clientes");
-                System.out.println("4- Nova fatura");
-                System.out.println("5- Editar fatura");
-                System.out.println("6- Listar faturas");
-                System.out.println("7- Visualizar fatura");
-                System.out.println("8- Apresentar estatísticas");
-                System.out.println("9- Exportar faturas");
-                System.out.println("10- Importar faturas");
-                System.out.println("0- Sair");
+                System.out.println("--------------------------------------------------");
+                System.out.println(String.format("|  %-46s |", "MENU:"));
+                System.out.println(String.format("|  %-46s |", "1- Novo cliente"));
+                System.out.println(String.format("|  %-46s |", "2- Editar cliente"));
+                System.out.println(String.format("|  %-46s |", "3- Listar clientes"));
+                System.out.println(String.format("|  %-46s |", "4- Nova fatura"));
+                System.out.println(String.format("|  %-46s |", "5- Editar fatura"));
+                System.out.println(String.format("|  %-46s |", "6- Listar faturas"));
+                System.out.println(String.format("|  %-46s |", "7- Visualizar fatura"));
+                System.out.println(String.format("|  %-46s |", "8- Apresentar estatísticas"));
+                System.out.println(String.format("|  %-46s |", "9- Exportar faturas"));
+                System.out.println(String.format("|  %-46s |", "10- Importar faturas"));
+                System.out.println(String.format("|  %-46s |", "0- Sair"));
+                System.out.println("--------------------------------------------------");
                 System.out.print("Selecione a operação > ");
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 10) {
@@ -87,7 +89,9 @@ public class POOFS {
                         leituras.importarFaturas();
                         break;
                     case 0:
-                        System.out.println("Programa terminado.");
+                        System.out.println("------------------------");
+                        System.out.println("|  Programa terminado  |");
+                        System.out.println("------------------------");
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         return;
@@ -98,7 +102,9 @@ public class POOFS {
                     System.out.print("\nDeseja voltar ao menu? (S ou N): ");
                     String continuar = scanner.nextLine();
                     if (continuar.trim().equalsIgnoreCase("N")) {
-                        System.out.println("Programa terminado.");
+                        System.out.println("------------------------");
+                        System.out.println("|  Programa terminado  |");
+                        System.out.println("------------------------");
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();

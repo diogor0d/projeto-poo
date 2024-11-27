@@ -24,5 +24,7 @@ public class Cliente implements Serializable {
     public void setLocalizacao(String localizacao) { this.localizacao = localizacao; }
 
     // toString
-    public String toString() { return "Nome: " + nome + ", Contribuinte: " + contribuinte + ", Localização: " + localizacao; }
+    public String toString() { return String.format("|  Nome: %-20s  Contribuinte: %-15s  Localização: %-15s |",
+            nome, contribuinte, localizacao);
+    }
 }

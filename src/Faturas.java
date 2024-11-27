@@ -168,10 +168,12 @@ public class Faturas {
         if (listaFaturas.isEmpty()) {
             System.out.println("Nenhuma fatura declarada.");
         } else {
-            System.out.println("Lista de Faturas:");
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.printf("| Lista de Faturas: %-167s |\n", "");
             for (Fatura fatura : listaFaturas) {
                 System.out.println(fatura);
             }
+            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         }
     }
 
