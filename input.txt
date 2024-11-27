@@ -21,6 +21,7 @@ PF_P, 8723, diazepam, 10 comprimidos de 10mg, 1, 15.00, Dr. Pedro Martins
 PF_NP, 3214, creme hidratante, 200ml creme para rosto, 10, 20.00, BELEZA
 PF_NP, 9281, dorflex, 10 comprimidos dorflex, 2, 250.00, BEM_ESTAR
 PF_NP, 4987, ração para gatos, 2kg ração premium para gatos adultos, 4, 25.00, ANIMAIS
+PA_TR, 8371, bifranga, bifranga pronta a comer, 1, 2.99, false, ISO22000, HACCP, GMP, FSSC22000
 
 FATURAS
 1, 23345123, 05/02/1995, 1234, 12366, 9281, 9391
