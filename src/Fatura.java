@@ -74,7 +74,7 @@ public class Fatura implements Serializable {
         return "Fatura: " + num + " , Cliente: " + cliente.getNome() + ", Contribuinte: " + cliente.getContribuinte() + ", Localização do cliente: " + cliente.getLocalizacao() + ", Data: " + data + ", Produtos: " + produtosConcatenados;
     }
 
-    public String toStringParaFicheiro() {
+    public String toStringFicheiro() {
         String[] produtosArray = new String[produtos.size()];
         for (int i = 0; i < produtos.size(); i++) {
             produtosArray[i] = produtos.get(i).getNome();

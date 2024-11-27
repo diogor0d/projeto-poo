@@ -19,7 +19,7 @@ public class Leituras {
     public void exportarFaturas(ArrayList<Fatura> faturas) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
             for (Fatura fatura : faturas) {
-                writer.write(fatura.toStringParaFicheiro());
+                writer.write(fatura.toStringFicheiro());
                 writer.newLine();
             }
             System.out.println("As faturas foram escritas no ficheiro 'output.txt' com sucesso.");
@@ -40,8 +40,8 @@ public class Leituras {
 
     //Em vez de receber argumento, exporta as faturas na class POOFS
     public void escreverObjeto(ArrayList<Fatura> faturas, ArrayList<Produto> produtos, ArrayList<Cliente> clientes) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output10.obj"))) {
-            System.out.println("Arquivo output10.obj encontrado.");
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output.obj"))) {
+            System.out.println("Arquivo output.obj encontrado.");
             oos.writeObject(faturas);
             oos.writeObject(produtos);
             oos.writeObject(clientes);
@@ -71,6 +71,7 @@ public class Leituras {
                 System.out.println("Erro ao carregar dados do arquivo objeto: " + ex.getMessage());
             }
         } else {
+            System.out.println("Ficheiro output.obj não encontrado.");
             File f_txt = new File("input.txt");
             if (f_txt.exists() && f_txt.isFile()) {
                 System.out.println("Arquivo input.txt encontrado.");
@@ -84,6 +85,8 @@ public class Leituras {
                 } catch (IOException e) {
                     System.out.println("Erro ao ler o arquivo de texto: " + e.getMessage());
                 }
+            } else {
+                System.out.println("Ficheiro input.txt não encontrado.");
             }
         }
     }
