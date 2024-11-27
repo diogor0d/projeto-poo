@@ -35,21 +35,21 @@ public class POOFS {
 
         while (true) {
             try {
-                System.out.println("------------------------------------------------------------------");
-                System.out.println(String.format("|  [Sistema de Faturação]                                        |"));
-                System.out.println(String.format("|  MENU:                     "+"⠈⠛⠻⠶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    |"));
-                System.out.println(String.format("|  1- Novo cliente           "+"⠀⠀⠀⠀⠈⢻⣆⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀    |"));
-                System.out.println(String.format("|  2- Editar cliente         "+"⠀⠀⠀⠀⠀⠀⢻⡏⠉⠉⠉⠉⢹⡏⠉⠉⠉⠉⣿⠉⠉⠉⠉⠉⣹⠇⠀⠀    |"));
-                System.out.println(String.format("|  3- Listar clientes        "+"⠀⠀⠀⠀⠀⠀⠈⣿⣀⣀⣀⣀⣸⣧⣀⣀⣀⣀⣿⣄⣀⣀⣀⣠⡿⠀⠀⠀    |"));
-                System.out.println(String.format("|  4- Nova fatura            "+"⠀⠀⠀⠀⠀⠀⠀⠸⣧⠀⠀⠀⢸⡇⠀⠀⠀⠀⣿⠁⠀⠀⠀⣿⠃⠀⠀⠀    |"));
-                System.out.println(String.format("|  5- Editar fatura          "+"⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⣤⣤⣼⣧⣤⣤⣤⣤⣿⣤⣤⣤⣼⡏⠀⠀⠀⠀    |"));
-                System.out.println(String.format("|  6- Listar faturas         "+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⠀⠀⢸⡇⠀⠀⠀⠀⣿⠀⠀⢠⡿⠀⠀⠀⠀⠀    |"));
-                System.out.println(String.format("|  7- Visualizar fatura      "+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣷⠤⠼⠷⠤⠤⠤⠤⠿⠦⠤⠾⠃⠀⠀⠀⠀⠀    |"));
-                System.out.println(String.format("|  8- Apresentar estatísticas"+"⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    |"));
-                System.out.println(String.format("|  9- Exportar faturas       "+"⠀⠀⠀⠀⠀⠀⠀⠀⢾⣷⢶⣶⠶⠶⠶⠶⠶⠶⣶⠶⣶⡶⠀⠀⠀⠀⠀⠀    |"));
-                System.out.println(String.format("|  10- Importar faturas      "+"⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⣠⡿⠀⠀⠀⠀⠀⠀⢷⣄⣼⠇⠀⠀⠀⠀⠀⠀    |"));
-                System.out.println(String.format("|  0- Sair                                                       |"));
-                System.out.println("------------------------------------------------------------------");
+                System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+                System.out.println(String.format("┃  [Sistema de Faturação]                                        ┃"));
+                System.out.println(String.format("┃  MENU:                     "+"⠈⠛⠻⠶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  1- Novo cliente           "+"⠀⠀⠀⠀⠈⢻⣆⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀    ┃"));
+                System.out.println(String.format("┃  2- Editar cliente         "+"⠀⠀⠀⠀⠀⠀⢻⡏⠉⠉⠉⠉⢹⡏⠉⠉⠉⠉⣿⠉⠉⠉⠉⠉⣹⠇⠀⠀    ┃"));
+                System.out.println(String.format("┃  3- Listar clientes        "+"⠀⠀⠀⠀⠀⠀⠈⣿⣀⣀⣀⣀⣸⣧⣀⣀⣀⣀⣿⣄⣀⣀⣀⣠⡿⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  4- Nova fatura            "+"⠀⠀⠀⠀⠀⠀⠀⠸⣧⠀⠀⠀⢸⡇⠀⠀⠀⠀⣿⠁⠀⠀⠀⣿⠃⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  5- Editar fatura          "+"⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⣤⣤⣼⣧⣤⣤⣤⣤⣿⣤⣤⣤⣼⡏⠀⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  6- Listar faturas         "+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⠀⠀⢸⡇⠀⠀⠀⠀⣿⠀⠀⢠⡿⠀⠀⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  7- Visualizar fatura      "+"⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣷⠤⠼⠷⠤⠤⠤⠤⠿⠦⠤⠾⠃⠀⠀⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  8- Apresentar estatísticas"+"⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  9- Exportar faturas       "+"⠀⠀⠀⠀⠀⠀⠀⠀⢾⣷⢶⣶⠶⠶⠶⠶⠶⠶⣶⠶⣶⡶⠀⠀⠀⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  10- Importar faturas      "+"⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⣠⡿⠀⠀⠀⠀⠀⠀⢷⣄⣼⠇⠀⠀⠀⠀⠀⠀    ┃"));
+                System.out.println(String.format("┃  0- Sair                                                       ┃"));
+                System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
                 System.out.print("Selecione a operação > ");
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 10) {
