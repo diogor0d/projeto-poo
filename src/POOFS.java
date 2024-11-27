@@ -28,7 +28,7 @@ public class POOFS {
             //mais tarde usaremos o ficheiro de input para as duas coisas
             leituras.exportarFaturas(faturas.getListaFaturas());
         } catch (Exception e) {
-            System.out.printf("%sErro durante a leitura dos ficheiros: %s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%sErro durante a manipulação dos ficheiros: %s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -52,10 +52,11 @@ public class POOFS {
                 System.out.printf("┃  0%s - Sair                                                      %s┃\n", Formatacao.RESET.getCode(), Formatacao.YELLOW.getCode());
                 System.out.printf("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.RESET.getCode());
                 System.out.printf("%s%s❯ Selecione a operação → %s", Formatacao.BOLD.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode());
+
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 10) {
-                    System.out.println("Opção inválida! Escreva um número de 0 a 10."); //so para testar
-                    continue; // Volta para a entrada de opção
+                    System.out.printf("%s● Opção inválida! Escreva um número de 0 a 10.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
+                    continue;
                 }
 
                 switch (opcao) {
@@ -98,10 +99,11 @@ public class POOFS {
                         System.out.printf("┗━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.RESET.getCode());
                         return;
                     default:
-                        System.out.println("Opção inválida. Escreva um número de 0 a 8.");
+                        System.out.printf("%s● Opção inválida. Escreva um número de 0 a 10.%s", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
                 }
+
                 while (true) {
-                    System.out.print("\nDeseja voltar ao menu? (S ou N): ");
+                    System.out.printf("%s❯ Deseja regressar ao menu? (S/N) → %s", Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode());
                     String continuar = scanner.nextLine();
                     if (continuar.trim().equalsIgnoreCase("N")) {
                         leituras.exportarFaturas(faturas.getListaFaturas());
@@ -114,7 +116,7 @@ public class POOFS {
                     } else if (continuar.trim().equalsIgnoreCase("S")) {
                         break;
                     } else {
-                        System.out.println("Entrada inválida. Digite apenas 'S' ou 'N'.");
+                        System.out.printf("%s● Entrada inválida. Insira apenas %s'S'%s ou %s'N'%s.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
                     }
                 }
 

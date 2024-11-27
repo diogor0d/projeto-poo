@@ -36,7 +36,6 @@ public class Faturas {
     }
 
 
-
     // Metodo para ler os dados e criar a fatura
     public void novaFatura() {
         Scanner scanner = new Scanner(System.in);
@@ -57,9 +56,9 @@ public class Faturas {
                         System.out.print("Digite o número da fatura: ");
                         numero = Integer.parseInt(scanner.nextLine());
                         Fatura faturaEncontrada = procurarFatura(numero);
-                        if(faturaEncontrada == null){
+                        if (faturaEncontrada == null) {
                             break;
-                        } else{
+                        } else {
                             System.out.println("Já existe uma fatura com esse número!");
                         }
                     } catch (NumberFormatException e) {
@@ -263,7 +262,7 @@ public class Faturas {
                             }
                             break;
                         case 4:
-                            try{
+                            try {
                                 ArrayList<Produto> produtosDaFatura = faturaEncontrada.getProdutos();
                                 if (produtosDaFatura == null || produtosDaFatura.isEmpty()) {
                                     System.out.println("Não há produtos associados a esta fatura.");
@@ -285,7 +284,7 @@ public class Faturas {
                                             System.out.println("Opção inválida! Por favor, digite um número entre 0 e 2.");
                                             continue;
                                         }
-                                        switch (opcaoProdutos){
+                                        switch (opcaoProdutos) {
                                             case 1:
                                                 System.out.print("Insira o código do produto que deseja adicionar: ");
                                                 String codigoProdutoAdicionar = scanner.nextLine().trim();
@@ -316,7 +315,7 @@ public class Faturas {
                                     }
                                 }
 
-                            }catch (Exception e) {
+                            } catch (Exception e) {
                                 System.out.println("Erro ao alterar a data: " + e.getMessage());
                             }
                             break;
@@ -407,7 +406,7 @@ public class Faturas {
             totalIva += subtotal + (subtotal * produto.calcularIva(cliente));
         }
         System.out.println("--------------------------------------------------------------------------------------------------------------");
-        System.out.printf("                Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva-fatura.calcularTotalBruto() , totalIva);
+        System.out.printf("                Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva - fatura.calcularTotalBruto(), totalIva);
         System.out.println("--------------------------------------------------------------------------------------------------------------");
     }
 
@@ -448,12 +447,14 @@ public class Faturas {
             }
         }
 
-        System.out.print("\nEstatisticas:");
-        System.out.printf("\n%-20s: %d", "Número de Faturas", nFaturas);
-        System.out.printf("\n%-20s: %d", "Número de Produtos", nProdutos);
-        System.out.printf("\n%-20s: %.2f€", "Total Bruto", totalBruto);
-        System.out.printf("\n%-20s: %.2f€", "Total Líquido", totalLiquido);
-        System.out.printf("\n%-20s: %.2f€\n", "Total IVA", totalIVA);
+        System.out.printf("%s┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n", Formatacao.YELLOW.getCode());
+        System.out.printf("┃%s%s                         Estatisticas:                          ┃", Formatacao.YELLOW.getCode(), Formatacao.BOLD.getCode());
+        System.out.printf("\n┃      %-35s %s%-10d%s %-11s┃", "Número de Faturas", Formatacao.RESET.getCode(), nFaturas,Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10d%s %-11s┃", "Número de Produtos", Formatacao.RESET.getCode(), nProdutos,Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃", "Total Bruto", Formatacao.RESET.getCode(), totalBruto,Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃", "Total Líquido", Formatacao.RESET.getCode(), totalLiquido,Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃\n", "Total IVA",Formatacao.RESET.getCode(),  totalIVA,Formatacao.YELLOW.getCode(), "");
+        System.out.printf("%s┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode());
 
     }
 }
