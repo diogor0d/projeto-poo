@@ -77,12 +77,8 @@ public class Fatura implements Serializable {
         );
     }
 
-<<<<<<< Updated upstream
-    public String toStringParaFicheiro() {
-=======
 
-        public String toStringFicheiro() {
->>>>>>> Stashed changes
+    public String toStringFicheiro() {
         String[] produtosArray = new String[produtos.size()];
         for (int i = 0; i < produtos.size(); i++) {
             produtosArray[i] = produtos.get(i).getNome();

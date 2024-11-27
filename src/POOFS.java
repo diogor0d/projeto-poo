@@ -35,22 +35,6 @@ public class POOFS {
 
         while (true) {
             try {
-<<<<<<< Updated upstream
-                System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                System.out.println(String.format("|  %-30s |", "MENU:"));
-                System.out.println(String.format("|  %-30s |", "1- Novo cliente"));
-                System.out.println(String.format("|  %-30s |", "2- Editar cliente"));
-                System.out.println(String.format("|  %-30s |", "3- Listar clientes"));
-                System.out.println(String.format("|  %-30s |", "4- Nova fatura"));
-                System.out.println(String.format("|  %-30s |", "5- Editar fatura"));
-                System.out.println(String.format("|  %-30s |", "6- Listar faturas"));
-                System.out.println(String.format("|  %-30s |", "7- Visualizar fatura"));
-                System.out.println(String.format("|  %-30s |", "8- Apresentar estatísticas"));
-                System.out.println(String.format("|  %-30s |", "9- Exportar faturas"));
-                System.out.println(String.format("|  %-30s |", "10- Importar faturas"));
-                System.out.println(String.format("|  %-30s |", "0- Sair"));
-                System.out.println("-----------------------------------");
-=======
                 System.out.println("------------------------------------------------------------------");
                 System.out.println(String.format("|  [Sistema de Faturação]                                        |"));
                 System.out.println(String.format("|  MENU:                     "+"⠈⠛⠻⠶⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀    |"));
@@ -66,7 +50,6 @@ public class POOFS {
                 System.out.println(String.format("|  10- Importar faturas      "+"⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⣠⡿⠀⠀⠀⠀⠀⠀⢷⣄⣼⠇⠀⠀⠀⠀⠀⠀    |"));
                 System.out.println(String.format("|  0- Sair                                                       |"));
                 System.out.println("------------------------------------------------------------------");
->>>>>>> Stashed changes
                 System.out.print("Selecione a operação > ");
                 opcao = Integer.parseInt(scanner.nextLine());
                 if (opcao < 0 || opcao > 10) {

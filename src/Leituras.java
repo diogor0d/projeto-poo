@@ -19,7 +19,7 @@ public class Leituras {
     public void exportarFaturas(ArrayList<Fatura> faturas) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
             for (Fatura fatura : faturas) {
-                writer.write(fatura.toStringParaFicheiro());
+                writer.write(fatura.toStringFicheiro());
                 writer.newLine();
             }
             System.out.println("As faturas foram escritas no ficheiro 'output.txt' com sucesso.");
