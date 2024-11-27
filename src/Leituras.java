@@ -40,7 +40,8 @@ public class Leituras {
 
     //Em vez de receber argumento, exporta as faturas na class POOFS
     public void escreverObjeto(ArrayList<Fatura> faturas, ArrayList<Produto> produtos, ArrayList<Cliente> clientes) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output3.obj"))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output10.obj"))) {
+            System.out.println("Arquivo output10.obj encontrado.");
             oos.writeObject(faturas);
             oos.writeObject(produtos);
             oos.writeObject(clientes);
@@ -51,11 +52,11 @@ public class Leituras {
     }
 
     public void lerFicheiro() {
-        File f_obj = new File("output3.obj");
+        File f_obj = new File("output10.obj");
 
         if (f_obj.exists() && f_obj.isFile()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f_obj))) {
-                System.out.println("Arquivo output.obj encontrado.");
+                System.out.println("Arquivo output10.obj encontrado.");
 
                 ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
                 ArrayList<Produto> produtosLidos = (ArrayList<Produto>) ois.readObject();

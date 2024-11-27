@@ -166,7 +166,7 @@ public class Faturas {
     // Metodo para listar as faturas
     public void listarFaturas() {
         if (listaFaturas.isEmpty()) {
-            System.out.println("Nenhuma fatura cadastrada.");
+            System.out.println("Nenhuma fatura declarada.");
         } else {
             System.out.println("Lista de Faturas:");
             for (Fatura fatura : listaFaturas) {
