@@ -15,15 +15,9 @@ public class ProdutoAlimentarTI extends ProdutoAlimentar {
     public double calcularIva(Cliente cliente) {
         double iva = 0;
         switch (cliente.getLocalizacao()) {
-            case "Continente":
-                iva = taxas[0];
-                break;
-            case "Madeira":
-                iva = taxas[1];
-                break;
-            case "Açores":
-                iva = taxas[2];
-                break;
+            case "Continente" -> iva = taxas[0];
+            case "Madeira" -> iva = taxas[1];
+            case "Açores" -> iva = taxas[2];
         }
 
         if (biologico) {
