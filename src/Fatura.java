@@ -77,6 +77,50 @@ public class Fatura implements Serializable {
         );
     }
 
+    public String toStringFaturaFormatada() {
+        String infoCabecalhoFatura = String.format(
+                "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
+                        "┃  Fatura simplificada nº:  %-80d ┃\n" +
+                        "┃  Cliente:                 %-80s ┃\n" +
+                        "┃  Nº Contribuinte:         %-80d ┃\n" +
+                        "┃  Data:                    %-80s ┃\n" +
+                        "┃  Região:                  %-80s ┃\n" +
+                        "┣━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┫\n" +
+                        "┃QNT┃ Produto                                   ┃  Preço    ┃  Taxa   ┃ Valor IVA ┃ Subtotal  ┃ Subt. + Taxas┃\n" +
+                        "┣━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫\n",
+                num, cliente.getNome(), cliente.getContribuinte(), data, cliente.getLocalizacao()
+        );
+
+        double totalIva = 0;
+        StringBuilder sb = new StringBuilder();
+        for (Produto produto : getProdutos()) {
+            double subtotal = produto.getPreco() * produto.getQuantidade();
+            sb.append(String.format("┃ %-2d┃ %-42s┃ %-8.2f€ ┃ %-6.2f%% ┃ %-6.2f €  ┃ %-8.2f€ ┃  %-8.2f€   ┃\n",
+                    produto.getQuantidade(),
+                    produto.getNome(),
+                    produto.getPreco(),
+                    produto.calcularIva(cliente) * 100,
+                    produto.getPreco() * produto.calcularIva(cliente),
+                    subtotal,
+                    subtotal + (subtotal * produto.calcularIva(cliente))
+            ));
+            totalIva += subtotal + (subtotal * produto.calcularIva(cliente));
+        }
+
+        String totais = String.format(
+                "┣━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n" +
+                        "┃%sTotal s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€%s┃\n" +
+                        "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n",
+                " ".repeat((108 - String.format("Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€", calcularTotalBruto(), totalIva - calcularTotalBruto(), totalIva).length()) / 2),
+                calcularTotalBruto(),
+                totalIva - calcularTotalBruto(),
+                totalIva,
+                " ".repeat((108 - String.format("Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€", calcularTotalBruto(), totalIva - calcularTotalBruto(), totalIva).length()) / 2)
+        );
+
+        return infoCabecalhoFatura + sb + totais;
+    }
+
 
     public String toStringFicheiro() {
         String[] produtosArray = new String[produtos.size()];

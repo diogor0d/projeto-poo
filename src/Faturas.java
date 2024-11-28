@@ -345,7 +345,7 @@ public class Faturas {
         if (num != -1) {
             Fatura fatura = procurarFatura(num);
             if (fatura != null) {
-                apresentarFatura(fatura);
+                System.out.println(fatura.toStringFaturaFormatada());
             } else {
                 System.out.println("Fatura não encontrada.");
             }
