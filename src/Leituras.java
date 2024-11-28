@@ -24,7 +24,7 @@ public class Leituras {
             }
             System.out.printf("%s● As faturas foram escritas no ficheiro %s'output.txt'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.printf("%s● Erro ao escrever as faturas no ficheiro: %s %s", Formatacao.RED.getCode(),e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro ao escrever as faturas no ficheiro: %s %s\n", Formatacao.RED.getCode(),e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
@@ -48,7 +48,7 @@ public class Leituras {
             oos.writeObject(clientes);
             System.out.printf("%s● As listas foram escritas no ficheiro %s'output.obj'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.printf("%s● Erro ao escrever as listas no ficheiro: %s%s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro ao escrever as listas no ficheiro: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
@@ -84,10 +84,10 @@ public class Leituras {
                     }
                     System.out.printf("%s● Processamento do ficheiro %sinput.txt%s concluído.%s\n", Formatacao.GREEN.getCode(),Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
                 } catch (IOException e) {
-                    System.out.printf("%s● Erro ao ler o ficheiro de texto: %s%s", Formatacao.RED.getCode() ,e.getMessage(), Formatacao.RESET.getCode());
+                    System.out.printf("%s● Erro ao ler o ficheiro de texto: %s%s\n", Formatacao.RED.getCode() ,e.getMessage(), Formatacao.RESET.getCode());
                 }
             } else {
-                System.out.printf("%s● Ficheiro %sinput.txt%s não encontrado.%s", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
+                System.out.printf("%s● Ficheiro %sinput.txt%s não encontrado.%s\n", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             }
         }
     }

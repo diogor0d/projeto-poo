@@ -167,12 +167,17 @@ public class Faturas {
         if (listaFaturas.isEmpty()) {
             System.out.println("Nenhuma fatura declarada.");
         } else {
-            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            System.out.printf("| Lista de Faturas: %-167s |\n", "");
+            int largura = 162; // Width of the separator line
+            String titulo = "Visão Geral Faturas:";
+            int enquadramento = (largura - titulo.length()) / 2;
+
+            System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
+            System.out.printf("┃%" + enquadramento + "s%s%" + (enquadramento-1) + "s┃\n", "", titulo, "");
             for (Fatura fatura : listaFaturas) {
-                System.out.println(fatura);
+
+                System.out.printf("┃  fatura.toString(), "");
             }
-            System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         }
     }
 
@@ -418,11 +423,11 @@ public class Faturas {
 
         System.out.printf("%s┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n", Formatacao.YELLOW.getCode());
         System.out.printf("┃%s%s                         Estatisticas:                          ┃", Formatacao.YELLOW.getCode(), Formatacao.BOLD.getCode());
-        System.out.printf("\n┃      %-35s %s%-10d%s %-11s┃", "Número de Faturas", Formatacao.RESET.getCode(), nFaturas,Formatacao.YELLOW.getCode(), "");
-        System.out.printf("\n┃      %-35s %s%-10d%s %-11s┃", "Número de Produtos", Formatacao.RESET.getCode(), nProdutos,Formatacao.YELLOW.getCode(), "");
-        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃", "Total Bruto", Formatacao.RESET.getCode(), totalBruto,Formatacao.YELLOW.getCode(), "");
-        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃", "Total Líquido", Formatacao.RESET.getCode(), totalLiquido,Formatacao.YELLOW.getCode(), "");
-        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃\n", "Total IVA",Formatacao.RESET.getCode(),  totalIVA,Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10d%s %-11s┃", "Número de Faturas", Formatacao.RESET.getCode(), nFaturas, Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10d%s %-11s┃", "Número de Produtos", Formatacao.RESET.getCode(), nProdutos, Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃", "Total Bruto", Formatacao.RESET.getCode(), totalBruto, Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃", "Total Líquido", Formatacao.RESET.getCode(), totalLiquido, Formatacao.YELLOW.getCode(), "");
+        System.out.printf("\n┃      %-35s %s%-10.2f%s€ %-10s┃\n", "Total IVA", Formatacao.RESET.getCode(), totalIVA, Formatacao.YELLOW.getCode(), "");
         System.out.printf("%s┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode());
 
     }

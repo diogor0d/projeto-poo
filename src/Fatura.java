@@ -72,7 +72,7 @@ public class Fatura implements Serializable {
         String produtosConcatenados = String.join(", ", produtosArray);
 
         return String.format(
-                "| Fatura: %-5s  Cliente: %-20s  Contribuinte: %-8s  Localização: %-13s |  Data: %-12s  Produtos: %-55s |",
+                "Nº: %-5s  Cliente: %-20s  Contribuinte: %-8s  Localização: %-13s  Data: %-12s Produtos: %s",
                 num, cliente.getNome(), cliente.getContribuinte(), cliente.getLocalizacao(), data, produtosConcatenados
         );
     }
