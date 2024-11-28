@@ -141,7 +141,7 @@ public class Clientes {
     public void adicionarCliente(String nome, int contribuinte, String localizacao) {
         Cliente novoCliente = new Cliente(nome, contribuinte, localizacao);
         listaClientes.add(novoCliente);
-        System.out.println("Novo cliente \'" + nome + "\' adicionado com sucesso!");
+        System.out.println(Formatacao.YELLOW.getCode() + "Novo cliente \'" + nome + "\' adicionado com sucesso!" + Formatacao.RESET.getCode());
     }
 
     // Metodo para listar os clientes

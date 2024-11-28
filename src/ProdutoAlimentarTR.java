@@ -44,6 +44,6 @@ public class ProdutoAlimentarTR extends ProdutoAlimentar {
 
     @Override
     public String toString() {
-        return super.toString() + " Certificações: " + certificacoes;
+        return super.toString() + " CRT:" + certificacoes;
     }
 }

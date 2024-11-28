@@ -28,7 +28,7 @@ public class POOFS {
             //mais tarde usaremos o ficheiro de input para as duas coisas
             leituras.exportarFaturas(faturas.getListaFaturas());
         } catch (Exception e) {
-            System.out.printf("%sErro durante a manipulação dos ficheiros: %s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro durante a manipulação dos ficheiros: %s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -109,9 +109,9 @@ public class POOFS {
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();
-                        System.out.println("------------------------");
-                        System.out.println("|  Programa terminado  |");
-                        System.out.println("------------------------");
+                        System.out.printf("%s┏━━━━━━━━━━━━━━━━━━━━━━┓\n", Formatacao.YELLOW.getCode());
+                        System.out.println("┃  Execução terminada  ┃");
+                        System.out.printf("┗━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.RESET.getCode());
                         return; // Encerra o programa
                     } else if (continuar.trim().equalsIgnoreCase("S")) {
                         break;
@@ -121,9 +121,9 @@ public class POOFS {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida! Digite um número válido.");
+                System.out.printf("%s● Entrada inválida! Digite um número válido.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             } catch (Exception e) {
-                System.out.println("Erro inesperado: " + e.getMessage());
+                System.out.printf("%s● Erro inesperado: %s%s\n" , Formatacao.RED.getCode(),e.getMessage(), Formatacao.RESET.getCode());
             }
         }
     }

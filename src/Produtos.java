@@ -24,7 +24,7 @@ public class Produtos {
 
     public void adicionarProduto(Produto produto) {
         produtos.add(produto);
-        System.out.println("Produto " + produto + " adicionado!");
+        System.out.println(Formatacao.YELLOW.getCode() + "Novo produto " + produto + " adicionado!" + Formatacao.RESET.getCode());
     }
 
     public void listarProdutos(ArrayList<Produto> produtos) {

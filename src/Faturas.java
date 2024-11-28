@@ -159,7 +159,7 @@ public class Faturas {
     public void adicionarFatura(int numero, Cliente cliente, Data data, ArrayList<Produto> produtos) {
         Fatura novaFatura = new Fatura(numero, cliente, data, produtos);
         listaFaturas.add(novaFatura);
-        System.out.println("Nova fatura, " + numero + ", adicionada com sucesso!");
+        System.out.println(Formatacao.YELLOW.getCode() + "Nova fatura " + numero + " adicionada com sucesso!" + Formatacao.RESET.getCode());
     }
 
     // Metodo para listar as faturas
@@ -377,37 +377,6 @@ public class Faturas {
             }
         }
         return num;
-    }
-
-    public void apresentarFatura(Fatura fatura) {
-        System.out.println("--------------------------------------------------------------------------------------------------------------");
-        System.out.printf("|  Fatura simplificada nº:  %-80d |\n", fatura.getNum());
-        Cliente cliente = fatura.getCliente();
-        System.out.printf("|  Cliente:                 %-80s |\n", cliente.getNome());
-        System.out.printf("|  Nº Contribuinte:         %-80d | \n", cliente.getContribuinte());
-        System.out.printf("|  Data:                    %-80s |\n", fatura.getData());
-        System.out.printf("|  Região:                  %-80s |\n", fatura.getCliente().getLocalizacao());
-        System.out.println("--------------------------------------------------------------------------------------------------------------");
-        System.out.println("QNT | Produto                                   |  Preço    |  Taxa   | Valor IVA | Subtotal  | Subtotal Taxas");
-        System.out.println("--------------------------------------------------------------------------------------------------------------");
-
-        double totalIva = 0;
-        for (Produto produto : fatura.getProdutos()) {
-            double subtotal = produto.getPreco() * produto.getQuantidade();
-            System.out.printf(" %-3d| %-42s| %-8.2f€ | %-6.2f%% | %-6.2f €  | %-8.2f€ |  %-8.2f€   |\n",
-                    produto.getQuantidade(),
-                    produto.getNome(),
-                    produto.getPreco(),
-                    produto.calcularIva(cliente) * 100,
-                    produto.getPreco() * produto.calcularIva(cliente),
-                    subtotal,
-                    subtotal + (subtotal * produto.calcularIva(cliente))
-            );
-            totalIva += subtotal + (subtotal * produto.calcularIva(cliente));
-        }
-        System.out.println("--------------------------------------------------------------------------------------------------------------");
-        System.out.printf("                Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€\n", fatura.calcularTotalBruto(), totalIva - fatura.calcularTotalBruto(), totalIva);
-        System.out.println("--------------------------------------------------------------------------------------------------------------");
     }
 
     public int gerarNumFatura() {

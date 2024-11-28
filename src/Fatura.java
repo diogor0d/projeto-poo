@@ -80,11 +80,11 @@ public class Fatura implements Serializable {
     public String toStringFaturaFormatada() {
         String infoCabecalhoFatura = String.format(
                 "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-                        "┃  Fatura simplificada nº:  %-80d ┃\n" +
-                        "┃  Cliente:                 %-80s ┃\n" +
-                        "┃  Nº Contribuinte:         %-80d ┃\n" +
-                        "┃  Data:                    %-80s ┃\n" +
-                        "┃  Região:                  %-80s ┃\n" +
+                        "┃                                  Fatura simplificada nº  %-48d ┃\n" +
+                        "┃                                  Cliente                 %-48s ┃\n" +
+                        "┃                                  Nº Contribuinte         %-48d ┃\n" +
+                        "┃                                  Data                    %-48s ┃\n" +
+                        "┃                                  Região                  %-48s ┃\n" +
                         "┣━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┫\n" +
                         "┃QNT┃ Produto                                   ┃  Preço    ┃  Taxa   ┃ Valor IVA ┃ Subtotal  ┃ Subt. + Taxas┃\n" +
                         "┣━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫\n",

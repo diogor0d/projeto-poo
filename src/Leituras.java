@@ -1,8 +1,6 @@
 // duvida: colocamos as linhas 7 e 8 como final??
 
 import java.io.*;
-import java.text.Format;
-import java.text.Normalizer;
 import java.util.*;
 
 public class Leituras {
@@ -26,7 +24,7 @@ public class Leituras {
             }
             System.out.printf("%s● As faturas foram escritas no ficheiro %s'output.txt'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.printf("%sErro ao escrever as faturas no ficheiro: %s", Formatacao.RED.getCode(),e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro ao escrever as faturas no ficheiro: %s %s", Formatacao.RED.getCode(),e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
@@ -34,9 +32,9 @@ public class Leituras {
     public void importarFaturas() {
         try (BufferedReader br = new BufferedReader(new FileReader("output.txt"))) {
             processarFaturas(br);
-            System.out.println("Faturas importadas com sucesso.");
+            System.out.printf("%s● Faturas importadas com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.println("Erro ao importar faturas do arquivo: " + e.getMessage());
+            System.out.printf("%s● Erro ao importar faturas do arquivo: %s%s\n ",Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
@@ -50,7 +48,7 @@ public class Leituras {
             oos.writeObject(clientes);
             System.out.printf("%s● As listas foram escritas no ficheiro %s'output.obj'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.println("● Erro ao escrever as listas no ficheiro: " + e.getMessage());
+            System.out.printf("%s● Erro ao escrever as listas no ficheiro: %s%s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
@@ -71,31 +69,30 @@ public class Leituras {
 
                 System.out.printf("%s● Listas carregadas com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
             } catch (IOException | ClassNotFoundException ex) {
-                System.out.printf("%sErro ao carregar dados do arquivo objeto: %s %s\n", Formatacao.RED.getCode(),ex.getMessage(), Formatacao.RESET.getCode());
+                System.out.printf("%s● Erro ao carregar dados do ficheiro de objetos: %s %s\n", Formatacao.RED.getCode(),ex.getMessage(), Formatacao.RESET.getCode());
             }
         } else {
-            System.out.printf("%sFicheiro %soutput.obj%s não encontrado.%s\n", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Ficheiro %soutput.obj%s não encontrado.%s\n", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             File f_txt = new File("input.txt");
             if (f_txt.exists() && f_txt.isFile()) {
-                System.out.printf("%sFicheiro %sinput.txt%s encontrado.%s\n", Formatacao.GREEN.getCode(),Formatacao.YELLOW.getCode(),Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
+                System.out.printf("%s● Ficheiro %sinput.txt%s encontrado.%s\n", Formatacao.GREEN.getCode(),Formatacao.YELLOW.getCode(),Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
                 try (BufferedReader br = new BufferedReader(new FileReader(f_txt))) {
                     String line;
                     while ((line = br.readLine()) != null) {
                         line = line.trim();
                         processarLinha(line, br);
                     }
-                    System.out.printf("%sProcessamento do ficheiro %sinput.txt%s concluído.%s\n", Formatacao.GREEN.getCode(),Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
+                    System.out.printf("%s● Processamento do ficheiro %sinput.txt%s concluído.%s\n", Formatacao.GREEN.getCode(),Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
                 } catch (IOException e) {
-                    System.out.printf("%sErro ao ler o ficheiro de texto: %s%s", Formatacao.RED.getCode() ,e.getMessage(), Formatacao.RESET.getCode());
+                    System.out.printf("%s● Erro ao ler o ficheiro de texto: %s%s", Formatacao.RED.getCode() ,e.getMessage(), Formatacao.RESET.getCode());
                 }
             } else {
-                System.out.printf("%sFicheiro %sinput.txt%s não encontrado.%s", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
+                System.out.printf("%s● Ficheiro %sinput.txt%s não encontrado.%s", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             }
         }
     }
 
     private void processarLinha(String line, BufferedReader br) throws IOException {
-        System.out.println("Linha lida: " + line);
         if (line.equalsIgnoreCase("clientes")) {
             processarClientes(br);
         } else if (line.equalsIgnoreCase("produtos")) {
@@ -109,7 +106,6 @@ public class Leituras {
         String line;
         while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
             if (line.isEmpty()) continue;
-            System.out.println("Linha clientes: "+ line);
             String[] partes = line.split(",");
             try {
                 String nome = partes[0].trim();
@@ -118,7 +114,7 @@ public class Leituras {
                 String localizacao = partes[2].trim();
                 clientes.adicionarCliente(nome, contribuinte, localizacao);
             } catch (NumberFormatException e) {
-                System.out.println("Erro ao processar cliente: " + line);
+                System.out.printf("%s● Erro ao processar cliente: %s%s\n", Formatacao.RED.getCode(), line, Formatacao.RESET.getCode());
             }
         }
     }
@@ -129,7 +125,6 @@ public class Leituras {
         String line;
         while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
             if (line.isEmpty()) continue;
-            System.out.println("Linha produtos: "+ line);
             line = line.trim();
             String[] elementos = line.split(",");
             for (int i = 0; i < elementos.length; i++) {
@@ -150,7 +145,6 @@ public class Leituras {
 
                     ProdutoAlimentarTI produto = new ProdutoAlimentarTI(codigo, nome, descricao, quantidade, preco, isBiologico, categoria);
                     produtos.adicionarProduto(produto);
-                    System.out.println("Produto criado: " + produto);
 
 
                 } else if (line.startsWith("PA_TR")) {
@@ -163,14 +157,13 @@ public class Leituras {
                             Certificacao certificacao = Certificacao.valueOf(elementos[i].trim());
                             listaCertificacoes.add(certificacao);
                         } catch (IllegalArgumentException e) {
-                            System.out.println("Certificação inválida ignorada: " + elementos[i]);
+                            System.out.printf("%s● Certificação inválida ignorada: %s%s\n",Formatacao.RED.getCode(), elementos[i],Formatacao.RESET.getCode());
                         }
                     }
 
                     // Criar o produto
                     ProdutoAlimentarTR produto = new ProdutoAlimentarTR(codigo, nome, descricao, quantidade, preco, isBiologico, listaCertificacoes);
                     produtos.adicionarProduto(produto);
-                    System.out.println("Produto criado: " + produto);
 
 
                 } else if(line.startsWith("PA_TN")){
@@ -190,11 +183,11 @@ public class Leituras {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.println("Erro ao processar número no ficheiro: " + e.getMessage());
+                System.out.printf("%s● Erro ao processar número no ficheiro: %s%s\n",Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
             } catch (IllegalArgumentException e) {
-                System.out.println("Erro ao processar categoria ou booleano: " + e.getMessage());
+                System.out.printf("%s● Erro ao processar categoria ou booleano: %s%s\n",Formatacao.RED.getCode(),e.getMessage(),Formatacao.RESET.getCode());
             } catch (Exception e) {
-                System.out.println("Erro inesperado: " + e.getMessage());
+                System.out.printf("%s● Erro inesperado: %d%s\n",Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
             }
 
         }
@@ -205,11 +198,7 @@ public class Leituras {
         String line;
         while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
             if (line.isEmpty()) continue;
-            System.out.println("Linha faturas: " + line);
             String[] partes = line.split(",");
-
-            System.out.println(Formatacao.RED + Arrays.toString(partes) + Formatacao.RESET);
-
 
             for (int i = 0; i < partes.length; i++) {
                 partes[i] = partes[i].trim();
@@ -219,7 +208,7 @@ public class Leituras {
                 int num = Integer.parseInt(partes[0]);
                 Fatura fatura = faturas.procurarFatura(num);
                 if(fatura != null){
-                    System.out.println("Já existe uma fatura com o número " + num + "!");
+                    System.out.printf("%s● Fatura %d já existe!%s\n", Formatacao.RED.getCode(), num, Formatacao.RESET.getCode());
                 }
                 else{
                     int contribuinte = Integer.parseInt(partes[1]);
@@ -227,7 +216,7 @@ public class Leituras {
                     Cliente cliente = clientes.procurarClientePorContribuinte(contribuinte);
 
                     if(cliente==null){
-                        System.out.println("Cliente " + contribuinte + " não encontrado!");
+                        System.out.printf("%s● Cliente %d não encontrado!%s\n", Formatacao.RED.getCode(), contribuinte, Formatacao.RESET.getCode());
                     } else{
                         String[] dataParts = partes[2].split("/");
                         int dia = Integer.parseInt(dataParts[0]);
@@ -235,7 +224,7 @@ public class Leituras {
                         int ano = Integer.parseInt(dataParts[2]);
                         Data data = new Data(dia, mes, ano);
                         if (!data.isDataValida()) {
-                            System.out.println("Data incorreta. Tente novamente.");
+                            System.out.printf("%s● Data incorreta. Tente novamente.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
                             break;
                         }
 
@@ -246,13 +235,13 @@ public class Leituras {
                             if (produto != null) {
                                 listaProdutos.add(produto);
                             } else {
-                                System.out.println("Produto não encontrado: " + codigoProduto);
+                                System.out.printf("%s● Produto não encontrado: %d%s\n",Formatacao.RED.getCode(), Integer.parseInt(codigoProduto), Formatacao.RESET.getCode());
                             }
                         }
                         if(!(listaProdutos.isEmpty())){
                             faturas.adicionarFatura(num, cliente, data, listaProdutos);
                         } else{
-                            System.out.println("Lista de produtos vazia, fatura descartada");
+                            System.out.printf("%s● Lista de produtos vazia, fatura descartada.%s\n",Formatacao.RED.getCode(), Formatacao.RESET.getCode());
                         }
 
                     }
@@ -260,7 +249,7 @@ public class Leituras {
                 }
 
             } catch(NumberFormatException e){
-                System.out.println("Erro ao processar cliente: " + line);
+                System.out.printf("%s● Erro ao processar cliente: %s%s\n", Formatacao.RED.getCode(), line, Formatacao.RESET.getCode());
             }
         }
     }
