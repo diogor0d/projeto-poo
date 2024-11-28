@@ -167,7 +167,7 @@ public class Faturas {
         if (listaFaturas.isEmpty()) {
             System.out.println("Nenhuma fatura declarada.");
         } else {
-            int largura = 162; // Width of the separator line
+            int largura = 183; // Width of the separator line
             String titulo = "Visão Geral Faturas:";
             int enquadramento = (largura - titulo.length()) / 2;
 
@@ -175,9 +175,9 @@ public class Faturas {
             System.out.printf("┃%" + enquadramento + "s%s%" + (enquadramento-1) + "s┃\n", "", titulo, "");
             for (Fatura fatura : listaFaturas) {
 
-                System.out.printf("┃  fatura.toString(), "");
+                System.out.printf("┃ %-179s ┃\n", fatura.toString());
             }
-            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
+            System.out.println("┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛");
         }
     }
 
