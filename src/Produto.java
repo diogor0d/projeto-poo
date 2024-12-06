@@ -69,7 +69,7 @@ public abstract class Produto implements Serializable {
     public String toString() {
         return String.format(
                 "COD:%-7s NOME:%-20s DESC=%-40s QNT:%-4d P.UNI:%-7.2f€",
-                codigo, "\'"+nome+"\'", "\'"+descricao+"\'", quantidade, preco
+                codigo, "'"+nome+"'", "'"+descricao+"'", quantidade, preco
         );
     }
 }

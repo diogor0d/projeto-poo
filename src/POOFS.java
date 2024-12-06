@@ -25,7 +25,7 @@ public class POOFS {
         try {
             leituras.lerFicheiro();
         } catch (Exception e) {
-            System.out.printf("%s● Erro durante a manipulação dos ficheiros: %s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro durante a manipulação dos ficheiros: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -68,9 +68,7 @@ public class POOFS {
                     case 0 -> {
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
-                        System.out.printf("%s┏━━━━━━━━━━━━━━━━━━━━━━┓\n", Formatacao.YELLOW.getCode());
-                        System.out.println("┃  Execução terminada  ┃");
-                        System.out.printf("┗━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.RESET.getCode());
+                        System.out.println("  Execução terminada  ");
                         return;
                     }
                     default ->
@@ -84,9 +82,7 @@ public class POOFS {
                         leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();
-                        System.out.printf("%s┏━━━━━━━━━━━━━━━━━━━━━━┓\n", Formatacao.YELLOW.getCode());
-                        System.out.println("┃  Execução terminada  ┃");
-                        System.out.printf("┗━━━━━━━━━━━━━━━━━━━━━━┛%s\n", Formatacao.RESET.getCode());
+                        System.out.println("  Execução terminada  ");
                         return; // Encerra o programa
                     } else if (continuar.trim().equalsIgnoreCase("S")) {
                         break;

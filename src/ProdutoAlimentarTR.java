@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class ProdutoAlimentarTR extends ProdutoAlimentar {
 
-    private ArrayList<Certificacao> certificacoes;
+    private final ArrayList<Certificacao> certificacoes;
     protected double[] taxas = {0.06, 0.05, 0.04};
     protected double descontoBiologico = 0.1;
     protected double descontoCertificacoes = 0.99;

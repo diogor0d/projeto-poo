@@ -79,15 +79,17 @@ public class Fatura implements Serializable {
 
     public String toStringFaturaFormatada() {
         String infoCabecalhoFatura = String.format(
-                "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓\n" +
-                        "┃                                  Fatura simplificada nº  %-48d ┃\n" +
-                        "┃                                  Cliente                 %-48s ┃\n" +
-                        "┃                                  Nº Contribuinte         %-48d ┃\n" +
-                        "┃                                  Data                    %-48s ┃\n" +
-                        "┃                                  Região                  %-48s ┃\n" +
-                        "┣━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┫\n" +
-                        "┃QNT┃ Produto                                   ┃  Preço    ┃  Taxa   ┃ Valor IVA ┃ Subtotal  ┃ Subt. + Taxas┃\n" +
-                        "┣━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫\n",
+                """
+                        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+                        ┃                                  Fatura simplificada nº  %-48d ┃
+                        ┃                                  Cliente                 %-48s ┃
+                        ┃                                  Nº Contribuinte         %-48d ┃
+                        ┃                                  Data                    %-48s ┃
+                        ┃                                  Região                  %-48s ┃
+                        ┣━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┫
+                        ┃QNT┃ Produto                                   ┃  Preço    ┃  Taxa   ┃ Valor IVA ┃ Subtotal  ┃ Subt. + Taxas┃
+                        ┣━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+                        """,
                 num, cliente.getNome(), cliente.getContribuinte(), data, cliente.getLocalizacao()
         );
 
@@ -108,9 +110,11 @@ public class Fatura implements Serializable {
         }
 
         String totais = String.format(
-                "┣━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫\n" +
-                        "┃%sTotal s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€%s┃\n" +
-                        "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n",
+                """
+                        ┣━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+                        ┃%sTotal s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€%s┃
+                        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                        """,
                 " ".repeat((108 - String.format("Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€", calcularTotalBruto(), totalIva - calcularTotalBruto(), totalIva).length()) / 2),
                 calcularTotalBruto(),
                 totalIva - calcularTotalBruto(),

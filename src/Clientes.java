@@ -141,7 +141,7 @@ public class Clientes {
     public void adicionarCliente(String nome, int contribuinte, String localizacao) {
         Cliente novoCliente = new Cliente(nome, contribuinte, localizacao);
         listaClientes.add(novoCliente);
-        System.out.println(Formatacao.YELLOW.getCode() + "Novo cliente \'" + nome + "\' adicionado com sucesso!" + Formatacao.RESET.getCode());
+        System.out.println(Formatacao.YELLOW.getCode() + "Novo cliente '" + nome + "' adicionado com sucesso!" + Formatacao.RESET.getCode());
     }
 
     // Metodo para listar os clientes
@@ -190,11 +190,11 @@ public class Clientes {
             while (opcao != 0) {
                 try {
                     System.out.println("--------------------------------");
-                    System.out.printf("| Que dados deseja alterar?   |\n", "");
-                    System.out.printf("|  1- Nome                    |\n", "");
-                    System.out.printf("|  2- Contribuinte            |\n", "");
-                    System.out.printf("|  3- Localização             |\n", "");
-                    System.out.printf("|  0- Cancelar                |\n", "");
+                    System.out.print("| Que dados deseja alterar?   |\n");
+                    System.out.print("|  1- Nome                    |\n");
+                    System.out.print("|  2- Contribuinte            |\n");
+                    System.out.print("|  3- Localização             |\n");
+                    System.out.print("|  0- Cancelar                |\n");
                     System.out.println("-------------------------------");
 
                     System.out.print("Opção-> ");

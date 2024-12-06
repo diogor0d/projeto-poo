@@ -202,12 +202,12 @@ public class Faturas {
                 int opcao = -1;
                 while (opcao != 0) {
                     System.out.println("--------------------------------");
-                    System.out.printf("| Que dados deseja alterar?   |\n", "");
-                    System.out.printf("|  1- Nome                    |\n", "");
-                    System.out.printf("|  2- Cliente                 |\n", "");
-                    System.out.printf("|  3- Data                    |\n", "");
-                    System.out.printf("|  4 -Produto(s)              |\n", "");
-                    System.out.printf("|  0- Cancelar                |\n", "");
+                    System.out.print("| Que dados deseja alterar?   |\n");
+                    System.out.print("|  1- Nome                    |\n");
+                    System.out.print("|  2- Cliente                 |\n");
+                    System.out.print("|  3- Data                    |\n");
+                    System.out.print("|  4 -Produto(s)              |\n");
+                    System.out.print("|  0- Cancelar                |\n");
                     System.out.println("-------------------------------");
                     System.out.print("Opção-> ");
                     try {
@@ -276,10 +276,10 @@ public class Faturas {
                                 while (opcaoProdutos != 0) {
                                     produtos.listarProdutos(produtosDaFatura);
                                     System.out.println("--------------------------------");
-                                    System.out.printf("| Deseja:                      |\n", "");
-                                    System.out.printf("|  1- Adicionar um produto     |\n", "");
-                                    System.out.printf("|  2- Remover um produto       |\n", "");
-                                    System.out.printf("|  0- Cancelar                 |\n", "");
+                                    System.out.print("| Deseja:                      |\n");
+                                    System.out.print("|  1- Adicionar um produto     |\n");
+                                    System.out.print("|  2- Remover um produto       |\n");
+                                    System.out.print("|  0- Cancelar                 |\n");
                                     System.out.println("--------------------------------");
                                     System.out.print("Opção-> ");
 
@@ -388,10 +388,7 @@ public class Faturas {
         // Gerar numeros aleatorios até não existir colisão com uma fatura existente
         do {
             novoNumero = random.nextInt(10000000);
-            existe = false;
-            if (procurarFatura(novoNumero) != null) {
-                existe = true;
-            }
+            existe = procurarFatura(novoNumero) != null;
         } while (existe);
 
         return novoNumero;

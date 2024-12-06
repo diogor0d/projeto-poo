@@ -1,6 +1,6 @@
 public class ProdutoFarmaciaPrescrito extends Produto {
 
-    private String medico;
+    private final String medico;
     protected double[] taxas = {0.06, 0.05, 0.04};
 
     public ProdutoFarmaciaPrescrito(int codigo, String nome, String descricao, int quantidade, double preco, String medico) {
