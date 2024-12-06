@@ -367,12 +367,12 @@ public class Faturas {
     public int lerInteiro() {
         Scanner scanner = new Scanner(System.in);
         int num = -1;
-        boolean valid = false;
-        while (!valid) {
+        boolean valido = false;
+        while (!valido) {
             try {
                 System.out.print(" > ");
                 num = Integer.parseInt(scanner.nextLine());
-                valid = true;
+                valido = true;
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida. Por favor, digite um número válido.");
             }
