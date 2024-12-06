@@ -172,7 +172,7 @@ public class Faturas {
             int enquadramento = (largura - titulo.length()) / 2;
 
             System.out.println("┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓");
-            System.out.printf("┃%" + enquadramento + "s%s%" + (enquadramento-1) + "s┃\n", "", titulo, "");
+            System.out.printf("┃%" + enquadramento + "s%s%" + (enquadramento - 1) + "s┃\n", "", titulo, "");
             for (Fatura fatura : listaFaturas) {
 
                 System.out.printf("┃ %-179s ┃\n", fatura.toString());
@@ -222,7 +222,7 @@ public class Faturas {
                     }
 
                     switch (opcao) {
-                        case 1:
+                        case 1 -> {
                             try {
                                 System.out.print("Novo número da fatura: ");
                                 int novoNumero = Integer.parseInt(scanner.nextLine());
@@ -231,8 +231,8 @@ public class Faturas {
                             } catch (Exception e) {
                                 System.out.println("Erro ao alterar o número da fatura: " + e.getMessage());
                             }
-                            break;
-                        case 2:
+                        }
+                        case 2 -> {
                             try {
                                 System.out.print("Número de contribuinte do novo cliente: ");
                                 int novoContribuinte = Integer.parseInt(scanner.nextLine());
@@ -246,8 +246,8 @@ public class Faturas {
                             } catch (Exception e) {
                                 System.out.println("Erro ao alterar cliente: " + e.getMessage());
                             }
-                            break;
-                        case 3:
+                        }
+                        case 3 -> {
                             try {
                                 System.out.print("Nova data (dd/mm/aaaa): ");
                                 String dataStr = scanner.nextLine();
@@ -265,8 +265,8 @@ public class Faturas {
                             } catch (Exception e) {
                                 System.out.println("Erro ao alterar a data: " + e.getMessage());
                             }
-                            break;
-                        case 4:
+                        }
+                        case 4 -> {
                             try {
                                 ArrayList<Produto> produtosDaFatura = faturaEncontrada.getProdutos();
                                 if (produtosDaFatura == null || produtosDaFatura.isEmpty()) {
@@ -290,7 +290,7 @@ public class Faturas {
                                             continue;
                                         }
                                         switch (opcaoProdutos) {
-                                            case 1:
+                                            case 1 -> {
                                                 System.out.print("Insira o código do produto que deseja adicionar: ");
                                                 String codigoProdutoAdicionar = scanner.nextLine().trim();
                                                 Produto produtoAdicionar = produtos.procurarProdutoCodigo(Integer.parseInt(codigoProdutoAdicionar));
@@ -298,8 +298,8 @@ public class Faturas {
                                                     produtosDaFatura.add(produtoAdicionar);
                                                     System.out.println("Produto adicionado com sucesso.");
                                                 }
-                                                break;
-                                            case 2:
+                                            }
+                                            case 2 -> {
                                                 System.out.print("Insira o codigo do produto a remover: ");
                                                 String codigoProdutoRemover = scanner.nextLine().trim();
                                                 Produto produtoRemover = produtos.procurarProdutoCodigo(Integer.parseInt(codigoProdutoRemover));
@@ -311,8 +311,7 @@ public class Faturas {
                                                         System.out.println("O produto não está associado a esta fatura.");
                                                     }
                                                 }
-
-                                                break;
+                                            }
                                         }
 
                                     } catch (NumberFormatException e) {
@@ -323,12 +322,9 @@ public class Faturas {
                             } catch (Exception e) {
                                 System.out.println("Erro ao alterar a data: " + e.getMessage());
                             }
-                            break;
-                        case 0:
-                            System.out.println("Alteração cancelada.");
-                            break;
-                        default:
-                            System.out.println("Opção inválida.");
+                        }
+                        case 0 -> System.out.println("Alteração cancelada.");
+                        default -> System.out.println("Opção inválida.");
                     }
                     System.out.print("Deseja alterar mais algum dado? (S ou N): ");
                     String continuar = scanner.nextLine();

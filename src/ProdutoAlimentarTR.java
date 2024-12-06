@@ -14,19 +14,13 @@ public class ProdutoAlimentarTR extends ProdutoAlimentar {
 
     @Override
     public double calcularIva(Cliente cliente) {
-        double iva = 0;
+        double iva = switch (cliente.getLocalizacao()) {
+            case "Continente" -> taxas[0];
+            case "Madeira" -> taxas[1];
+            case "Açores" -> taxas[2];
+            default -> 0;
+        };
 
-        switch (cliente.getLocalizacao()) {
-            case "Continente":
-                iva = taxas[0];
-                break;
-            case "Madeira":
-                iva = taxas[1];
-                break;
-            case "Açores":
-                iva = taxas[2];
-                break;
-        }
         if (biologico) {
             iva -= descontoBiologico;
         }

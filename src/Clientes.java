@@ -25,7 +25,7 @@ public class Clientes {
 
     // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
     public boolean isTextoValido(String texto) {
-        if(!texto.isEmpty()){
+        if (!texto.isEmpty()) {
             texto = String.join(" ", texto.split("\\s+"));
             for (int i = 0; i < texto.length(); i++) {
                 char c = texto.charAt(i);
@@ -33,13 +33,13 @@ public class Clientes {
                     return false;
                 }
             }
-        } else{
+        } else {
             return false;
         }
         return true;
     }
 
-    public boolean isLocalizacaoValida(String localizacao){
+    public boolean isLocalizacaoValida(String localizacao) {
         ArrayList<String> localizacoes = new ArrayList<>();
         localizacoes.add("continente");
         localizacoes.add("açores");
@@ -70,7 +70,7 @@ public class Clientes {
         String nome;
         while (true) {
             try {
-                System.out.print("Digite o nome do cliente: ");
+                System.out.print("❯ Digite o nome do cliente →");
                 nome = scanner.nextLine();
                 nome = nome.trim();
                 if (isTextoValido(nome)) {
@@ -88,9 +88,9 @@ public class Clientes {
             try {
                 System.out.print("Digite o número de contribuinte: ");
                 contribuinte = Integer.parseInt(scanner.nextLine());
-                if(String.valueOf(contribuinte).length() != 9){
+                if (String.valueOf(contribuinte).length() != 9) {
                     System.out.println("Número de contribuinte inválido. O número deve ter 9 digitos!");
-                } else{
+                } else {
                     Cliente clienteComEsteContribuinte = procurarClientePorContribuinte(contribuinte);
                     if (clienteComEsteContribuinte != null) {
                         System.out.println("Já existe um cliente com este número de contribuinte!");
@@ -113,17 +113,17 @@ public class Clientes {
                 localizacao = scanner.nextLine();
                 localizacao = localizacao.trim();
                 if (isTextoValido(localizacao)) {
-                    if(isLocalizacaoValida(localizacao)){
+                    if (isLocalizacaoValida(localizacao)) {
                         //Para  a primeira letra de cada palavra ser maiúscula
-                        if(localizacao.equalsIgnoreCase("madeira")){
+                        if (localizacao.equalsIgnoreCase("madeira")) {
                             localizacao = "Madeira";
-                        } else if(localizacao.equalsIgnoreCase("açores")) {
+                        } else if (localizacao.equalsIgnoreCase("açores")) {
                             localizacao = "Açores";
-                        } else if (localizacao.equalsIgnoreCase("continente")){
+                        } else if (localizacao.equalsIgnoreCase("continente")) {
                             localizacao = "Continente";
                         }
                         break;
-                    } else{
+                    } else {
                         System.out.print("Não existe essa localização! Digite 'Continente', 'Açores' ou 'Madeira': ");
                     }
                 } else {
@@ -205,27 +205,25 @@ public class Clientes {
                     }
 
                     switch (opcao) {
-                        case 1:
+                        case 1 -> {
                             String novoNome;
                             while (true) {
                                 System.out.print("Novo nome: ");
-                                novoNome = scanner.nextLine();
-                                novoNome = novoNome.trim();
+                                novoNome = scanner.nextLine().trim();
                                 if (isTextoValido(novoNome)) {
                                     break;
                                 } else {
                                     System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
                                 }
                             }
-                            break;
-
-                        case 2:
+                        }
+                        case 2 -> {
                             int novoContribuinte;
                             while (true) {
                                 System.out.print("Novo número de contribuinte: ");
                                 try {
                                     novoContribuinte = Integer.parseInt(scanner.nextLine());
-                                    if(String.valueOf(contribuinte).length() != 9){
+                                    if (String.valueOf(contribuinte).length() != 9) {
                                         System.out.println("Número de contribuinte inválido. O número deve ter 9 digitos!");
                                     } else {
                                         Cliente novoClienteContribuinte = procurarClientePorContribuinte(novoContribuinte);
@@ -241,28 +239,26 @@ public class Clientes {
                                     System.out.println("Entrada inválida. Digite um número inteiro.");
                                 }
                             }
-                            break;
-
-                        case 3:
+                        }
+                        case 3 -> {
                             String novaLocalizacao;
                             System.out.print("Digite a localização do cliente (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
                             while (true) {
                                 try {
-                                    novaLocalizacao = scanner.nextLine();
-                                    novaLocalizacao = novaLocalizacao.trim();
+                                    novaLocalizacao = scanner.nextLine().trim();
                                     if (isTextoValido(novaLocalizacao)) {
-                                        if(isLocalizacaoValida(novaLocalizacao)){
-                                            //Para  a primeira letra de cada palavra ser maiúscula
-                                            if(novaLocalizacao.equalsIgnoreCase("madeira")){
+                                        if (isLocalizacaoValida(novaLocalizacao)) {
+                                            // Para a primeira letra de cada palavra ser maiúscula
+                                            if (novaLocalizacao.equalsIgnoreCase("madeira")) {
                                                 novaLocalizacao = "Madeira";
-                                            } else if(novaLocalizacao.equalsIgnoreCase("açores")) {
+                                            } else if (novaLocalizacao.equalsIgnoreCase("açores")) {
                                                 novaLocalizacao = "Açores";
-                                            } else if (novaLocalizacao.equalsIgnoreCase("continente")){
+                                            } else if (novaLocalizacao.equalsIgnoreCase("continente")) {
                                                 novaLocalizacao = "Continente";
                                             }
                                             cliente.setLocalizacao(novaLocalizacao);
                                             break;
-                                        } else{
+                                        } else {
                                             System.out.print("Não existe essa localização! Digite 'Continente', 'Açores' ou 'Madeira': ");
                                         }
                                     } else {
@@ -272,14 +268,9 @@ public class Clientes {
                                     System.out.println("Erro ao processar a localização: " + e.getMessage());
                                 }
                             }
-                            break;
-
-                        case 0:
-                            System.out.println("Alteração cancelada.");
-                            break;
-
-                        default:
-                            System.out.println("Opção inválida. Tente novamente.");
+                        }
+                        case 0 -> System.out.println("Alteração cancelada.");
+                        default -> System.out.println("Opção inválida. Tente novamente.");
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Erro ao processar a opção: Digite um número válido.");

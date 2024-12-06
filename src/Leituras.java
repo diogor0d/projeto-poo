@@ -86,14 +86,9 @@ public class Leituras {
                             linhaSplitted[i] = linhaSplitted[i].trim();
                         }
                         switch (linhaSplitted[0].toUpperCase()) {
-                            case "CL":
-                                processarCliente(linhaSplitted);
-                                break;
-                            case "F":
-                                processarFatura(linhaSplitted);
-                                break;
-                            default:
-                                processarProduto(linhaSplitted);
+                            case "CL" -> processarCliente(linhaSplitted);
+                            case "F" -> processarFatura(linhaSplitted);
+                            default -> processarProduto(linhaSplitted);
                         }
                     }
                     System.out.printf("%s● Processamento do ficheiro %sinput.txt%s concluído.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
