@@ -27,7 +27,7 @@ public class POOFS {
             //mais tarde usaremos o ficheiro de input para as duas coisas
             leituras.exportarFaturas(faturas.getListaFaturas());
         } catch (Exception e) {
-            System.out.printf("%s● Erro durante a manipulação dos ficheiros: %s", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro durante a manipulação dos ficheiros: %s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
 
         Scanner scanner = new Scanner(System.in);
