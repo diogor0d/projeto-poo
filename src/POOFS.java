@@ -1,4 +1,3 @@
-import java.text.Normalizer;
 import java.util.Scanner;
 
 public class POOFS {

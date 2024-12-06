@@ -85,22 +85,17 @@ public class Leituras {
                         for (int i = 0; i < linhaSplitted.length; i++) {
                             linhaSplitted[i] = linhaSplitted[i].trim();
                         }
-
-                        System.out.println(linhaSplitted[0].toUpperCase());
+                        
                         switch (linhaSplitted[0].toUpperCase()) {
                             case "CL":
-                                System.out.println("Processar cliente");
                                 processarCliente(linhaSplitted);
                                 break;
                             case "F":
-                                System.out.println("Processar fatura");
                                 processarFatura(linhaSplitted);
                                 break;
                             default:
-                                System.out.println("Processar produtos");
                                 processarProduto(linhaSplitted);
                         }
-
                     }
                     System.out.printf("%s● Processamento do ficheiro %sinput.txt%s concluído.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
                 } catch (IOException e) {
@@ -189,13 +184,19 @@ public class Leituras {
                     System.out.printf("%s● Produto não encontrado: %d%s\n", Formatacao.RED.getCode(), Integer.parseInt(splittedLine[i]), Formatacao.RESET.getCode());
                 }
             }
-            if (!(listaProdutos.isEmpty())) {
-                faturas.adicionarFatura(num, cliente, data, listaProdutos);
-            } else {
-                System.out.printf("%s● Lista de produtos vazia, fatura descartada.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
+            if (listaProdutos.isEmpty()) {
+                throw new IllegalArgumentException(String.format("Lista de produtos vazia, fatura %d descartada.", num));
             }
+            if (cliente == null) {
+                throw new IllegalArgumentException(String.format("Erro ao reconhecer cliente an fatura %d.", num));
+            }
+
+
+            faturas.adicionarFatura(num, cliente, data, listaProdutos);
         } catch (NumberFormatException e) {
-            System.out.printf("%s● Erro ao processar fatura: %s%s\n", Formatacao.RED.getCode(), splittedLine, Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro ao processar fatura %d: %s%s\n", Formatacao.RED.getCode(), splittedLine, Formatacao.RESET.getCode());
+        } catch (IllegalArgumentException e) {
+            System.out.printf("%s● Erro ao processar fatura %d: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
