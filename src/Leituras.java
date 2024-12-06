@@ -57,7 +57,7 @@ public class Leituras {
 
         if (ficheiroObjetos.exists() && ficheiroObjetos.isFile()) {
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ficheiroObjetos))) {
-                System.out.printf("%s● Ficheiro %s\'output.obj\'%s encontrado.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
+                System.out.printf("%s● Ficheiro %s'output.obj'%s encontrado.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
 
                 ArrayList<Fatura> faturasLidas = (ArrayList<Fatura>) ois.readObject();
                 ArrayList<Produto> produtosLidos = (ArrayList<Produto>) ois.readObject();
@@ -161,7 +161,7 @@ public class Leituras {
         } catch (IllegalArgumentException e) {
             System.out.printf("%s● Erro ao processar categoria ou booleano: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         } catch (Exception e) {
-            System.out.printf("%s● Erro inesperado: %d%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro inesperado: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 
@@ -176,7 +176,7 @@ public class Leituras {
             Data data = new Data(dia, mes, ano);
             ArrayList<Produto> listaProdutos = new ArrayList<>();
             if (!(splittedLine.length >= 5)) {
-                throw new IllegalArgumentException(String.format("%s● Fatura %d descartada, não estão declarados produtos: %d%s\n", Formatacao.RED.getCode(), num, Formatacao.RESET.getCode()));
+                throw new IllegalArgumentException(String.format("%s● Fatura %d descartada, não estão declarados produtos.%s\n", Formatacao.RED.getCode(), num, Formatacao.RESET.getCode()));
             }
             for (int i = 4; i < splittedLine.length; i++) {
                 Produto produto = produtos.procurarProdutoCodigo(Integer.parseInt(splittedLine[i]));
@@ -196,8 +196,6 @@ public class Leituras {
 
 
             faturas.adicionarFatura(num, cliente, data, listaProdutos);
-        } catch (NumberFormatException e) {
-            System.out.printf("%s● Erro ao processar fatura: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         } catch (IllegalArgumentException e) {
             System.out.printf("%s● Erro ao processar fatura: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
@@ -210,112 +208,9 @@ public class Leituras {
             String localizacao = splittedLine[3];
             clientes.adicionarCliente(nome, contribuinte, localizacao);
         } catch (NumberFormatException e) {
-            System.out.printf("%s● Erro ao processar cliente: %s%s\n", Formatacao.RED.getCode(), splittedLine, Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro ao processar cliente: %s%s\n", Formatacao.RED.getCode(), Arrays.toString(splittedLine), Formatacao.RESET.getCode());
         }
     }
-
-    private void processarLinha(String line, BufferedReader br) throws IOException {
-
-
-        if (line.equalsIgnoreCase("clientes")) {
-            processarClientes(br);
-        } else if (line.equalsIgnoreCase("produtos")) {
-            processarProdutos(br);
-        } else if (line.equalsIgnoreCase("faturas")) {
-            processarFaturas(br);
-        }
-    }
-
-    private void processarClientes(BufferedReader br) throws IOException {
-        String line;
-        while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
-            if (line.isEmpty()) continue;
-            String[] partes = line.split(",");
-            try {
-                String nome = partes[0].trim();
-                int contribuinte = Integer.parseInt(partes[1].trim());
-                clientes.procurarClientePorContribuinte(contribuinte);
-                String localizacao = partes[2].trim();
-                clientes.adicionarCliente(nome, contribuinte, localizacao);
-            } catch (NumberFormatException e) {
-                System.out.printf("%s● Erro ao processar cliente: %s%s\n", Formatacao.RED.getCode(), line, Formatacao.RESET.getCode());
-            }
-        }
-    }
-
-
-    private void processarProdutos(BufferedReader br) throws IOException {
-        String line;
-        while ((line = br.readLine()) != null && !line.trim().isEmpty()) {
-            if (line.isEmpty()) continue;
-            line = line.trim();
-            String[] elementos = line.split(",");
-            for (int i = 0; i < elementos.length; i++) {
-                elementos[i] = elementos[i].trim();
-            }
-            try {
-
-                int codigo = Integer.parseInt(elementos[1]);
-                String nome = elementos[2];
-                String descricao = elementos[3];
-                int quantidade = Integer.parseInt(elementos[4]);
-                double preco = Double.parseDouble(elementos[5]);
-
-
-                if (line.startsWith("PA_TI")) {
-                    boolean isBiologico = Boolean.parseBoolean(elementos[6]);
-                    CategoriaAlimentar categoria = CategoriaAlimentar.valueOf(elementos[7]);
-
-                    ProdutoAlimentarTI produto = new ProdutoAlimentarTI(codigo, nome, descricao, quantidade, preco, isBiologico, categoria);
-                    produtos.adicionarProduto(produto);
-
-
-                } else if (line.startsWith("PA_TR")) {
-                    boolean isBiologico = Boolean.parseBoolean(elementos[6]);
-
-                    // Criar lista de certificações
-                    ArrayList<Certificacao> listaCertificacoes = new ArrayList<>();
-                    for (int i = 7; i < elementos.length && listaCertificacoes.size() < 4; i++) {
-                        try {
-                            Certificacao certificacao = Certificacao.valueOf(elementos[i].trim());
-                            listaCertificacoes.add(certificacao);
-                        } catch (IllegalArgumentException e) {
-                            System.out.printf("%s● Certificação inválida ignorada: %s%s\n", Formatacao.RED.getCode(), elementos[i], Formatacao.RESET.getCode());
-                        }
-                    }
-
-                    // Criar o produto
-                    ProdutoAlimentarTR produto = new ProdutoAlimentarTR(codigo, nome, descricao, quantidade, preco, isBiologico, listaCertificacoes);
-                    produtos.adicionarProduto(produto);
-
-
-                } else if (line.startsWith("PA_TN")) {
-                    boolean isBiologico = Boolean.parseBoolean(elementos[6]);
-                    ProdutoAlimentarTN produto = new ProdutoAlimentarTN(codigo, nome, descricao, quantidade, preco, isBiologico);
-                    produtos.adicionarProduto(produto);
-
-                } else if (line.startsWith("PF_NP")) {
-                    CategoriaFarmacia categoria = CategoriaFarmacia.valueOf(elementos[6]);
-                    ProdutoFarmaciaNaoPrescrito produto = new ProdutoFarmaciaNaoPrescrito(codigo, nome, descricao, quantidade, preco, categoria);
-                    produtos.adicionarProduto(produto);
-
-                } else if (line.startsWith("PF_P")) {
-                    String medico = elementos[6];
-                    ProdutoFarmaciaPrescrito produto = new ProdutoFarmaciaPrescrito(codigo, nome, descricao, quantidade, preco, medico);
-                    produtos.adicionarProduto(produto);
-                }
-
-            } catch (NumberFormatException e) {
-                System.out.printf("%s● Erro ao processar número no ficheiro: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
-            } catch (IllegalArgumentException e) {
-                System.out.printf("%s● Erro ao processar categoria ou booleano: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
-            } catch (Exception e) {
-                System.out.printf("%s● Erro inesperado: %d%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
-            }
-
-        }
-    }
-
 
     private void processarFaturas(BufferedReader br) throws IOException {
         String line;
