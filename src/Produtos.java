@@ -16,9 +16,9 @@ public class Produtos {
     public void setListaProdutos(ArrayList<Produto> novaListaProdutos) {
         if (novaListaProdutos != null) {
             this.produtos = novaListaProdutos;
-            System.out.println("Lista de Produtos atualizada.");
+            System.out.println("%sLista de Produtos atualizada.%s".formatted(Formatacao.GREEN.getCode(), Formatacao.RESET.getCode()));
         } else {
-            System.out.println("A nova lista de proutos é inválida (null).");
+            System.out.println("%sA nova lista de proutos é inválida.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
         }
     }
 
@@ -29,14 +29,14 @@ public class Produtos {
 
     public void listarProdutos(ArrayList<Produto> produtos) {
         if (produtos == null || produtos.isEmpty()) {
-            System.out.println("Nenhum produto registado.");
+            System.out.println("%sNenhum produto registado.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
         } else {
-            System.out.println("------------------------------------------");
-            System.out.println("| Lista de produtos no sistema:          |");
+            System.out.println("%s────────────────────────────────────────────────────────────────────────────%s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+            System.out.println(" Lista de produtos:");
             for (Produto produto : produtos) {
                 System.out.println(produto);
             }
-            System.out.println("------------------------------------------");
+            System.out.println("%s────────────────────────────────────────────────────────────────────────────%s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
         }
     }
 

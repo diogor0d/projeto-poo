@@ -72,7 +72,7 @@ public class Fatura implements Serializable {
         String produtosConcatenados = String.join(", ", produtosArray);
 
         return String.format(
-                "Nº: %-5s  Cliente: %-20s  Contribuinte: %-8s  Localização: %-13s  Data: %-12s Produtos: %s",
+                "Nº: %-5s  Cliente: %-20s  Contribuinte: %-8s  Localização: %-13s  > Data: %-12s Produtos: %s",
                 num, cliente.getNome(), cliente.getContribuinte(), cliente.getLocalizacao(), data, produtosConcatenados
         );
     }
@@ -80,15 +80,15 @@ public class Fatura implements Serializable {
     public String toStringFaturaFormatada() {
         String infoCabecalhoFatura = String.format(
                 """
-                        ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-                        ┃                                  Fatura simplificada nº  %-48d ┃
-                        ┃                                  Cliente                 %-48s ┃
-                        ┃                                  Nº Contribuinte         %-48d ┃
-                        ┃                                  Data                    %-48s ┃
-                        ┃                                  Região                  %-48s ┃
-                        ┣━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┫
-                        ┃QNT┃ Produto                                   ┃  Preço    ┃  Taxa   ┃ Valor IVA ┃ Subtotal  ┃ Subt. + Taxas┃
-                        ┣━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━┫
+                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                                                          Fatura simplificada nº  %-48d 
+                                                          Cliente                 %-48s 
+                                                          Nº Contribuinte         %-48d 
+                                                          Data                    %-48s 
+                                                          Região                  %-48s 
+                        ━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━
+                        QNT┃ Produto                                   ┃  Preço    ┃  Taxa   ┃ Valor IVA ┃ Subtotal  ┃ Subt. + Taxas
+                        ━━━╋━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━╋━━━━━━━━━━━━━━
                         """,
                 num, cliente.getNome(), cliente.getContribuinte(), data, cliente.getLocalizacao()
         );
@@ -97,7 +97,7 @@ public class Fatura implements Serializable {
         StringBuilder sb = new StringBuilder();
         for (Produto produto : getProdutos()) {
             double subtotal = produto.getPreco() * produto.getQuantidade();
-            sb.append(String.format("┃ %-2d┃ %-42s┃ %-8.2f€ ┃ %-6.2f%% ┃ %-6.2f €  ┃ %-8.2f€ ┃  %-8.2f€   ┃\n",
+            sb.append(String.format(" %-2d┃ %-42s┃ %-8.2f€ ┃ %-6.2f%% ┃ %-6.2f €  ┃ %-8.2f€ ┃  %-8.2f€   \n",
                     produto.getQuantidade(),
                     produto.getNome(),
                     produto.getPreco(),
@@ -111,9 +111,9 @@ public class Fatura implements Serializable {
 
         String totais = String.format(
                 """
-                        ┣━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-                        ┃%sTotal s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€%s┃
-                        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                        ━━━┻━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                        %sTotal s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€%s
+                        ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
                         """,
                 " ".repeat((108 - String.format("Total s/IVA: %.2f€ | Total IVA: %.2f€ | Total c/IVA: %.2f€", calcularTotalBruto(), totalIva - calcularTotalBruto(), totalIva).length()) / 2),
                 calcularTotalBruto(),

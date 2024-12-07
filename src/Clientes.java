@@ -1,3 +1,4 @@
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,40 +18,10 @@ public class Clientes {
     public void setListaClientes(ArrayList<Cliente> novaListaClientes) {
         if (novaListaClientes != null) {
             this.listaClientes = novaListaClientes;
-            System.out.println("Lista de Clientes atualizada.");
+            System.out.println("%sLista de Clientes atualizada.%s".formatted(Formatacao.GREEN.getCode(),Formatacao.RESET.getCode()));
         } else {
-            System.out.println("A nova lista de clientes é inválida (null).");
+            System.out.println("%s● A nova lista de clientes é inválida (null).%s".formatted(Formatacao.RED.getCode(),Formatacao.RESET.getCode()));
         }
-    }
-
-    // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
-    public boolean isTextoValido(String texto) {
-        if (!texto.isEmpty()) {
-            texto = String.join(" ", texto.split("\\s+"));
-            for (int i = 0; i < texto.length(); i++) {
-                char c = texto.charAt(i);
-                if (!(Character.isLetter(c) || c == ' ')) {
-                    return false;
-                }
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isLocalizacaoValida(String localizacao) {
-        ArrayList<String> localizacoes = new ArrayList<>();
-        localizacoes.add("continente");
-        localizacoes.add("açores");
-        localizacoes.add("madeira");
-
-        for (String loc : localizacoes) {
-            if (loc.equalsIgnoreCase(localizacao)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     // Metodo para procurar um cliente na lista a partir do seu numero de contribuinte
@@ -67,72 +38,22 @@ public class Clientes {
     public void novoCliente() {
         Scanner scanner = new Scanner(System.in);
 
-        String nome;
-        while (true) {
-            try {
-                System.out.print("❯ Digite o nome do cliente →");
-                nome = scanner.nextLine();
-                nome = nome.trim();
-                if (isTextoValido(nome)) {
-                    break;
-                } else {
-                    System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
-                }
-            } catch (Exception e) {
-                System.out.println("Erro ao processar o nome: " + e.getMessage());
-            }
+        String nome = (String)POOFS.receberInput(scanner, CategoriaInput.nome, "%s❯ Introduza o nome do cliente →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        if (nome == null) {
+            System.out.println("%s● Operação de criação de novo cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+            return;
         }
+
 
         int contribuinte;
-        while (true) {
-            try {
-                System.out.print("Digite o número de contribuinte: ");
-                contribuinte = Integer.parseInt(scanner.nextLine());
-                if (String.valueOf(contribuinte).length() != 9) {
-                    System.out.println("Número de contribuinte inválido. O número deve ter 9 digitos!");
-                } else {
-                    Cliente clienteComEsteContribuinte = procurarClientePorContribuinte(contribuinte);
-                    if (clienteComEsteContribuinte != null) {
-                        System.out.println("Já existe um cliente com este número de contribuinte!");
-                    } else {
-                        break;
-                    }
-                }
-
-            } catch (NumberFormatException e) {
-                System.out.println("Entrada inválida. Digite um número inteiro.");
-            } catch (Exception e) {
-                System.out.println("Erro ao processar o número de contribuinte: " + e.getMessage());
-            }
+        contribuinte = (int)POOFS.receberInput(scanner, CategoriaInput.inteiro, "%s❯ Introduza o número de contribuinte →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        if (contribuinte == -1) {
+            System.out.println("%s● Operação de criação de novo cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+            return;
         }
 
-        String localizacao;
-        System.out.print("Digite a localização do cliente (Digite 'Continente', 'Açores' ou 'Madeira'): ");
-        while (true) {
-            try {
-                localizacao = scanner.nextLine();
-                localizacao = localizacao.trim();
-                if (isTextoValido(localizacao)) {
-                    if (isLocalizacaoValida(localizacao)) {
-                        //Para  a primeira letra de cada palavra ser maiúscula
-                        if (localizacao.equalsIgnoreCase("madeira")) {
-                            localizacao = "Madeira";
-                        } else if (localizacao.equalsIgnoreCase("açores")) {
-                            localizacao = "Açores";
-                        } else if (localizacao.equalsIgnoreCase("continente")) {
-                            localizacao = "Continente";
-                        }
-                        break;
-                    } else {
-                        System.out.print("Não existe essa localização! Digite 'Continente', 'Açores' ou 'Madeira': ");
-                    }
-                } else {
-                    System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
-                }
-            } catch (Exception e) {
-                System.out.println("Erro ao processar a localização: " + e.getMessage());
-            }
-        }
+        String localizacao = (String)POOFS.receberInput(scanner, CategoriaInput.localizacao, "%s❯ Introduza a localização do cliente (Introduza 'Continente', 'Açores' ou 'Madeira') →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+
         adicionarCliente(nome, contribuinte, localizacao);
     }
 
@@ -147,14 +68,14 @@ public class Clientes {
     // Metodo para listar os clientes
     public void listarClientes() {
         if (listaClientes.isEmpty()) {
-            System.out.println("A lista de clientes está vazia!");
+            System.out.println("%s● A lista de clientes está vazia!%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
         } else {
-            System.out.println("--------------------------------------------------------------------------------------------");
-            System.out.printf("| Lista de Clientes: %-69s |\n", "");
+            System.out.println("%s───────────────────────────────────────────────────────────────────────────────────────────────%s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+            System.out.printf(" Lista de Clientes:\n");
             for (Cliente cliente : listaClientes) {
                 System.out.println(cliente);
             }
-            System.out.println("--------------------------------------------------------------------------------------------");
+            System.out.println("%s───────────────────────────────────────────────────────────────────────────────────────────────%s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
         }
     }
 
@@ -164,43 +85,43 @@ public class Clientes {
         Scanner scanner = new Scanner(System.in);
 
         if (listaClientes.isEmpty()) {
-            System.out.println("A lista de clientes está vazia.");
+            System.out.println("%s● A lista de clientes está vazia.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
         } else {
             Cliente cliente;
             int contribuinte;
             while (true) {
                 try {
-                    System.out.print("Digite o número de contribuinte do cliente ao qual deseja alterar os dados: ");
+                    System.out.print("%s❯ Introduza o número de contribuinte do cliente ao qual deseja alterar os dados: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
                     contribuinte = Integer.parseInt(scanner.nextLine());
                     cliente = procurarClientePorContribuinte(contribuinte);
                     if (cliente != null) {
-                        System.out.println("Cliente " + cliente.getNome() + " encontrado!");
+                        System.out.println("%sCliente %s encontrado!%s".formatted(Formatacao.GREEN.getCode(),cliente.getNome(), Formatacao.RESET.getCode()));
                         break;
                     } else {
-                        System.out.println("Cliente não encontrado! Tente novamente.");
+                        System.out.println("%sCliente %s não encontrado! Tente novamente.%s".formatted(Formatacao.RED.getCode(),cliente.getNome(), Formatacao.RESET.getCode()));
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Entrada inválida. Digite um número inteiro.");
+                    System.out.println("%sEntrada inválida. Introduza um número inteiro.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                 } catch (Exception e) {
-                    System.out.println("Erro ao processar o número de contribuinte: " + e.getMessage());
+                    System.out.println("%s● Erro ao processar o número de contribuinte: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
                 }
             }
 
             int opcao = -1;
             while (opcao != 0) {
                 try {
-                    System.out.println("--------------------------------");
-                    System.out.print("| Que dados deseja alterar?   |\n");
-                    System.out.print("|  1- Nome                    |\n");
-                    System.out.print("|  2- Contribuinte            |\n");
-                    System.out.print("|  3- Localização             |\n");
-                    System.out.print("|  0- Cancelar                |\n");
-                    System.out.println("-------------------------------");
+                    System.out.println("─────────────────────────────────────");
+                    System.out.println(" Que dados deseja alterar?");
+                    System.out.println(" 1 - Nome");
+                    System.out.println(" 2 - Contribuinte");
+                    System.out.println(" 3 - Localização");
+                    System.out.println(" 0 - Sair");
+                    System.out.println("─────────────────────────────────────");
 
-                    System.out.print("Opção-> ");
+                    System.out.print("%s❯ Opção → %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
                     opcao = Integer.parseInt(scanner.nextLine());
                     if (opcao < 0 || opcao > 3) {
-                        System.out.println("Opção inválida! Digite um número entre 0 e 3.");
+                        System.out.println("%s● Opção inválida! Introduza um número entre 0 e 3.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                         continue; // Volta para a entrada de opção
                     }
 
@@ -208,46 +129,47 @@ public class Clientes {
                         case 1 -> {
                             String novoNome;
                             while (true) {
-                                System.out.print("Novo nome: ");
+                                System.out.print("%s❯ Novo nome: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
                                 novoNome = scanner.nextLine().trim();
-                                if (isTextoValido(novoNome)) {
+                                if (POOFS.isTextoValido(novoNome)) {
+                                    cliente.setNome(novoNome);
                                     break;
                                 } else {
-                                    System.out.println("Nome inválido. Apenas letras e espaços são permitidos.");
+                                    System.out.println("%sNome inválido. Apenas letras e espaços são permitidos.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                 }
                             }
                         }
                         case 2 -> {
                             int novoContribuinte;
                             while (true) {
-                                System.out.print("Novo número de contribuinte: ");
+                                System.out.print("%s❯ Novo número de contribuinte: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
                                 try {
                                     novoContribuinte = Integer.parseInt(scanner.nextLine());
-                                    if (String.valueOf(contribuinte).length() != 9) {
-                                        System.out.println("Número de contribuinte inválido. O número deve ter 9 digitos!");
+                                    if (String.valueOf(novoContribuinte).length() != 9) {
+                                        System.out.println("%s● Número de contribuinte inválido. O número deve ter 9 digitos!%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                     } else {
                                         Cliente novoClienteContribuinte = procurarClientePorContribuinte(novoContribuinte);
                                         if (novoClienteContribuinte == null) {
                                             cliente.setContribuinte(novoContribuinte);
-                                            System.out.println("Contribuinte alterado com sucesso.");
+                                            System.out.println("%sContribuinte alterado com sucesso.%s".formatted(Formatacao.GREEN.getCode(), Formatacao.RESET.getCode()));
                                             break;
                                         } else {
-                                            System.out.println("Já existe um cliente com este número de contribuinte!");
+                                            System.out.println("%s● Já existe um cliente com este número de contribuinte!%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                         }
                                     }
                                 } catch (NumberFormatException e) {
-                                    System.out.println("Entrada inválida. Digite um número inteiro.");
+                                    System.out.println("%s● Entrada inválida. Introduza um número inteiro.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                 }
                             }
                         }
                         case 3 -> {
                             String novaLocalizacao;
-                            System.out.print("Digite a localização do cliente (Digite 'Portugal Continental', 'Açores' ou 'Madeira'): ");
+                            System.out.print("%s❯ Introduza a nova localização do cliente ('Continente', 'Açores' ou 'Madeira'): %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
                             while (true) {
                                 try {
                                     novaLocalizacao = scanner.nextLine().trim();
-                                    if (isTextoValido(novaLocalizacao)) {
-                                        if (isLocalizacaoValida(novaLocalizacao)) {
+                                    if (POOFS.isTextoValido(novaLocalizacao)) {
+                                        if (POOFS.isLocalizacaoValida(novaLocalizacao)) {
                                             // Para a primeira letra de cada palavra ser maiúscula
                                             if (novaLocalizacao.equalsIgnoreCase("madeira")) {
                                                 novaLocalizacao = "Madeira";
@@ -259,31 +181,32 @@ public class Clientes {
                                             cliente.setLocalizacao(novaLocalizacao);
                                             break;
                                         } else {
-                                            System.out.print("Não existe essa localização! Digite 'Continente', 'Açores' ou 'Madeira': ");
+                                            System.out.print("%s● Não existe essa localização! Introduza 'Continente', 'Açores' ou 'Madeira': %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                         }
                                     } else {
-                                        System.out.println("Localização inválida. Apenas letras e espaços são permitidos.");
+                                        System.out.println("%s● Localização inválida. Apenas letras e espaços são permitidos.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                     }
                                 } catch (Exception e) {
-                                    System.out.println("Erro ao processar a localização: " + e.getMessage());
+                                    System.out.println("%s● Erro ao processar a localização: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
                                 }
                             }
                         }
-                        case 0 -> System.out.println("Alteração cancelada.");
-                        default -> System.out.println("Opção inválida. Tente novamente.");
+                        case 0 -> System.out.println("%s● Alterações terminadas.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                        default -> System.out.println("%s● Opção inválida. Tente novamente.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Erro ao processar a opção: Digite um número válido.");
+                    System.out.println("%s● Erro ao processar a opção: Introduza um número válido.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                 } catch (Exception e) {
-                    System.out.println("Erro inesperado: " + e.getMessage());
+                    System.out.println("%s● Erro inesperado: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
                 }
-                System.out.print("Deseja alterar mais algum dado? (S ou N): ");
+                System.out.print("%s❯ Deseja alterar mais alguma informação? (S/N): %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
                 String continuar = scanner.nextLine();
                 while (!continuar.equalsIgnoreCase("S") && !continuar.equalsIgnoreCase("N")) {
-                    System.out.println("Opção inválida. Por favor, digite 'S' para sim ou 'N' para não.");
+                    System.out.println("%s● Opção inválida. Por favor, introduza S/N.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                     continuar = scanner.nextLine();
                 }
                 if (continuar.equalsIgnoreCase("N")) {
+                    System.out.println("%s● Alterações guardadas: edição de cliente terminada%s".formatted(Formatacao.GREEN.getCode(), Formatacao.RESET.getCode()));
                     break;
                 }
             }

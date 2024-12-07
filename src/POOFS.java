@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class POOFS {
@@ -92,10 +93,141 @@ public class POOFS {
                 }
 
             } catch (NumberFormatException e) {
-                System.out.printf("%s● Entrada inválida! Digite um número válido.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
+                System.out.printf("%s● Entrada inválida! Introduza um número válido.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             } catch (Exception e) {
                 System.out.printf("%s● Erro inesperado: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
             }
         }
+    }
+
+    public static Object receberInput(Scanner scanner, CategoriaInput tipo, String mensagem) {
+        switch (tipo) {
+            case inteiro -> {
+                int num = -1;
+                boolean valido = false;
+                while (!valido) {
+                    try {
+                        System.out.print(mensagem);
+                        num = Integer.parseInt(scanner.nextLine());
+                        valido = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("%s● Entrada inválida. Por favor, introduza um número válido. Introduza '-1' para sair.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                    }
+                }
+                return num;
+            }
+            case data -> {
+                while (true) {
+                    try {
+                        System.out.print(mensagem);
+                        String dataStr = scanner.nextLine();
+
+                        if (dataStr.equalsIgnoreCase("Cancelar")) {
+                            return null;
+                        }
+
+                        String[] partes = dataStr.split("/");
+                        if (partes.length != 3) {
+                            throw new IllegalArgumentException("%s● Formato inválido. Siga o formato (DD/MM/AAAA). Use 'Cancelar' para sair.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                        }
+
+                        int dia = Integer.parseInt(partes[0].trim());
+                        int mes = Integer.parseInt(partes[1].trim());
+                        int ano = Integer.parseInt(partes[2].trim());
+
+                        Data data = new Data(dia, mes, ano);
+                        if (data.isDataValida()) {
+                            return data;
+                        } else {
+                            throw new IllegalArgumentException("Data inválida. Verifique a validez da data introduzida. Use 'Cancelar' para sair.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("%s● Erro ao processar a data. Certifique-se que usa apenas números.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+            }
+            case nome -> {
+                String nome;
+                while (true) {
+                    try {
+                        System.out.print(mensagem);
+                        nome = scanner.nextLine();
+                        nome = nome.trim();
+                        if (isTextoValido(nome)) {
+                            return nome;
+                        } else {
+                            System.out.println("%s● Nome inválido. Apenas letras e espaços são permitidos.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+
+                            return null;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("%s● Erro ao processar o nome: %s".formatted(Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode()));
+                    }
+                }
+            }
+            case localizacao -> {
+                while (true) {
+                    System.out.print(mensagem);
+                    try {
+                        String localizacao;
+                        localizacao = scanner.nextLine();
+                        localizacao = localizacao.trim();
+                        if (POOFS.isTextoValido(localizacao)) {
+                            if (POOFS.isLocalizacaoValida(localizacao)) {
+                                //Para  a primeira letra de cada palavra ser maiúscula
+                                if (localizacao.equalsIgnoreCase("madeira")) {
+                                    localizacao = "Madeira";
+                                } else if (localizacao.equalsIgnoreCase("açores")) {
+                                    localizacao = "Açores";
+                                } else if (localizacao.equalsIgnoreCase("continente")) {
+                                    localizacao = "Continente";
+                                }
+                                break;
+                            } else {
+                                System.out.print("%s● Localização não reconhecida! Introduza 'Continente', 'Açores' ou 'Madeira'. %s\n".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                            }
+                        } else {
+                            System.out.println("%s● Localização inválida. Apenas letras e espaços são permitidos.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                        }
+                    } catch (Exception e) {
+                        System.out.println("%s● Erro ao processar a localização: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
+    public static boolean isTextoValido(String texto) {
+        if (!texto.isEmpty()) {
+            texto = String.join(" ", texto.split("\\s+"));
+            for (int i = 0; i < texto.length(); i++) {
+                char c = texto.charAt(i);
+                if (!(Character.isLetter(c) || c == ' ')) {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+
+    public static boolean isLocalizacaoValida(String localizacao) {
+        ArrayList<String> localizacoes = new ArrayList<>();
+        localizacoes.add("continente");
+        localizacoes.add("açores");
+        localizacoes.add("madeira");
+
+        for (String loc : localizacoes) {
+            if (loc.equalsIgnoreCase(localizacao)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

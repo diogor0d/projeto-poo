@@ -68,8 +68,8 @@ public abstract class Produto implements Serializable {
     // // toString
     public String toString() {
         return String.format(
-                "COD:%-7s NOME:%-20s DESC=%-40s QNT:%-4d P.UNI:%-7.2f€",
-                codigo, "'"+nome+"'", "'"+descricao+"'", quantidade, preco
+                "%sCOD:%s%-7s %sNOME%s:%-20s %sDESC%s:%-40s %sQNT%s:%-4d %sP.UNI%s:%-7.2f€",Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode(),
+                codigo,Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode(), "'"+nome+"'",Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode(),"'"+descricao+"'",Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode(),quantidade,Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode(),preco
         );
     }
 }

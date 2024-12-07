@@ -3,6 +3,7 @@ CL,Jose Socrates, 928112311, Continente
 CL,Rabolho Costa, 123456789, Açores
 CL,Fernando Madureira, 876543212, Continente
 CL,André Ventura, 345672891, Continente
+CL,User Teste, 1, Continente
 
 PA_TR, 12366, melao, 500g melao do panelas, 1, 5.00, true, HACCP
 PA_TR, 4567, farinha de trigo, 1kg farinha tipo 55, 10, 1.50, true, HACCP, GMP
