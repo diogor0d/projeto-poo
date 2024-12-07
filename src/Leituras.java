@@ -1,6 +1,7 @@
 // duvida: colocamos as linhas 7 e 8 como final??
 
 import java.io.*;
+import java.text.Format;
 import java.util.*;
 
 public class Leituras {
@@ -17,12 +18,20 @@ public class Leituras {
 
     //Em vez de receber argumento, exporta as faturas na class Faturas e ta feito
     public void exportarFaturas(ArrayList<Fatura> faturas) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"))) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("%s❯ Insira o nome do ficheiro de exportação: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        String fileName = scanner.nextLine();
+
+        if(!fileName.endsWith(".txt")) {
+            fileName += ".txt";
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             for (Fatura fatura : faturas) {
                 writer.write(fatura.toStringFicheiro());
                 writer.newLine();
             }
-            System.out.printf("%s● As faturas foram escritas no ficheiro %s'output.txt'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
+            System.out.printf("%s● As faturas foram escritas no ficheiro %s'%s'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), fileName,Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
             System.out.printf("%s● Erro ao escrever as faturas no ficheiro: %s %s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
@@ -30,11 +39,26 @@ public class Leituras {
 
 
     public void importarFaturas() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("%s❯ Insira o nome do ficheiro a importar: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        String fileName = scanner.nextLine();
+
+        if(!fileName.endsWith(".txt")) {
+            fileName += ".txt";
+        }
+
+        File ficheiroImportacao = new File(fileName);
+
+        if(!ficheiroImportacao.exists() || !ficheiroImportacao.isFile()) {
+            System.out.printf("%s● Ficheiro %s'%s'%s não encontrado.%s\n", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), fileName, Formatacao.RED.getCode(), Formatacao.RESET.getCode());
+            return;
+        }
+
         try (BufferedReader br = new BufferedReader(new FileReader("output.txt"))) {
             processarFaturas(br);
             System.out.printf("%s● Faturas importadas com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
-            System.out.printf("%s● Erro ao importar faturas do arquivo: %s%s\n ", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
+            System.out.printf("%s● Erro ao importar faturas do ficheiro: %s%s\n ", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
     }
 

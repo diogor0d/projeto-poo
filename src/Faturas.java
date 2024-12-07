@@ -330,7 +330,7 @@ public class Faturas {
 
     public void visualizarFatura() {
         System.out.print("%s❯ Qual é o número da fatura que quer vizualizar? %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
-        int num = lerInteiro();
+        int num = (int) POOFS.receberInput(new Scanner(System.in), CategoriaInput.inteiro, "");
         if (num != -1) {
             Fatura fatura = procurarFatura(num);
             if (fatura != null) {
@@ -352,21 +352,6 @@ public class Faturas {
         return null;
     }
 
-    public int lerInteiro() {
-        Scanner scanner = new Scanner(System.in);
-        int num = -1;
-        boolean valido = false;
-        while (!valido) {
-            try {
-                System.out.print(" > ");
-                num = Integer.parseInt(scanner.nextLine());
-                valido = true;
-            } catch (NumberFormatException e) {
-                System.out.println("%s● Entrada inválida. Por favor, introduza um número válido.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
-            }
-        }
-        return num;
-    }
 
     public int gerarNumFatura() {
         Random random = new Random();

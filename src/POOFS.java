@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class POOFS {
-    // Declaração das classes que manipulam os clientes, faturas e produtos e da que é responsável pelas leituras e escritas dos arquivos
+    // Declaração das classes que manipulam os clientes, faturas e produtos e da que é responsável pelas leituras e escritas dos ficheiros
     private final Clientes clientes;
     private final Faturas faturas;
     private final Produtos produtos;
@@ -22,7 +22,7 @@ public class POOFS {
         sistema.iniciar();
     }
 
-    public void iniciar() {
+    private void iniciar() {
         try {
             leituras.lerFicheiro();
         } catch (Exception e) {

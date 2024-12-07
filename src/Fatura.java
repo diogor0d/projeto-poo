@@ -17,7 +17,7 @@ public class Fatura implements Serializable {
         this.produtos = produtos;
     }
 
-    public double calcularTotalBruto() {
+    private double calcularTotalBruto() {
         double total = 0;
         for (Produto produto : produtos) {
             total += produto.getPreco() * produto.getQuantidade();
