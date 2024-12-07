@@ -1,11 +1,12 @@
-//vizualizarFatura e editarFatura estão incompletos
-
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Classe que representa uma lista de faturas e todos as ferramentas de gestão associadas
+ */
 public class Faturas {
+
     private ArrayList<Fatura> listaFaturas;
     private final Clientes clientes;
     private final Produtos produtos;

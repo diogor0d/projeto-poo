@@ -1,13 +1,31 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Classe principal do programa
+ */
 public class POOFS {
-    // Declaração das classes que manipulam os clientes, faturas e produtos e da que é responsável pelas leituras e escritas dos ficheiros
+
+    /**
+     * Lista de clientes
+     */
     private final Clientes clientes;
+    /**
+     * Lista de faturas
+     */
     private final Faturas faturas;
+    /**
+     * Lista de produtos
+     */
     private final Produtos produtos;
+    /**
+     * Instância de leituras, que contém métodos para ler e escrever ficheiros e manipular os dados
+     */
     private final Leituras leituras;
 
+    /**
+     * Construtor da classe POOFS
+     */
     public POOFS() {
         // Inicializa dessas classes, criando uma nova instância para cada uma
         this.clientes = new Clientes();
@@ -16,12 +34,20 @@ public class POOFS {
         this.leituras = new Leituras(clientes, faturas, produtos);
     }
 
+    /**
+     * Método principal do programa
+     *
+     * @param args Argumentos da linha de comandos
+     */
     public static void main(String[] args) {
         // Cria a instância de Main, ou seja inicializar o sistema
         POOFS sistema = new POOFS();
         sistema.iniciar();
     }
 
+    /**
+     * Método que inicia e assegura a execução do programa
+     */
     private void iniciar() {
         try {
             leituras.lerFicheiro();
@@ -100,6 +126,14 @@ public class POOFS {
         }
     }
 
+    /**
+     * Método para receber input do utilizador, de forma centralizada, de forma a minimizar a repetição de código e facilitar a manutenção e promover a modularidade do projeto.
+     *
+     * @param scanner   Scanner
+     * @param tipo      Tipo de input a receber
+     * @param mensagem  Mensagem a apresentar ao utilizador
+     * @return          Objeto com o input do utilizador
+     */
     public static Object receberInput(Scanner scanner, CategoriaInput tipo, String mensagem) {
         switch (tipo) {
             case inteiro -> {
@@ -200,7 +234,12 @@ public class POOFS {
         return null;
     }
 
-    // Metodo para determinar se uma string é constituida apenas por caracteres e espaços
+    /**
+     * Método que verifica se um texto é válido, ou seja, se contém apenas letras e espaços.
+     *
+     * @param texto Texto a verificar
+     * @return      True se o texto for válido, false caso contrário
+     */
     public static boolean isTextoValido(String texto) {
         if (!texto.isEmpty()) {
             texto = String.join(" ", texto.split("\\s+"));
@@ -216,7 +255,12 @@ public class POOFS {
         return true;
     }
 
-
+    /**
+     * Método que verifica se uma localização é válida, ou seja, se é uma das opções disponíveis.
+     *
+     * @param localizacao Localização a verificar
+     * @return            True se a localização for válida, false caso contrário
+     */
     public static boolean isLocalizacaoValida(String localizacao) {
         ArrayList<String> localizacoes = new ArrayList<>();
         localizacoes.add("continente");

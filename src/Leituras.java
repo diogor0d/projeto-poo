@@ -1,14 +1,32 @@
-// duvida: colocamos as linhas 7 e 8 como final??
 
 import java.io.*;
-import java.text.Format;
 import java.util.*;
 
+/**
+ * Classe que representa as leituras de ficheiros e escritas de ficheiros, através de métodos e as respetivas estruturas para gerir o sistema de faturas.
+ */
 public class Leituras {
+    /**
+     * Lista de clientes
+     */
     private final Clientes clientes;
+
+    /**
+     * Lista de faturas
+     */
     private final Faturas faturas;
+
+    /**
+     * Lista de produtos
+     */
     private final Produtos produtos;
 
+    /**
+     * Construtor da classe Leituras
+     * @param clientes Lista de clientes
+     * @param faturas Lista de faturas
+     * @param produtos Lista de produtos
+     */
     public Leituras(Clientes clientes, Faturas faturas, Produtos produtos) {
         this.clientes = clientes;
         this.faturas = faturas;
@@ -16,7 +34,10 @@ public class Leituras {
     }
 
 
-    //Em vez de receber argumento, exporta as faturas na class Faturas e ta feito
+    /**
+     * Método que exporta as faturas para um ficheiro de texto especificado e solicitado ao utilizador
+     * @param faturas Lista de faturas
+     */
     public void exportarFaturas(ArrayList<Fatura> faturas) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("%s❯ Insira o nome do ficheiro de exportação: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
@@ -37,7 +58,9 @@ public class Leituras {
         }
     }
 
-
+    /**
+     * Método que importa as faturas de um ficheiro de texto especificado e solicitado ao utilizador
+     */
     public void importarFaturas() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("%s❯ Insira o nome do ficheiro a importar: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
@@ -62,7 +85,12 @@ public class Leituras {
         }
     }
 
-    //Em vez de receber argumento, exporta as faturas na class POOFS
+    /**
+     * Método que exporta as faturas para um ficheiro de objetos 'output.obj'
+     * @param faturas Lista de faturas
+     * @param produtos Lista de produtos
+     * @param clientes Lista de clientes
+     */
     public void escreverObjeto(ArrayList<Fatura> faturas, ArrayList<Produto> produtos, ArrayList<Cliente> clientes) {
         File ficheiroObjetos = new File("output.obj");
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ficheiroObjetos))) {
@@ -76,6 +104,9 @@ public class Leituras {
         }
     }
 
+    /**
+     * Método que lê as listas de faturas, produtos e clientes de um ficheiro de objetos 'output.obj'
+     */
     public void lerFicheiro() {
         File ficheiroObjetos = new File("output.obj");
 
@@ -125,6 +156,10 @@ public class Leituras {
         }
     }
 
+    /**
+     * Método que processa um produto a partir de uma linha do ficheiro de texto
+     * @param splittedLine Linha do ficheiro de texto
+     */
     private void processarProduto(String[] splittedLine) {
         try {
 
@@ -184,6 +219,10 @@ public class Leituras {
         }
     }
 
+    /**
+     * Método que processa uma fatura a partir de uma linha do ficheiro de texto
+     * @param splittedLine Linha do ficheiro de texto
+     */
     private void processarFatura(String[] splittedLine) {
         try {
             int num = Integer.parseInt(splittedLine[1]);
@@ -220,6 +259,10 @@ public class Leituras {
         }
     }
 
+    /**
+     * Método que processa um cliente a partir de uma linha do ficheiro de texto
+     * @param splittedLine Linha do ficheiro de texto
+     */
     private void processarCliente(String[] splittedLine) {
         try {
             String nome = splittedLine[1];
@@ -231,6 +274,11 @@ public class Leituras {
         }
     }
 
+    /**
+     * Método que processa as faturas a partir de um ficheiro de texto exportado previamente ou criado manualmente
+     * @param br BufferedReader
+     * @throws IOException Exceção de I/O
+     */
     private void processarFaturas(BufferedReader br) throws IOException {
         String line;
         while ((line = br.readLine()) != null && !line.trim().isEmpty()) {

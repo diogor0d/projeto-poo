@@ -1,21 +1,48 @@
 import java.io.Serializable;
 
+/**
+ * Classe que representa uma data
+ */
 public class Data implements Serializable{
+    /**
+     * Dia da data
+     */
     private final int dia;
+
+    /**
+     * Mês da data
+     */
     private final int mes;
+
+    /**
+     * Ano da data
+     */
     private final int ano;
 
+    /**
+     * Construtor da classe Data
+     * @param dia Dia da data
+     * @param mes Mês da data
+     * @param ano Ano da data
+     */
     public Data(int dia, int mes, int ano) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
     }
 
+    /**
+     * Método que devolve a representação em string da data
+     * @return Data em String
+     */
     public String toString() {
         return String.format("%02d/%02d/%04d", dia, mes, ano);
     }
 
-    // Metodo para verificar se uma Data é válida ou não
+    /**
+     * Método que verifica se a data é válida
+     * @return True se a data for válida, false caso contrário
+     */
     public boolean isDataValida() {
         if (ano < 200 || ano > 2024) return false;
 

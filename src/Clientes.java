@@ -1,20 +1,36 @@
-import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Esta classe representa uma lista de clientes e todas as ferraentas de gestão da mesma.
+ */
 public class Clientes {
+    /**
+     * Lista de clientes.
+     */
     private ArrayList<Cliente> listaClientes;
 
-    // Construtor da classe Clientes
+    /**
+     * Construtor da classe Clientes.
+     */
     public Clientes() {
         this.listaClientes = new ArrayList<>();
     }
 
+    /**
+     * Método que devolve a lista de clientes.
+     *
+     * @return Lista de clientes.
+     */
     public ArrayList<Cliente> getListaClientes() {
         return listaClientes;
     }
 
-    // Metodo para tornar uma lista de clientes na lista de clientes
+    /**
+     * Método que define a lista de clientes.
+     *
+     * @param novaListaClientes Nova lista de clientes.
+     */
     public void setListaClientes(ArrayList<Cliente> novaListaClientes) {
         if (novaListaClientes != null) {
             this.listaClientes = novaListaClientes;
@@ -24,7 +40,12 @@ public class Clientes {
         }
     }
 
-    // Metodo para procurar um cliente na lista a partir do seu numero de contribuinte
+    /**
+     * Método que procura um cliente na lista de clientes através do número de contribuinte.
+     *
+     * @param contribuinte Número de contribuinte do cliente a procurar.
+     * @return Cliente encontrado ou null se não for encontrado.
+     */
     public Cliente procurarClientePorContribuinte(int contribuinte) {
         for (Cliente cliente : listaClientes) {
             if (cliente.getContribuinte() == contribuinte) {
@@ -34,7 +55,10 @@ public class Clientes {
         return null;
     }
 
-    // Metodo para ler os dados e criar o cliente
+    /**
+     * Método que solicita a introdução de um novo cliente ao utilizador e o acrescenta à lista de clientes.
+     *
+     */
     public void novoCliente() {
         Scanner scanner = new Scanner(System.in);
 
@@ -58,14 +82,22 @@ public class Clientes {
     }
 
 
-    // Metodo para adicionar um novo cliente à lista
+    /**
+     * Método que adiciona um novo cliente à lista de clientes.
+     *
+     * @param nome         Nome do cliente.
+     * @param contribuinte Número de contribuinte do cliente.
+     * @param localizacao  Localização do cliente.
+     */
     public void adicionarCliente(String nome, int contribuinte, String localizacao) {
         Cliente novoCliente = new Cliente(nome, contribuinte, localizacao);
         listaClientes.add(novoCliente);
         System.out.println(Formatacao.YELLOW.getCode() + "Novo cliente '" + nome + "' adicionado com sucesso!" + Formatacao.RESET.getCode());
     }
 
-    // Metodo para listar os clientes
+    /**
+     * Método que apresenta a lista de todos os clientes no sistema
+     */
     public void listarClientes() {
         if (listaClientes.isEmpty()) {
             System.out.println("%s● A lista de clientes está vazia!%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
@@ -79,32 +111,26 @@ public class Clientes {
         }
     }
 
-
-    //duvida: deveriamos usar o contribuinte em vez de nome??
+    /**
+     * Método que permite ao utilizador a edição de um cliente existente na lista de clientes.
+     */
     public void editarCliente() {
         Scanner scanner = new Scanner(System.in);
 
         if (listaClientes.isEmpty()) {
             System.out.println("%s● A lista de clientes está vazia.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
         } else {
-            Cliente cliente;
             int contribuinte;
-            while (true) {
-                try {
-                    System.out.print("%s❯ Introduza o número de contribuinte do cliente ao qual deseja alterar os dados: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
-                    contribuinte = Integer.parseInt(scanner.nextLine());
-                    cliente = procurarClientePorContribuinte(contribuinte);
-                    if (cliente != null) {
-                        System.out.println("%sCliente %s encontrado!%s".formatted(Formatacao.GREEN.getCode(),cliente.getNome(), Formatacao.RESET.getCode()));
-                        break;
-                    } else {
-                        System.out.println("%sCliente %s não encontrado! Tente novamente.%s".formatted(Formatacao.RED.getCode(),cliente.getNome(), Formatacao.RESET.getCode()));
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("%sEntrada inválida. Introduza um número inteiro.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
-                } catch (Exception e) {
-                    System.out.println("%s● Erro ao processar o número de contribuinte: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
-                }
+            contribuinte = (int)POOFS.receberInput(scanner, CategoriaInput.inteiro, "%s❯ Introduza o número de contribuinte do cliente ao qual deseja alterar os dados: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+            if (contribuinte == -1) {
+                System.out.println("%s● Operação de edição de cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                return;
+            }
+
+            Cliente cliente = procurarClientePorContribuinte(contribuinte);
+            if (cliente == null) {
+                System.out.println("%s● Cliente não encontrado. Verifique os dados e tente novamente.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                return;
             }
 
             int opcao = -1;

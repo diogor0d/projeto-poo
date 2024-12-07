@@ -3,13 +3,37 @@
 import java.util.ArrayList;
 import java.io.Serializable;
 
+/**
+ * Classe que representa uma fatura
+ */
 public class Fatura implements Serializable {
+    /**
+     * Número da fatura
+     */
     private int num;
+
+    /**
+     * Cliente associado à fatura
+     */
     private Cliente cliente;
+
+    /**
+     * Data da fatura
+     */
     private Data data;
+
+    /**
+     * Lista de produtos da fatura
+     */
     private ArrayList<Produto> produtos;
 
-    // Construtor
+    /**
+     * Construtor da classe Fatura
+     * @param num Número da fatura
+     * @param cliente Cliente associado à fatura
+     * @param data Data da fatura
+     * @param produtos Lista de produtos da fatura
+     */
     public Fatura(int num, Cliente cliente, Data data, ArrayList<Produto> produtos) {
         this.num = num;
         this.cliente = cliente;
@@ -17,6 +41,10 @@ public class Fatura implements Serializable {
         this.produtos = produtos;
     }
 
+    /**
+     * Método que calcula o total bruto da fatura
+     * @return Total bruto (sem impostos) da fatura
+     */
     private double calcularTotalBruto() {
         double total = 0;
         for (Produto produto : produtos) {
@@ -27,42 +55,74 @@ public class Fatura implements Serializable {
     }
 
     // Getters e Setters
+    /**
+     * Método que devolve o número da fatura
+     * @return Número da fatura
+     */
     public int getNum() {
         return num;
     }
 
+    /**
+     * Método que devolve o cliente associado à fatura
+     * @return Cliente associado à fatura
+     */
     public Cliente getCliente() {
         return cliente;
     }
 
+    /**
+     * Método que devolve a data da fatura
+     * @return Data da fatura
+     */
     public Data getData() {
         return data;
     }
 
+    /**
+     * Método que devolve a lista de produtos da fatura
+     * @return Lista de produtos da fatura
+     */
     public ArrayList<Produto> getProdutos() {
         return produtos;
     }
 
+    /**
+     * Método que define o número da fatura
+     * @param numero Número da fatura
+     */
     public void setNumero(int numero) {
         this.num = numero;
     }
 
+    /**
+     * Método que define o cliente associado à fatura
+     * @param cliente Cliente associado à fatura
+     */
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
+    /**
+     * Método que define a data da fatura
+     * @param data Data da fatura
+     */
     public void setData(Data data) {
         this.data = data;
     }
 
+    /**
+     * Método que define a lista de produtos da fatura
+     * @param produtos Lista de produtos da fatura
+     */
     public void setProdutos(ArrayList<Produto> produtos) {
         this.produtos = produtos;
     }
 
-
-    // toString
-    //duvida só estou a imprimir o nome dos produtos, mas nao os produtos todos para "facilitar" a leitura, o que achas? depois para guardar no ficheiro, atraves do nome do produto,
-    // recuperamos o produto inteiro na lista de produtos
+    /**
+     * Método que devolve a representação em string da fatura
+     * @return Fatura sob a forma de String
+     */
     public String toString() {
         String[] produtosArray = new String[produtos.size()];
         for (int i = 0; i < produtos.size(); i++) {
@@ -77,6 +137,10 @@ public class Fatura implements Serializable {
         );
     }
 
+    /**
+     * Método que devolve a representação em string da fatura com sob o formato tabela de fatura
+     * @return String de fatura sob a forma de tabela
+     */
     public String toStringFaturaFormatada() {
         String infoCabecalhoFatura = String.format(
                 """
@@ -126,6 +190,10 @@ public class Fatura implements Serializable {
     }
 
 
+    /**
+     * Método que devolve a representação em string da fatura para ser guardada em ficheiro
+     * @return Fatura sob a forma de String para guardar no ficheiro
+     */
     public String toStringFicheiro() {
         String[] produtosArray = new String[produtos.size()];
         for (int i = 0; i < produtos.size(); i++) {
