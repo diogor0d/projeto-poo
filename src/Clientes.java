@@ -223,6 +223,7 @@ public class Clientes {
                 } catch (NumberFormatException e) {
                     System.out.println("%s● Erro ao processar a opção: Introduza um número válido.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                 } catch (Exception e) {
+                    e.printStackTrace();
                     System.out.println("%s● Erro inesperado: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
                 }
                 System.out.print("%s❯ Deseja alterar mais alguma informação? (S/N): %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));

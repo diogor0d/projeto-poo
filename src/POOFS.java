@@ -121,6 +121,7 @@ public class POOFS {
             } catch (NumberFormatException e) {
                 System.out.printf("%s● Entrada inválida! Introduza um número válido.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             } catch (Exception e) {
+                e.printStackTrace();
                 System.out.printf("%s● Erro inesperado: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
             }
         }

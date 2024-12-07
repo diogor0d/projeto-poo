@@ -215,6 +215,7 @@ public class Leituras {
         } catch (IllegalArgumentException e) {
             System.out.printf("%s● Erro ao processar categoria ou booleano: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.printf("%s● Erro inesperado: %s%s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
     }
