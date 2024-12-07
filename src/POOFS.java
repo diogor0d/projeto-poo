@@ -85,7 +85,7 @@ public class POOFS {
                         scanner.close();
                         System.out.println("  Execução terminada  ");
                         return; // Encerra o programa
-                    } else if (continuar.trim().equalsIgnoreCase("S")) {
+                    } else if (continuar.trim().equalsIgnoreCase("S") || continuar.trim().isEmpty()) {
                         break;
                     } else {
                         System.out.printf("%s● Entrada inválida. Insira apenas %s'S'%s ou %s'N'%s.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode(), Formatacao.RED.getCode(), Formatacao.RESET.getCode());
