@@ -213,7 +213,7 @@ public class Clientes {
                                             System.out.print("%s● Não existe essa localização! Introduza 'Continente', 'Açores' ou 'Madeira': %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                         }
                                     } else {
-                                        System.out.println("%s● Localização inválida. Apenas letras e espaços são permitidos. Tente novamente:%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                                        System.out.print("%s● Localização inválida. Apenas letras e espaços são permitidos. Tente novamente: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                                     }
                                 } catch (Exception e) {
                                     System.out.println("%s● Erro ao processar a localização: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
