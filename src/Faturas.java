@@ -160,7 +160,7 @@ public class Faturas {
             int enquadramento = (largura - titulo.length()) / 2;
 
             System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
-            System.out.printf("%" + enquadramento + "s%s%" + (enquadramento - 1) + "s┃\n", "", titulo, "");
+            System.out.printf("%" + enquadramento + "s%s%" + (enquadramento - 1) + "s\n", "", titulo, "");
             for (Fatura fatura : listaFaturas) {
 
                 System.out.printf(" %-179s \n", fatura.toString());

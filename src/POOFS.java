@@ -219,7 +219,7 @@ public class POOFS {
                                 } else if (localizacao.equalsIgnoreCase("continente")) {
                                     localizacao = "Continente";
                                 }
-                                break;
+                                return localizacao;
                             } else {
                                 System.out.print("%s● Localização não reconhecida! Introduza 'Continente', 'Açores' ou 'Madeira'. %s\n".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                             }

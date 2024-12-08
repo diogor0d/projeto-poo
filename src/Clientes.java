@@ -77,6 +77,10 @@ public class Clientes {
         }
 
         String localizacao = (String)POOFS.receberInput(scanner, CategoriaInput.localizacao, "%s❯ Introduza a localização do cliente (Introduza 'Continente', 'Açores' ou 'Madeira') →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        if (localizacao == null) {
+            System.out.println("%s● Operação de criação de novo cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+            return;
+        }
 
         adicionarCliente(nome, contribuinte, localizacao);
     }
