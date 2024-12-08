@@ -31,3 +31,4 @@ bin/
 ### POOFS ###
 output.obj
 /Javadoc/
+.idea/misc.xml
