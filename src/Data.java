@@ -47,7 +47,7 @@ public class Data implements Serializable {
      * @return True se a data for válida, false caso contrário
      */
     public boolean isDataValida() {
-        if (ano < 200 || ano > 2024) return false;
+        if (ano < 2000 || ano > 2024) return false;
 
         if (mes < 1 || mes > 12) return false;
 
