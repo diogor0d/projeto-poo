@@ -1,0 +1,26 @@
+CL,Cristino Rondo, 233451231, Madeira
+CL,Jose Socrates, 928112311, Continente
+CL,Rabolho Costa, 123456789, Açores
+CL,Fernando Madureira, 876543212, Continente
+
+PA_TR, 12366, melao, 500g melao do panelas, 1, 5.00, true, HACCP
+PA_TR, 4567, farinha de trigo, 1kg farinha tipo 55, 10, 1.50, true, HACCP, GMP
+PA_TR, 6789, mel natural, 500g mel artesanal de rosmaninho, 3, 7.00, true, ISO22000
+PA_TI, 1234, vinho de pacote, 750ml vinho de pacote biologico do douro, 2, 250.00, true, VINHO
+PA_TI, 9876, ervilhas congeladas, 1kg ervilhas congeladas, 8, 3.20, false, CONGELADOS
+PA_TI, 3458, atum enlatado, 125g atum em azeite, 15, 1.75, false, ENLATADOS
+PA_TN, 27311, queijo, 750g queijo de cabra, 4, 10.00, false
+PA_TN, 1357, biscoitos, 500g biscoitos de aveia, 20, 2.50, false
+PA_TN, 9753, manteiga, 250g manteiga sem sal, 6, 1.90, false
+PF_P, 9391, paracetamol 1000mg, 10 comprimidos paracetamol 1000mg, 2, 250.00, Dr. Joao
+PF_P, 6547, amoxicilina, 20 comprimidos de 500mg, 2, 8.50, Dr. Ana Costa
+PF_P, 8723, diazepam, 10 comprimidos de 10mg, 1, 15.00, Dr. Pedro Martins
+PF_NP, 3214, creme hidratante, 200ml creme para rosto, 10, 20.00, BELEZA
+PF_NP, 9281, dorflex, 10 comprimidos dorflex, 2, 250.00, BEM_ESTAR
+PF_NP, 4987, ração para gatos, 2kg ração premium para gatos adultos, 4, 25.00, ANIMAIS
+PA_TR, 8371, bifranga, bifranga pronta a comer, 1, 2.99, false, ISO22000, HACCP, GMP, FSSC22000
+
+F,1,233451231, 05/02/1995, 1234, 12366, 9281, 9391
+F,2,123456789, 12/03/2020, 4567, 6789, 6547
+F,3,876543212, 25/12/2023, 9876, 3458, 3214
+F,4,876543212, 01/07/2022, 1357, 9753, 8723
