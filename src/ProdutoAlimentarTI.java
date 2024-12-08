@@ -21,12 +21,13 @@ public class ProdutoAlimentarTI extends ProdutoAlimentar {
 
     /**
      * Construtor da classe ProdutoAlimentarTI.
-     * @param codigo Código do produto.
-     * @param nome Nome do produto.
-     * @param descricao Descrição do produto.
-     * @param quantidade Quantidade do produto.
-     * @param preco Preço do produto.
-     * @param biologico Indica se o produto é biológico.
+     *
+     * @param codigo             Código do produto.
+     * @param nome               Nome do produto.
+     * @param descricao          Descrição do produto.
+     * @param quantidade         Quantidade do produto.
+     * @param preco              Preço do produto.
+     * @param biologico          Indica se o produto é biológico.
      * @param categoriaAlimentar Categoria alimentar do produto.
      */
     public ProdutoAlimentarTI(int codigo, String nome, String descricao, int quantidade, double preco, boolean biologico, CategoriaAlimentar categoriaAlimentar) {
@@ -36,6 +37,7 @@ public class ProdutoAlimentarTI extends ProdutoAlimentar {
 
     /**
      * Método que calcula o IVA de um produto alimentar.
+     *
      * @param cliente Cliente que está a comprar o produto, cuja localização influencia o valor do impossto a aplicar
      * @return Valor da Taxa do IVA do produto
      */
