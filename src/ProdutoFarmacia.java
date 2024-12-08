@@ -9,11 +9,12 @@ public abstract class ProdutoFarmacia extends Produto {
 
     /**
      * Construtor da classe ProdutoFarmacia.
-     * @param codigo Código do produto
-     * @param nome Nome do produto
-     * @param descricao Descrição do produto
+     *
+     * @param codigo     Código do produto
+     * @param nome       Nome do produto
+     * @param descricao  Descrição do produto
      * @param quantidade Quantidade do produto
-     * @param preco Preço do produto
+     * @param preco      Preço do produto
      */
     public ProdutoFarmacia(int codigo, String nome, String descricao, int quantidade, double preco) {
         super(codigo, nome, descricao, quantidade, preco);

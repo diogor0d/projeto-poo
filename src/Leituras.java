@@ -23,8 +23,9 @@ public class Leituras {
 
     /**
      * Construtor da classe Leituras
+     *
      * @param clientes Lista de clientes
-     * @param faturas Lista de faturas
+     * @param faturas  Lista de faturas
      * @param produtos Lista de produtos
      */
     public Leituras(Clientes clientes, Faturas faturas, Produtos produtos) {
@@ -36,6 +37,7 @@ public class Leituras {
 
     /**
      * Método que exporta as faturas para um ficheiro de texto especificado e solicitado ao utilizador
+     *
      * @param faturas Lista de faturas
      */
     public void exportarFaturas(ArrayList<Fatura> faturas) {
@@ -43,7 +45,7 @@ public class Leituras {
         System.out.print("%s❯ Insira o nome do ficheiro de exportação: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
         String fileName = scanner.nextLine();
 
-        if(!fileName.endsWith(".txt")) {
+        if (!fileName.endsWith(".txt")) {
             fileName += ".txt";
         }
 
@@ -52,7 +54,7 @@ public class Leituras {
                 writer.write(fatura.toStringFicheiro());
                 writer.newLine();
             }
-            System.out.printf("%s● As faturas foram escritas no ficheiro %s'%s'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), fileName,Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
+            System.out.printf("%s● As faturas foram escritas no ficheiro %s'%s'%s com sucesso.%s\n", Formatacao.GREEN.getCode(), Formatacao.YELLOW.getCode(), fileName, Formatacao.GREEN.getCode(), Formatacao.RESET.getCode());
         } catch (IOException e) {
             System.out.printf("%s● Erro ao escrever as faturas no ficheiro: %s %s\n", Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode());
         }
@@ -66,13 +68,13 @@ public class Leituras {
         System.out.print("%s❯ Insira o nome do ficheiro a importar: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
         String fileName = scanner.nextLine();
 
-        if(!fileName.endsWith(".txt")) {
+        if (!fileName.endsWith(".txt")) {
             fileName += ".txt";
         }
 
         File ficheiroImportacao = new File(fileName);
 
-        if(!ficheiroImportacao.exists() || !ficheiroImportacao.isFile()) {
+        if (!ficheiroImportacao.exists() || !ficheiroImportacao.isFile()) {
             System.out.printf("%s● Ficheiro %s'%s'%s não encontrado.%s\n", Formatacao.RED.getCode(), Formatacao.YELLOW.getCode(), fileName, Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             return;
         }
@@ -87,7 +89,8 @@ public class Leituras {
 
     /**
      * Método que exporta as faturas para um ficheiro de objetos 'output.obj'
-     * @param faturas Lista de faturas
+     *
+     * @param faturas  Lista de faturas
      * @param produtos Lista de produtos
      * @param clientes Lista de clientes
      */
@@ -158,6 +161,7 @@ public class Leituras {
 
     /**
      * Método que processa um produto a partir de uma linha do ficheiro de texto
+     *
      * @param splittedLine Linha do ficheiro de texto
      */
     private void processarProduto(String[] splittedLine) {
@@ -222,6 +226,7 @@ public class Leituras {
 
     /**
      * Método que processa uma fatura a partir de uma linha do ficheiro de texto
+     *
      * @param splittedLine Linha do ficheiro de texto
      */
     private void processarFatura(String[] splittedLine) {
@@ -262,6 +267,7 @@ public class Leituras {
 
     /**
      * Método que processa um cliente a partir de uma linha do ficheiro de texto
+     *
      * @param splittedLine Linha do ficheiro de texto
      */
     private void processarCliente(String[] splittedLine) {
@@ -277,6 +283,7 @@ public class Leituras {
 
     /**
      * Método que processa as faturas a partir de um ficheiro de texto exportado previamente ou criado manualmente
+     *
      * @param br BufferedReader
      * @throws IOException Exceção de I/O
      */

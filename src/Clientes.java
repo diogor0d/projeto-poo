@@ -34,9 +34,9 @@ public class Clientes {
     public void setListaClientes(ArrayList<Cliente> novaListaClientes) {
         if (novaListaClientes != null) {
             this.listaClientes = novaListaClientes;
-            System.out.println("%sLista de Clientes atualizada.%s".formatted(Formatacao.GREEN.getCode(),Formatacao.RESET.getCode()));
+            System.out.println("%sLista de Clientes atualizada.%s".formatted(Formatacao.GREEN.getCode(), Formatacao.RESET.getCode()));
         } else {
-            System.out.println("%s● A nova lista de clientes é inválida (null).%s".formatted(Formatacao.RED.getCode(),Formatacao.RESET.getCode()));
+            System.out.println("%s● A nova lista de clientes é inválida (null).%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
         }
     }
 
@@ -57,12 +57,11 @@ public class Clientes {
 
     /**
      * Método que solicita a introdução de um novo cliente ao utilizador e o acrescenta à lista de clientes.
-     *
      */
     public void novoCliente() {
         Scanner scanner = new Scanner(System.in);
 
-        String nome = (String)POOFS.receberInput(scanner, CategoriaInput.nome, "%s❯ Introduza o nome do cliente →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        String nome = (String) POOFS.receberInput(scanner, CategoriaInput.nome, "%s❯ Introduza o nome do cliente →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
         if (nome == null) {
             System.out.println("%s● Operação de criação de novo cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
             return;
@@ -70,13 +69,13 @@ public class Clientes {
 
 
         int contribuinte;
-        contribuinte = (int)POOFS.receberInput(scanner, CategoriaInput.inteiro, "%s❯ Introduza o número de contribuinte →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        contribuinte = (int) POOFS.receberInput(scanner, CategoriaInput.inteiro, "%s❯ Introduza o número de contribuinte →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
         if (contribuinte == -1) {
             System.out.println("%s● Operação de criação de novo cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
             return;
         }
 
-        String localizacao = (String)POOFS.receberInput(scanner, CategoriaInput.localizacao, "%s❯ Introduza a localização do cliente (Introduza 'Continente', 'Açores' ou 'Madeira') →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+        String localizacao = (String) POOFS.receberInput(scanner, CategoriaInput.localizacao, "%s❯ Introduza a localização do cliente (Introduza 'Continente', 'Açores' ou 'Madeira') →%s ".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
         if (localizacao == null) {
             System.out.println("%s● Operação de criação de novo cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
             return;
@@ -125,7 +124,7 @@ public class Clientes {
             System.out.println("%s● A lista de clientes está vazia.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
         } else {
             int contribuinte;
-            contribuinte = (int)POOFS.receberInput(scanner, CategoriaInput.inteiro, "%s❯ Introduza o número de contribuinte do cliente ao qual deseja alterar os dados: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
+            contribuinte = (int) POOFS.receberInput(scanner, CategoriaInput.inteiro, "%s❯ Introduza o número de contribuinte do cliente ao qual deseja alterar os dados: %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
             if (contribuinte == -1) {
                 System.out.println("%s● Operação de edição de cliente abortada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                 return;
@@ -221,8 +220,10 @@ public class Clientes {
                                 }
                             }
                         }
-                        case 0 -> System.out.println("%s● Alterações terminadas.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
-                        default -> System.out.println("%s● Opção inválida. Tente novamente.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                        case 0 ->
+                                System.out.println("%s● Alterações terminadas.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                        default ->
+                                System.out.println("%s● Opção inválida. Tente novamente.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("%s● Erro ao processar a opção: Introduza um número válido.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));

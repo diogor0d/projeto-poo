@@ -29,9 +29,10 @@ public class Fatura implements Serializable {
 
     /**
      * Construtor da classe Fatura
-     * @param num Número da fatura
-     * @param cliente Cliente associado à fatura
-     * @param data Data da fatura
+     *
+     * @param num      Número da fatura
+     * @param cliente  Cliente associado à fatura
+     * @param data     Data da fatura
      * @param produtos Lista de produtos da fatura
      */
     public Fatura(int num, Cliente cliente, Data data, ArrayList<Produto> produtos) {
@@ -43,6 +44,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que calcula o total bruto da fatura
+     *
      * @return Total bruto (sem impostos) da fatura
      */
     private double calcularTotalBruto() {
@@ -55,8 +57,10 @@ public class Fatura implements Serializable {
     }
 
     // Getters e Setters
+
     /**
      * Método que devolve o número da fatura
+     *
      * @return Número da fatura
      */
     public int getNum() {
@@ -65,6 +69,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que devolve o cliente associado à fatura
+     *
      * @return Cliente associado à fatura
      */
     public Cliente getCliente() {
@@ -73,6 +78,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que devolve a data da fatura
+     *
      * @return Data da fatura
      */
     public Data getData() {
@@ -81,6 +87,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que devolve a lista de produtos da fatura
+     *
      * @return Lista de produtos da fatura
      */
     public ArrayList<Produto> getProdutos() {
@@ -89,6 +96,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que define o número da fatura
+     *
      * @param numero Número da fatura
      */
     public void setNumero(int numero) {
@@ -97,6 +105,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que define o cliente associado à fatura
+     *
      * @param cliente Cliente associado à fatura
      */
     public void setCliente(Cliente cliente) {
@@ -105,6 +114,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que define a data da fatura
+     *
      * @param data Data da fatura
      */
     public void setData(Data data) {
@@ -113,6 +123,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que define a lista de produtos da fatura
+     *
      * @param produtos Lista de produtos da fatura
      */
     public void setProdutos(ArrayList<Produto> produtos) {
@@ -121,6 +132,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que devolve a representação em string da fatura
+     *
      * @return Fatura sob a forma de String
      */
     public String toString() {
@@ -139,6 +151,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que devolve a representação em string da fatura com sob o formato tabela de fatura
+     *
      * @return String de fatura sob a forma de tabela
      */
     public String toStringFaturaFormatada() {
@@ -192,6 +205,7 @@ public class Fatura implements Serializable {
 
     /**
      * Método que devolve a representação em string da fatura para ser guardada em ficheiro
+     *
      * @return Fatura sob a forma de String para guardar no ficheiro
      */
     public String toStringFicheiro() {

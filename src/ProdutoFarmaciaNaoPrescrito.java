@@ -13,12 +13,13 @@ public class ProdutoFarmaciaNaoPrescrito extends ProdutoFarmacia {
 
     /**
      * Construtor da classe ProdutoFarmaciaNaoPrescrito.
-     * @param codigo Código do produto.
-     * @param nome Nome do produto.
-     * @param descricao Descrição do produto.
+     *
+     * @param codigo     Código do produto.
+     * @param nome       Nome do produto.
+     * @param descricao  Descrição do produto.
      * @param quantidade Quantidade do produto.
-     * @param preco Preço do produto.
-     * @param categoria Categoria do produto.
+     * @param preco      Preço do produto.
+     * @param categoria  Categoria do produto.
      */
     public ProdutoFarmaciaNaoPrescrito(int codigo, String nome, String descricao, int quantidade, double preco, CategoriaFarmacia categoria) {
         super(codigo, nome, descricao, quantidade, preco);
@@ -27,6 +28,7 @@ public class ProdutoFarmaciaNaoPrescrito extends ProdutoFarmacia {
 
     /**
      * Método que calcula o IVA de um produto de farmácia.
+     *
      * @param cliente Cliente que está a comprar o produto, cuja localização influencia o valor do imposto a aplicar
      * @return Valor da Taxa do IVA do produto
      */

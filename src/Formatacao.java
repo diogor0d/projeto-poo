@@ -1,6 +1,5 @@
 /**
  * Enum com os códigos unicode para a formatação de texto no terminal.
- *
  */
 public enum Formatacao {
     BOLD("\u001B[1m"),

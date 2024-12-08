@@ -33,7 +33,7 @@ public class Faturas {
                 System.out.println("%s● A nova lista de Faturas é inválida (null).%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
             }
         } catch (Exception e) {
-            System.out.println("%s● Ocorreu um erro inesperado: %s%s".formatted(Formatacao.RED.getCode(),e.getMessage(), Formatacao.RESET.getCode()));
+            System.out.println("%s● Ocorreu um erro inesperado: %s%s".formatted(Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode()));
         }
     }
 
@@ -72,7 +72,6 @@ public class Faturas {
                 System.out.printf("%s● Entrada inválida. Introduza apenas 'S' ou 'N'.%s\n", Formatacao.RED.getCode(), Formatacao.RESET.getCode());
             }
         }
-
 
 
         Cliente cliente;
@@ -118,10 +117,10 @@ public class Faturas {
             for (String codigo : partes) {
                 Produto produto = produtos.procurarProdutoCodigo(Integer.parseInt(codigo));
                 if (produto != null) {
-                    System.out.println("%s● Produto %s adicionado.%s".formatted(Formatacao.GREEN.getCode(),produto.getNome(), Formatacao.RESET.getCode()));
+                    System.out.println("%s● Produto %s adicionado.%s".formatted(Formatacao.GREEN.getCode(), produto.getNome(), Formatacao.RESET.getCode()));
                     listaProdutos.add(produto);
                 } else {
-                    System.out.println("%s● Produto com o código %s não encontrado. Verifique o código e tente adiciona-lo novamente mais tarde.".formatted(Formatacao.RED.getCode(),codigo,Formatacao.RESET.getCode()));
+                    System.out.println("%s● Produto com o código %s não encontrado. Verifique o código e tente adiciona-lo novamente mais tarde.".formatted(Formatacao.RED.getCode(), codigo, Formatacao.RESET.getCode()));
                 }
             }
         } catch (NumberFormatException e) {
@@ -138,7 +137,7 @@ public class Faturas {
             adicionarFatura(numero, cliente, data, listaProdutos);
             System.out.println("%s● Fatura criada com sucesso.%s".formatted(Formatacao.GREEN.getCode(), Formatacao.RESET.getCode()));
         } catch (Exception e) {
-            System.out.println("%s● Erro ao criar fatura: %s&s".formatted(Formatacao.RED.getCode(),e.getMessage(),Formatacao.RESET.getCode()));
+            System.out.println("%s● Erro ao criar fatura: %s&s".formatted(Formatacao.RED.getCode(), e.getMessage(), Formatacao.RESET.getCode()));
         }
     }
 
@@ -181,7 +180,7 @@ public class Faturas {
                     int num = Integer.parseInt(scanner.nextLine());
                     faturaEncontrada = procurarFatura(num);
                     if (faturaEncontrada != null) {
-                        System.out.println("%sFatura %s encontrada.%s".formatted(Formatacao.GREEN.getCode(), num,Formatacao.RESET.getCode()));
+                        System.out.println("%sFatura %s encontrada.%s".formatted(Formatacao.GREEN.getCode(), num, Formatacao.RESET.getCode()));
                         break;
                     } else {
                         System.out.println("%s● Não existe nenhuma fatura com esse número!%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
@@ -312,8 +311,10 @@ public class Faturas {
                                 System.out.println("%s● Erro ao alterar a data: %s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()) + e.getMessage());
                             }
                         }
-                        case 0 -> System.out.println("%s● Alteração cancelada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
-                        default -> System.out.println("%s● Opção inválida.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                        case 0 ->
+                                System.out.println("%s● Alteração cancelada.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
+                        default ->
+                                System.out.println("%s● Opção inválida.%s".formatted(Formatacao.RED.getCode(), Formatacao.RESET.getCode()));
                     }
                     System.out.print("%s❯ Deseja alterar mais alguma informação? (S ou N): %s".formatted(Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode()));
                     String continuar = scanner.nextLine();

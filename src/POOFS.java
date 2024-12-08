@@ -130,10 +130,10 @@ public class POOFS {
     /**
      * Método para receber input do utilizador, de forma centralizada, de forma a minimizar a repetição de código e facilitar a manutenção e promover a modularidade do projeto.
      *
-     * @param scanner   Scanner
-     * @param tipo      Tipo de input a receber
-     * @param mensagem  Mensagem a apresentar ao utilizador
-     * @return          Objeto com o input do utilizador
+     * @param scanner  Scanner
+     * @param tipo     Tipo de input a receber
+     * @param mensagem Mensagem a apresentar ao utilizador
+     * @return Objeto com o input do utilizador
      */
     public static Object receberInput(Scanner scanner, CategoriaInput tipo, String mensagem) {
         switch (tipo) {
@@ -239,7 +239,7 @@ public class POOFS {
      * Método que verifica se um texto é válido, ou seja, se contém apenas letras e espaços.
      *
      * @param texto Texto a verificar
-     * @return      True se o texto for válido, false caso contrário
+     * @return True se o texto for válido, false caso contrário
      */
     public static boolean isTextoValido(String texto) {
         if (!texto.isEmpty()) {
@@ -260,7 +260,7 @@ public class POOFS {
      * Método que verifica se uma localização é válida, ou seja, se é uma das opções disponíveis.
      *
      * @param localizacao Localização a verificar
-     * @return            True se a localização for válida, false caso contrário
+     * @return True se a localização for válida, false caso contrário
      */
     public static boolean isLocalizacaoValida(String localizacao) {
         ArrayList<String> localizacoes = new ArrayList<>();

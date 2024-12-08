@@ -25,6 +25,7 @@ public class Produtos {
 
     /**
      * Método para definir a lista de produtos.
+     *
      * @param novaListaProdutos Nova lista de produtos.
      */
     public void setListaProdutos(ArrayList<Produto> novaListaProdutos) {
@@ -38,6 +39,7 @@ public class Produtos {
 
     /**
      * Método para adicionar um produto à lista de produtos.
+     *
      * @param produto Produto a adicionar.
      */
     public void adicionarProduto(Produto produto) {
@@ -47,6 +49,7 @@ public class Produtos {
 
     /**
      * Método para listar todos os produtos presentes na lista.
+     *
      * @param produtos Lista de produtos.
      */
     public void listarProdutos(ArrayList<Produto> produtos) {
@@ -64,6 +67,7 @@ public class Produtos {
 
     /**
      * Método para procurar um produto pelo seu código.
+     *
      * @param codigo
      * @return produto ou null caso não exista
      */

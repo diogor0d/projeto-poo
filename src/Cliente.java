@@ -21,9 +21,10 @@ public class Cliente implements Serializable {
 
     /**
      * Construtor da classe Cliente
-     * @param nome Nome do cliente
+     *
+     * @param nome         Nome do cliente
      * @param contribuinte Número de contribuinte do cliente
-     * @param localizacao Localização do cliente
+     * @param localizacao  Localização do cliente
      */
     public Cliente(String nome, int contribuinte, String localizacao) {
         this.nome = nome;
@@ -33,43 +34,64 @@ public class Cliente implements Serializable {
 
 
     // Getters e Setters
+
     /**
      * Método que devolve o nome do cliente
+     *
      * @return Nome do cliente
      */
-    public String getNome() { return nome; }
+    public String getNome() {
+        return nome;
+    }
 
     /**
      * Método que devolve o número de contribuinte do cliente
+     *
      * @return Número de contribuinte do cliente
      */
-    public int getContribuinte() { return contribuinte; }
+    public int getContribuinte() {
+        return contribuinte;
+    }
 
     /**
      * Método que devolve a localização do cliente
+     *
      * @return Localização do cliente
      */
-    public String getLocalizacao() { return localizacao; }
+    public String getLocalizacao() {
+        return localizacao;
+    }
 
 
     /**
      * Método que define o nome do cliente
+     *
      * @param nome Nome do cliente
      */
-    public void setNome(String nome) { this.nome = nome; }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     /**
      * Método que define o número de contribuinte do cliente
+     *
      * @param contribuinte Número de contribuinte do cliente
      */
-    public void setContribuinte(int contribuinte) { this.contribuinte = contribuinte; }
-    public void setLocalizacao(String localizacao) { this.localizacao = localizacao; }
+    public void setContribuinte(int contribuinte) {
+        this.contribuinte = contribuinte;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
 
     /**
      * Método que devolve a representação em String do cliente
+     *
      * @return Representação em String do cliente
      */
-    public String toString() { return String.format("  Nome: %-20s  Contribuinte: %-15s  Localização: %-15s ",
-            nome, contribuinte, localizacao);
+    public String toString() {
+        return String.format("  Nome: %-20s  Contribuinte: %-15s  Localização: %-15s ",
+                nome, contribuinte, localizacao);
     }
 }

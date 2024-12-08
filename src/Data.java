@@ -3,7 +3,7 @@ import java.io.Serializable;
 /**
  * Classe que representa uma data
  */
-public class Data implements Serializable{
+public class Data implements Serializable {
     /**
      * Dia da data
      */
@@ -21,6 +21,7 @@ public class Data implements Serializable{
 
     /**
      * Construtor da classe Data
+     *
      * @param dia Dia da data
      * @param mes Mês da data
      * @param ano Ano da data
@@ -33,6 +34,7 @@ public class Data implements Serializable{
 
     /**
      * Método que devolve a representação em string da data
+     *
      * @return Data em String
      */
     public String toString() {
@@ -41,6 +43,7 @@ public class Data implements Serializable{
 
     /**
      * Método que verifica se a data é válida
+     *
      * @return True se a data for válida, false caso contrário
      */
     public boolean isDataValida() {
