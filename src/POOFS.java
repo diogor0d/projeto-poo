@@ -93,7 +93,6 @@ public class POOFS {
                     case 9 -> leituras.exportarFaturas(faturas.getListaFaturas());
                     case 10 -> leituras.importarFaturas();
                     case 0 -> {
-                        leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         System.out.println("  Execução terminada  ");
                         return;
@@ -106,7 +105,6 @@ public class POOFS {
                     System.out.printf("%s❯ Deseja regressar ao menu? (S/N) → %s", Formatacao.YELLOW.getCode(), Formatacao.RESET.getCode());
                     String continuar = scanner.nextLine();
                     if (continuar.trim().equalsIgnoreCase("N")) {
-                        leituras.exportarFaturas(faturas.getListaFaturas());
                         leituras.escreverObjeto(faturas.getListaFaturas(), produtos.getListaProdutos(), clientes.getListaClientes());
                         scanner.close();
                         System.out.println("  Execução terminada  ");
