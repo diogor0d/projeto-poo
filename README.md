@@ -1,10 +1,12 @@
 # POOFS - Financial Management System
 
+<img src="menu.png" alt="Project Menu" width="500">
+
 **Course:** Object-Oriented Programming 2024/2025  
 **Institution:** Department of Informatics Engineering (DEI) - University of Coimbra
 
 ## About the Project
-The goal of this project was to develop an application for the financial management of a company in Java. The application operates through an interactive menu and centers its business logic on manipulating three main lists: clients, products, and invoices. The interface uses a Formatacao class with ANSI codes to apply styles and colors to the terminal, improving the graphical presentation and the reading of information.
+The goal of this project was to develop a simple command line application for the financial management of a company in Java. The application operates through an interactive menu and centers its business logic on manipulating three main lists: clients, products, and invoices. The interface uses a Formatacao class with ANSI codes to apply styles and colors to the terminal, improving the graphical presentation and the reading of information.
 
 ## Main Features
 The system provides a menu with the following operations:
